@@ -1,0 +1,5 @@
+suites:
+    main:
+        namespace: CityBoard
+        psr4_prefix: CityBoard
+        src_path: app
