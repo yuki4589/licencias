@@ -95,6 +95,7 @@ class LicenseRepository implements RepositoryInterface
         $license->register_date = $request->input('register_date');
         $license->register_number = $request->input('register_number');
         $license->closet = $request->input('closet');
+        $license->trade_name = $request->input('trade_name');
 
         if (!empty($request->input('activity_id'))) {
             $license->activity_id = $request->input('activity_id');
@@ -192,6 +193,8 @@ class LicenseRepository implements RepositoryInterface
         $license->register_date = $request->input('register_date');
         $license->register_number = $request->input('register_number');
         $license->closet = $request->input('closet');
+        //Se actualiza el nombre del comercio
+        $license->trade_name = $request->input('trade_name'); 
 
         if (!empty($request->input('activity_id'))) {
             $license->activity_id = $request->input('activity_id');

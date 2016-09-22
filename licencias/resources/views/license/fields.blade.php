@@ -58,7 +58,7 @@
 
     <div class="panel panel-body panel-default">
         <div class="row">
-            <div class="col-md-12">
+            <div class="col-md-6">
                 <div class="form-group @if($errors->first('activity_id')) has-error @endif">
                     {!! Form::label('activity_id', 'Actividad', ['class' => 'control-label']) !!}
                     @if(isset($license))
@@ -73,6 +73,16 @@
                             @{{ activity.name }}
                         </button>
                     </div>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="form-group">
+                    {!! Form::label('trade_name', 'Nombre del comercio', ['class' => 'control-label']) !!}
+                    @if(isset($license))
+                        {!! Form::text('trade_name', null, ['class' => 'form-control', 'id' => 'trade_name_input', 'placeholder' => 'Nombre del comercio', 'ng-model' => 'trade_name', 'ng-init' => 'trade_name="' . $license->trade_name . '"']) !!}
+                    @else
+                        {!! Form::text('trade_name', null, ['class' => 'form-control', 'id' => 'trade_name_input', 'placeholder' => 'Nombre del comercio', 'ng-model' => 'trade_name']) !!}
+                    @endif
                 </div>
             </div>
         </div>

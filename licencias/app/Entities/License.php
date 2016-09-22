@@ -55,6 +55,7 @@ class License extends Model
         'volume_year',
         'closet',
         'on_query',
+        'trade_name',// Se agrega el campo trade_name
     ];
 
     protected $licenseCurrentStageRepository;
