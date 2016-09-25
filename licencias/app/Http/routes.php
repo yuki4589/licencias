@@ -126,4 +126,6 @@ Route::group(['middleware' => 'auth'], function () {
   Route::get('file/download/{file}',
     ['as' => 'file.download', 'uses' => 'FileController@download']);
 
+  Route::get('getlicense/{id}', 'LicenseController@getLicense');
+
 });

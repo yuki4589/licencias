@@ -23,6 +23,7 @@ stageApp.controller('currentStageController', ['$scope', '$http', 'Upload', '$ti
 
     angular.element(document).ready(function () {
         $http.get('../currentstage/' + $scope.license.id).then(currentStage);
+        $http.get('../getlicense/' + $scope.license.id).then(readObjectLicense);
     });
 
     function scrollTo(id) {
@@ -266,12 +267,18 @@ stageApp.controller('currentStageController', ['$scope', '$http', 'Upload', '$ti
         $scope.stageError = {};
         hideSaveStageButton();
         $http.get('../nextstage/' + $scope.license.id + '/stage/' + $scope.stageFields.id).then(currentStage);
+        $http.get('../getlicense/' + $scope.license.id).then(readObjectLicense);
+    }
+
+    function readObjectLicense(response){
+        $scope.licenseObject = response.data.object.license_current_stages;
     }
 
     function retrievePreviousStageForLicenseId() {
         $scope.stageError = {};
         hideSaveStageButton();
         $http.get('../previousstage/' + $scope.license.id + '/stage/' + $scope.stageFields.id).then(currentStage);
+        $http.get('../getlicense/' + $scope.license.id).then(readObjectLicense);
     }
 
     function finishStage(response) {

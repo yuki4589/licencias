@@ -72,7 +72,7 @@ class LicenseRepository implements RepositoryInterface
 
 
     public function selectTitularityChangeControl() {
-        $nulls = \CityBoard\Entities\License::all()->where('identifier', null)->all();
+        $nulls = \CityBoard\Entities\License::all()->where('identifier', 'IS NULL')->all();
         $diff = \CityBoard\Entities\License::all()->diff($nulls);
         return $diff->lists('expedient_number' , 'id');
     }
@@ -95,6 +95,7 @@ class LicenseRepository implements RepositoryInterface
         $license->register_date = $request->input('register_date');
         $license->register_number = $request->input('register_number');
         $license->closet = $request->input('closet');
+        $license->commerce_name = $request->input('commerce_name');
 
         if (!empty($request->input('activity_id'))) {
             $license->activity_id = $request->input('activity_id');
@@ -192,6 +193,8 @@ class LicenseRepository implements RepositoryInterface
         $license->register_date = $request->input('register_date');
         $license->register_number = $request->input('register_number');
         $license->closet = $request->input('closet');
+        //Se actualiza el nombre del comercio
+        $license->commerce_name = $request->input('commerce_name'); 
 
         if (!empty($request->input('activity_id'))) {
             $license->activity_id = $request->input('activity_id');

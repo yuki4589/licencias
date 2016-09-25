@@ -226,58 +226,46 @@
                 </div>
                 <div role="tabpanel" class="tab-pane panel panel-body" id="license-details">
                     <!-- Detalles -->
-                    @foreach($license->licenseCurrentStages as $currentStage)
-                        <h3>{{$currentStage->licenseStage->name }}</h3>
-
-                        @if(!empty($currentStage->date))
-                            <p><strong>Fecha:</strong> {{  $currentStage->date_output }}</p>
-                        @endif
-
-                        @if(!empty($currentStage->person_id))
-                            <p><strong>Persona:</strong> {{  $currentStage->person->full_name }}</p>
-                        @endif
-
-                        @if(!empty($currentStage->number))
-                            <p><strong>Número:</strong> {{  $currentStage->number }}</p>
-                        @endif
-
-                        @if(env('FILE_UPLOAD'))
-                            @if(!empty($currentStage->file_id))
-                                <p><strong>Fichero:</strong> <a href="../file/download/{{ $currentStage->file_id }}" target="_blank">Descargar {{  $currentStage->file->filename }}</a></p>
-                            @endif
-                        @endif
-
-                        @if(($currentStage->objections->count()) != 0)
+                    <div ng-repeat="value in licenseObject">
+                        <h3>@{{ value.license_stage.name }}</h3>
+                        <div ng-if="value.date">
+                            <p><strong>Fecha:</strong> @{{ value.date | date:'dd-MM-yyyy' }}</p>
+                        </div>
+                        <div ng-if="value.person_id">
+                            <p><strong>Persona:</strong> @{{ value.person.first_name }} @{{value.person.first_name}}</p>
+                        </div>
+                        <div ng-if="value.number">
+                            <p><strong>Número:</strong> @{{ value.number }}</p>
+                        </div>
+                        <div ng-if="value.file_id">
+                            <p><strong>Fichero:</strong> <a ng-href="../file/download/@{{ value.file_id }}" target="_blank">Descargar @{{  value.file.filename }}</a></p>
+                        </div>
+                        <div ng-if="value.objections.length">
                             <p><strong>Reparos</strong></p>
-
-                            @foreach($currentStage->objections as $objection)
+                            <div ng-repeat="objection in value.objections">
                                 <div class="col-md-1">
                                 </div>
                                 <div class="col-md-11">
-                                <p><strong>Reparo {{ $objection->id }}</strong></p>
-                                @if(!empty($objection->first_person_position_id))
-                                    <p>Primera Posición de Persona: {{ $objection->firstPersonPosition->name }}</p>
-                                @endif
-
-                                @if(!empty($objection->second_person_position_id))
-                                    <p>Segunda Posición de Persona: {{ $objection->firstPersonPosition->name }}</p>
-                                @endif
-
-                                @if(!empty($objection->report_date))
-                                    <p>Fecha de reporte: {{ $objection->report_date_output }}</p>
-                                @endif
-
-                                @foreach($objection->objectionNotifications as $notification)
-                                    <p>Notificación: {{ $notification->notification_date_output}} Fecha de Finalización: {{ $notification->finish_date_output }}</p>
-                                @endforeach
-
-                                @if(!empty($objection->correction_date))
-                                    <p>Fecha de subsanación: {{ $objection->correction_date_output }}</p>
-                                @endif
+                                    <p><strong>Reparo @{{ objection.id }}</strong></p>
+                                    <div ng-if="objection.first_person_position_id">
+                                        <p>Primera Posición de Persona: @{{ objection.first_person_position.name }}</p>
+                                    </div>
+                                    <div ng-if="objection.second_person_position_id">
+                                        <p>Segunda Posición de Persona: @{{ objection.second_person_position.name }}</p>
+                                    </div>
+                                    <div ng-if="objection.report_date">
+                                        <p>Fecha de reporte: @{{ objection.report_date | date:'dd-MM-yyyy' }}</p>
+                                    </div>
+                                    <div ng-repeat="notification in objection.objection_notifications">
+                                        <p>Notificación: @{{ notification.notification_date | date:'dd-MM-yyyy'}} Fecha de Finalización: @{{ notification.finish_date | date:'dd-MM-yyyy'}}</p>
+                                    </div>
+                                    <div ng-if="objection.correction_date">
+                                         <p>Fecha de subsanación: @{{ objection.correction_date | date:'dd-MM-yyyy'}}</p>
+                                    </div>
                                 </div>
-                            @endforeach
-                        @endif
-                    @endforeach
+                            </div>
+                        </div>
+                    </div>
                 </div>
                 <div role="tabpanel" class="tab-pane panel panel-body" id="license-titulars">
                     <!-- Cambios de titularidad -->

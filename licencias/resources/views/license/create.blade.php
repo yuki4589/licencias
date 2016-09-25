@@ -38,6 +38,7 @@
         var licenseApp = angular.module('licenseApp', ['ngFileUpload']);
 
         licenseApp.controller('licenseController', ['$scope', '$http', function ($scope, $http) {
+            $scope.commerce_name = ""; //se agrega al scope el campo de "nombre del comercio"
             $scope.activitySearch = function () {
                 $scope.activity_id = null;
                 $http.get('../activity/search/' + $scope.activity_name).then(pushActivities);
