@@ -197,7 +197,7 @@ class LicenseController extends Controller
         }
 
         $licensesAmount = $licenses->count();
-        $licenses = $licenses->paginate(10, ['*'],'licenses');
+        $licenses = $licenses->get();
         $activities = $this->activityRepository->selectControl();
         $licenseTypes = $this->licenseTypeRepository->selectControl();
 

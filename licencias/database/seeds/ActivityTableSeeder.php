@@ -1,20 +1,20 @@
 <?php
 
 use Illuminate\Database\Seeder;
+use CityBoard\Entities\Activity;
 
 class ActivityTableSeeder extends Seeder
 {
 
     public function run()
     {
-        factory(CityBoard\Entities\Activity::class)->create([
+        factory(Activity::class)->create([
           'name' => 'Bar',
         ]);
-
-        factory(CityBoard\Entities\Activity::class)->create([
+        factory(Activity::class)->create([
           'name' => 'Industria',
         ]);
-        factory(CityBoard\Entities\Activity::class)->create([
+        factory(Activity::class)->create([
           'name' => 'Academia',
         ]);
     }

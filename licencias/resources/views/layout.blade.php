@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-    <title>CityBoard</title>
+    <title>CityBoard @yield('pageTitle')</title>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="shortcut icon" href="{{ asset(env('FAVICO')) }}">
@@ -11,13 +11,20 @@
     <link rel="stylesheet" href="http://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400italic,600,700%7COpen+Sans:300,400,400italic,600,700">
 
     <!-- Page JS Plugins CSS -->
-    <link rel="stylesheet" href="assets/js/plugins/slick/slick.min.css">
-    <link rel="stylesheet" href="assets/js/plugins/slick/slick-theme.min.css">
+    <link rel="stylesheet" href="{{ asset('assets/js/plugins/slick/slick.min.css') }}">
+    <link rel="stylesheet" href="{{ asset('assets/js/plugins/slick/slick-theme.min.css') }}">
+    <link rel="stylesheet" href="{{ asset('assets/js/plugins/datatables/jquery.dataTables.min.css') }}">
 
     <link rel="stylesheet" href="{{ asset('assets/css/bootstrap.min.css') }}">
     <link rel="stylesheet" id="css-main" href="{{ asset('assets/css/oneui.css') }}">
     <link rel="stylesheet" id="css-theme" href="{{ asset('assets/css/themes/flat.min.css') }}">
 
+    <style>
+        [ng-cloak]
+        {
+            display: none !important;
+        }
+    </style>
     @yield('scripts_at_head')
 
 </head>
@@ -47,6 +54,14 @@
         @include('generals.menu.authMenu')
         <!-- Main Container -->
         <main id="main-container">
+            @if(View::hasSection('title'))
+                <div class="content bg-gray-lighter">
+                    <h1 class="page-heading push">
+                        @yield('title')
+                    </h1>
+                </div>
+            @endif
+
             <div class="content content-boxed">
                 @yield('content')
             </div>
@@ -65,7 +80,11 @@
     <script src="{{ asset('assets/js/core/js.cookie.min.js') }}"></script>
     <script src="{{ asset('assets/js/app.js') }}"></script>
     <!-- Page Plugins -->
-    <script src="assets/js/plugins/slick/slick.min.js"></script>
+    <script src="{{ asset('assets/js/plugins/slick/slick.min.js') }}"></script>
+
+    <script src="{{ asset('assets/js/plugins/datatables/jquery.dataTables.min.js') }}"></script>
+
+    <script src="{{ asset('assets/js/pages/base_tables_datatables.js') }}"></script>
 
     <!-- Page JS Code -->
     <script>

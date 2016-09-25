@@ -1,7 +1,7 @@
 @extends('layout')
 
 @section('content')
-<div ng-app="currentStageApp" ng-controller="currentStageController">
+<div ng-app="currentStageApp" ng-controller="currentStageController" ng-cloak>
    @include('licenseCurrentStage.interactive')
 
     <div class="panel panel-default">
@@ -426,14 +426,6 @@
 @endsection
 
 @section('scripts_at_body')
-    <script src="{{ asset('js/jquery.min.js') }}"></script>
-    <script src="{{ asset('js/jquery-ui.js') }}"></script>
-    <script src="{{ asset('js/angular.min.js') }}"></script>
-    <script src="{{ asset('js/angular-route.js') }}"></script>
-    <script src="{{ asset('js/ng-file-upload-shim.min.js') }}"></script>
-    <script src="{{ asset('js/ng-file-upload.min.js') }}"></script>
-    <script src="{{ asset('js/sortable.js') }}"></script>
-    <script src="{{ asset('js/bootstrap.min.js') }}"></script>
     <script src="{{ asset('js/license/show.js') }}"></script>
 @endsection
 
