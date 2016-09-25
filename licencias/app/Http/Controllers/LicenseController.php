@@ -444,4 +444,21 @@ class LicenseController extends Controller
 
         return response()->json($response, 200);
     }
+
+    /**
+    * Get the object license
+    * @param int $id
+    * @return $license 
+    */
+    public function getLicense($id)
+    {
+      
+      $license = $this->licenseRepository->findOrFailById($id);
+        
+      $response = [
+        'object' => $license,
+      ];
+
+      return response()->json($response, 200);
+    }
 }

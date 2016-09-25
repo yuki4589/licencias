@@ -22,6 +22,7 @@ Route::group(['middleware' => 'auth'], function () {
     Route::put('license/{license_id}/loan', 'LoanController@saveLoan');
 
     // Gestion de licencias
+    Route::get('getlicense/{id}', 'LicenseController@getLicense');
     Route::get('license/{license_id}/stage/{stage_id}',
         'LicenseCurrentStageController@thisStage');
     Route::put('license/{license_id}/closet', 'LicenseController@changeCloset');
@@ -31,6 +32,22 @@ Route::group(['middleware' => 'auth'], function () {
         'LicenseController@changeVolumeYear');
     Route::put('license/{license_id}/onquery', 'LicenseController@changeOnQuery');
     Route::resource('license', 'LicenseController');
+
+
+    // Servicios para gestion de pasos
+    Route::get('licensestagestojson',
+        'LicenseStageController@licenseStagesToJson');
+    Route::get('licensestagestojson/licensetype/{licenseType}',
+        'LicenseTypeStageController@stagesToJson');
+    Route::put('licensestagestojson/licensetype/{licenseType}',
+        'LicenseTypeStageController@storeStagesForATypeJson');
+
+    Route::get('currentstage/{license_id}',
+        'LicenseCurrentStageController@currentStage');
+    Route::post('currentstage/{license_id}/stage/{stage_id}',
+        'LicenseCurrentStageController@saveCurrentStage');
+    Route::post('finishstage/{license_id}',
+        'LicenseCurrentStageController@finishStage');
     Route::post('changestatuslicense/{license_id}',
         'LicenseController@changeStatusLicense');
     Route::post('openlicense/{license_id}', 'LicenseController@openLicense');
@@ -40,20 +57,6 @@ Route::group(['middleware' => 'auth'], function () {
         'LicenseCurrentStageController@nextStage');
     Route::get('previousstage/{license_id}/stage/{stage_id}',
         'LicenseCurrentStageController@previousStage');
-
-    // Servicios para gestion de pasos
-    Route::get('licensestagestojson',
-        'LicenseStageController@licenseStagesToJson');
-    Route::get('licensestagestojson/licensetype/{licenseType}',
-        'LicenseTypeStageController@stagesToJson');
-    Route::put('licensestagestojson/licensetype/{licenseType}',
-        'LicenseTypeStageController@storeStagesForATypeJson');
-    Route::get('currentstage/{license_id}',
-        'LicenseCurrentStageController@currentStage');
-    Route::post('currentstage/{license_id}/stage/{stage_id}',
-        'LicenseCurrentStageController@saveCurrentStage');
-    Route::post('finishstage/{license_id}',
-        'LicenseCurrentStageController@finishStage');
 
     // Gestion de reparos
     Route::post('nextobjectionnotification/{objection_id}',

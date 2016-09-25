@@ -2,33 +2,17 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="c777afb9-9922-4c17-9168-0c1ff66a08a7" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/licencias/app/Http/Middleware/IsAdmin.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/licencias/app/Http/Middleware/IsType.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/licencias/app/Http/Middleware/IsUser.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/licencias/app/Http/Routes/auth.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/licencias/public/js/cityboardCustom.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/licencias/app/Http/Routes/licenses.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/licencias/database/migrations/2016_01_12_154942_create_user_types_table.php" afterPath="$PROJECT_DIR$/licencias/database/migrations/2016_01_12_154942_create_user_types_table.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/licencias/database/seeds/ActivityTableSeeder.php" afterPath="$PROJECT_DIR$/licencias/database/seeds/ActivityTableSeeder.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/licencias/app/Http/Kernel.php" afterPath="$PROJECT_DIR$/licencias/app/Http/Kernel.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/licencias/database/migrations/2016_01_12_151438_create_licenses_table.php" afterPath="$PROJECT_DIR$/licencias/database/migrations/2016_01_12_151438_create_licenses_table.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/licencias/app/Entities/License.php" afterPath="$PROJECT_DIR$/licencias/app/Entities/License.php" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/licencias/app/Http/Controllers/LicenseController.php" afterPath="$PROJECT_DIR$/licencias/app/Http/Controllers/LicenseController.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/licencias/app/User.php" afterPath="$PROJECT_DIR$/licencias/app/User.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/licencias/database/seeds/UserTableSeeder.php" afterPath="$PROJECT_DIR$/licencias/database/seeds/UserTableSeeder.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/licencias/database/seeds/UserTypeTableSeeder.php" afterPath="$PROJECT_DIR$/licencias/database/seeds/UserTypeTableSeeder.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/licencias/resources/views/generals/menu/authMenu.blade.php" afterPath="$PROJECT_DIR$/licencias/resources/views/generals/menu/authMenu.blade.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/licencias/public/assets/js/pages/base_tables_datatables.js" afterPath="$PROJECT_DIR$/licencias/public/assets/js/pages/base_tables_datatables.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/licencias/app/Http/Controllers/LicenseCurrentStageController.php" afterPath="$PROJECT_DIR$/licencias/app/Http/Controllers/LicenseCurrentStageController.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/licencias/app/Repositories/LicenseRepository.php" afterPath="$PROJECT_DIR$/licencias/app/Repositories/LicenseRepository.php" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/licencias/resources/views/license/create.blade.php" afterPath="$PROJECT_DIR$/licencias/resources/views/license/create.blade.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/licencias/resources/views/titularityChange/create.blade.php" afterPath="$PROJECT_DIR$/licencias/resources/views/titularityChange/create.blade.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/licencias/resources/views/license/edit.blade.php" afterPath="$PROJECT_DIR$/licencias/resources/views/license/edit.blade.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/licencias/resources/views/titularityChange/edit.blade.php" afterPath="$PROJECT_DIR$/licencias/resources/views/titularityChange/edit.blade.php" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/licencias/resources/views/license/fields.blade.php" afterPath="$PROJECT_DIR$/licencias/resources/views/license/fields.blade.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/licencias/resources/views/home.blade.php" afterPath="$PROJECT_DIR$/licencias/resources/views/home.blade.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/licencias/resources/views/license/index.blade.php" afterPath="$PROJECT_DIR$/licencias/resources/views/license/index.blade.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/licencias/resources/views/licenseTypeStage/interactive.blade.php" afterPath="$PROJECT_DIR$/licencias/resources/views/licenseTypeStage/interactive.blade.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/licencias/resources/views/layout.blade.php" afterPath="$PROJECT_DIR$/licencias/resources/views/layout.blade.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/licencias/app/Http/Routes/licenses.php" afterPath="$PROJECT_DIR$/licencias/app/Http/Routes/licenses.php" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/licencias/app/Http/routes.php" afterPath="$PROJECT_DIR$/licencias/app/Http/routes.php" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/licencias/resources/views/license/show.blade.php" afterPath="$PROJECT_DIR$/licencias/resources/views/license/show.blade.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/licencias/resources/views/titularityChange/show.blade.php" afterPath="$PROJECT_DIR$/licencias/resources/views/titularityChange/show.blade.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/licencias/public/js/license/show.js" afterPath="$PROJECT_DIR$/licencias/public/js/license/show.js" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
     <ignored path="licencias.iws" />
@@ -50,7 +34,40 @@
     <favorites_list name="licencias" />
   </component>
   <component name="FileEditorManager">
-    <leaf />
+    <leaf>
+      <file leaf-file-name="routes.php" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/licencias/app/Http/routes.php">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="-10.0">
+              <caret line="15" column="0" selection-start-line="15" selection-start-column="0" selection-end-line="15" selection-end-column="0" />
+              <folding>
+                <element signature="e#7#392#0#PHP" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="licenses.php" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/licencias/app/Http/Routes/licenses.php">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="-1.862069">
+              <caret line="43" column="0" selection-start-line="43" selection-start-column="0" selection-end-line="43" selection-end-column="0" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="LicenseCurrentStageController.php" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/licencias/app/Http/Controllers/LicenseCurrentStageController.php">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="0.40716612">
+              <caret line="372" column="26" selection-start-line="372" selection-start-column="11" selection-end-line="372" selection-end-column="26" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+    </leaf>
   </component>
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
@@ -85,8 +102,6 @@
         <option value="$PROJECT_DIR$/licencias/database/seeds/UserTableSeeder.php" />
         <option value="$PROJECT_DIR$/licencias/database/seeds/UserTypeTableSeeder.php" />
         <option value="$PROJECT_DIR$/licencias/database/migrations/2016_09_25_060743_add_users_data.php" />
-        <option value="$PROJECT_DIR$/licencias/app/Http/routes.php" />
-        <option value="$PROJECT_DIR$/licencias/app/Http/Routes/licenses.php" />
         <option value="$PROJECT_DIR$/licencias/app/Http/Kernel.php" />
         <option value="$PROJECT_DIR$/licencias/app/Http/Middleware/IsAdmin.php" />
         <option value="$PROJECT_DIR$/licencias/app/Http/Middleware/IsUser.php" />
@@ -104,6 +119,9 @@
         <option value="$PROJECT_DIR$/licencias/resources/views/license/fields.blade.php" />
         <option value="$PROJECT_DIR$/licencias/resources/views/license/edit.blade.php" />
         <option value="$PROJECT_DIR$/licencias/resources/views/license/create.blade.php" />
+        <option value="$PROJECT_DIR$/licencias/app/Http/routes.php" />
+        <option value="$PROJECT_DIR$/licencias/app/Http/Controllers/LicenseCurrentStageController.php" />
+        <option value="$PROJECT_DIR$/licencias/app/Http/Routes/licenses.php" />
       </list>
     </option>
   </component>
@@ -119,10 +137,10 @@
   </component>
   <component name="PhpWorkspaceProjectConfiguration" backward_compatibility_performed="true" />
   <component name="ProjectFrameBounds">
-    <option name="x" value="65" />
+    <option name="x" value="1600" />
     <option name="y" value="24" />
-    <option name="width" value="1535" />
-    <option name="height" value="876" />
+    <option name="width" value="1366" />
+    <option name="height" value="744" />
   </component>
   <component name="ProjectLevelVcsManager" settingsEditedManually="false">
     <OptionsSetting value="true" id="Add" />
@@ -183,11 +201,7 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
-              <option name="myItemId" value="resources" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="views" />
+              <option name="myItemId" value="app" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
@@ -205,15 +219,11 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
-              <option name="myItemId" value="resources" />
+              <option name="myItemId" value="app" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
-              <option name="myItemId" value="views" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="license" />
+              <option name="myItemId" value="Http" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
@@ -231,37 +241,15 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
-              <option name="myItemId" value="resources" />
+              <option name="myItemId" value="app" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
-              <option name="myItemId" value="views" />
+              <option name="myItemId" value="Http" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
-              <option name="myItemId" value="license" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="exposed" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="licencias" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="licencias" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="licencias" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="resources" />
+              <option name="myItemId" value="Controllers" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
@@ -323,15 +311,15 @@
     <servers />
   </component>
   <component name="ToolWindowManager">
-    <frame x="65" y="24" width="1535" height="876" extended-state="6" />
-    <editor active="false" />
+    <frame x="1600" y="24" width="1366" height="744" extended-state="6" />
+    <editor active="true" />
     <layout>
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Application Servers" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="true" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.2495114" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.28038067" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
@@ -364,13 +352,6 @@
     <watches-manager />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/licencias/resources/views/auth/login.blade.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-8.666667">
-          <caret line="13" column="24" selection-start-line="13" selection-start-column="24" selection-end-line="13" selection-end-column="118" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/licencias/public/js/app.js">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.8369987">
@@ -583,14 +564,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/licencias/app/Http/routes.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.093628086">
-          <caret line="13" column="37" selection-start-line="13" selection-start-column="37" selection-end-line="13" selection-end-column="37" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/licencias/resources/views/generals/menu/menu.blade.php">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.5439739">
@@ -655,16 +628,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/licencias/app/Http/Routes/licenses.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.12052117">
-          <caret line="124" column="32" selection-start-line="124" selection-start-column="32" selection-end-line="124" selection-end-column="32" />
-          <folding>
-            <element signature="e#6#89#0#PHP" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/licencias/app/User.php">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.73615634">
@@ -723,9 +686,9 @@
         <state vertical-scroll-proportion="0.55764073">
           <caret line="206" column="27" selection-start-line="206" selection-start-column="27" selection-end-line="206" selection-end-column="27" />
           <folding>
-            <marker date="1474788431872" expanded="true" signature="-1:-1" placeholder="..." />
-            <marker date="1474788431872" expanded="true" signature="-1:-1" placeholder="..." />
-            <marker date="1474788431872" expanded="true" signature="-1:-1" placeholder="..." />
+            <marker date="1474789149343" expanded="true" signature="-1:-1" placeholder="..." />
+            <marker date="1474789149343" expanded="true" signature="-1:-1" placeholder="..." />
+            <marker date="1474789149343" expanded="true" signature="-1:-1" placeholder="..." />
           </folding>
         </state>
       </provider>
@@ -743,8 +706,8 @@
         <state vertical-scroll-proportion="0.48257372">
           <caret line="152" column="91" selection-start-line="152" selection-start-column="91" selection-end-line="152" selection-end-column="91" />
           <folding>
-            <marker date="1474788578292" expanded="true" signature="-1:-1" placeholder="..." />
-            <marker date="1474788578292" expanded="true" signature="-1:-1" placeholder="..." />
+            <marker date="1474789149371" expanded="true" signature="-1:-1" placeholder="..." />
+            <marker date="1474789149371" expanded="true" signature="-1:-1" placeholder="..." />
           </folding>
         </state>
       </provider>
@@ -754,9 +717,9 @@
         <state vertical-scroll-proportion="0.072386056">
           <caret line="3" column="83" selection-start-line="3" selection-start-column="83" selection-end-line="3" selection-end-column="83" />
           <folding>
-            <marker date="1474788635032" expanded="true" signature="-1:-1" placeholder="..." />
-            <marker date="1474788635032" expanded="true" signature="-1:-1" placeholder="..." />
-            <marker date="1474788635032" expanded="true" signature="-1:-1" placeholder="..." />
+            <marker date="1474789149371" expanded="true" signature="-1:-1" placeholder="..." />
+            <marker date="1474789149371" expanded="true" signature="-1:-1" placeholder="..." />
+            <marker date="1474789149371" expanded="true" signature="-1:-1" placeholder="..." />
           </folding>
         </state>
       </provider>
@@ -766,11 +729,11 @@
         <state vertical-scroll-proportion="0.072386056">
           <caret line="3" column="83" selection-start-line="3" selection-start-column="83" selection-end-line="3" selection-end-column="83" />
           <folding>
-            <marker date="1474788644120" expanded="true" signature="-1:-1" placeholder="..." />
-            <marker date="1474788644120" expanded="true" signature="-1:-1" placeholder="..." />
-            <marker date="1474788644120" expanded="true" signature="-1:-1" placeholder="..." />
-            <marker date="1474788644120" expanded="true" signature="-1:-1" placeholder="..." />
-            <marker date="1474788644120" expanded="true" signature="-1:-1" placeholder="..." />
+            <marker date="1474789149371" expanded="true" signature="-1:-1" placeholder="..." />
+            <marker date="1474789149371" expanded="true" signature="-1:-1" placeholder="..." />
+            <marker date="1474789149371" expanded="true" signature="-1:-1" placeholder="..." />
+            <marker date="1474789149371" expanded="true" signature="-1:-1" placeholder="..." />
+            <marker date="1474789149371" expanded="true" signature="-1:-1" placeholder="..." />
           </folding>
         </state>
       </provider>
@@ -804,13 +767,13 @@
         <state vertical-scroll-proportion="0.56568366">
           <caret line="210" column="0" selection-start-line="210" selection-start-column="0" selection-end-line="210" selection-end-column="0" />
           <folding>
-            <marker date="1474788720009" expanded="true" signature="-1:-1" placeholder="..." />
-            <marker date="1474788720009" expanded="true" signature="-1:-1" placeholder="..." />
-            <marker date="1474788720009" expanded="true" signature="-1:-1" placeholder="..." />
-            <marker date="1474788720009" expanded="true" signature="-1:-1" placeholder="..." />
-            <marker date="1474788720009" expanded="true" signature="-1:-1" placeholder="..." />
-            <marker date="1474788720009" expanded="true" signature="-1:-1" placeholder="..." />
-            <marker date="1474788720009" expanded="true" signature="-1:-1" placeholder="..." />
+            <marker date="1474789167004" expanded="true" signature="-1:-1" placeholder="..." />
+            <marker date="1474789167004" expanded="true" signature="-1:-1" placeholder="..." />
+            <marker date="1474789167004" expanded="true" signature="-1:-1" placeholder="..." />
+            <marker date="1474789167004" expanded="true" signature="-1:-1" placeholder="..." />
+            <marker date="1474789167004" expanded="true" signature="-1:-1" placeholder="..." />
+            <marker date="1474789167004" expanded="true" signature="-1:-1" placeholder="..." />
+            <marker date="1474789167004" expanded="true" signature="-1:-1" placeholder="..." />
           </folding>
         </state>
       </provider>
@@ -835,6 +798,32 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.34182304">
           <caret line="28" column="0" selection-start-line="28" selection-start-column="0" selection-end-line="28" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/licencias/app/Http/routes.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-10.0">
+          <caret line="15" column="0" selection-start-line="15" selection-start-column="0" selection-end-line="15" selection-end-column="0" />
+          <folding>
+            <element signature="e#7#392#0#PHP" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/licencias/app/Http/Routes/licenses.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-1.862069">
+          <caret line="43" column="0" selection-start-line="43" selection-start-column="0" selection-end-line="43" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/licencias/app/Http/Controllers/LicenseCurrentStageController.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.40716612">
+          <caret line="372" column="26" selection-start-line="372" selection-start-column="11" selection-end-line="372" selection-end-column="26" />
           <folding />
         </state>
       </provider>
