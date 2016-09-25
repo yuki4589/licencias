@@ -1,7 +1,7 @@
 @extends('layout')
 
 @section('content')
-    <div ng-app="titularChangeApp" ng-controller="titularChangeController">
+    <div ng-app="titularChangeApp" ng-controller="titularChangeController" ng-cloak>
         <div class="panel panel-default">
             <div class="panel-heading">
                 <div class="row">
