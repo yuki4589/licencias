@@ -1,4 +1,4 @@
-<div ng-app="licenseApp" ng-controller="licenseController">
+<div ng-app="licenseApp" ng-controller="licenseController" ng-cloak>
     <div class="panel panel-body panel-default">
         <div class="row">
             <div class="col-md-6">
@@ -218,24 +218,6 @@
             </div>
         </div>
     </div>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
     @if(isset($license))
 
         @include('archive.exposed.fields')

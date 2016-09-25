@@ -1,177 +1,103 @@
 @extends('layout')
 
-@section('sidebar')
-        <h3>Filtro</h3>
-        {!! Form::open([
-            'route' => [
-                'home'
-            ],
-            'method' => 'get',
-            'autocomplete' => 'off'
-            ]
-            ) !!}
-        <div ng-app="licenseApp" ng-controller="licenseController">
-            <div class="form-group">
-                {!! Form::label('license_type_id', 'Tipo Licencia', ['class' => 'control-label']) !!}
-                {!! Form::select('license_type_id', $licenseTypes, $licenseTypeId, ['class' => 'form-control', 'placeholder' => 'Selecciona un tipo de licencia...']) !!}
-            </div>
-
-            <div class="form-group">
-                {!! Form::label('license_status_id', 'Estado', ['class' => 'control-label']) !!}
-                {!! Form::select('license_status_id', $licenseStatuses, $licenseStatusId, ['class' => 'form-control', 'placeholder' => 'Selecciona un estado de licencia...']) !!}
-            </div>
-
-            <div class="form-group">
-                {!! Form::label('expedient_number', 'Nº de expediente', ['class' => 'control-label']) !!}
-                {!! Form::text('expedient_number', $expedientNumber) !!}
-            </div>
-
-            <div class="form-group">
-                {!! Form::label('register_number', 'Nº de registro', ['class' => 'control-label']) !!}
-                {!! Form::text('register_number', $registerNumber) !!}
-            </div>
-
-            <div class="form-group">
-                {!! Form::label('license_identifier', 'Nº licencia', ['class' => 'control-label']) !!}
-                {!! Form::text('license_identifier', $licenseIdentifier) !!}
-            </div>
-
-            <div class="form-group">
-                {!! Form::label('titular_nif', 'NIF/CIF', ['class' => 'control-label']) !!}
-                {!! Form::text('titular_nif', $titularNif) !!}
-            </div>
-
-            <div class="form-group">
-                {!! Form::label('titular_first_name', 'Nombre', ['class' => 'control-label']) !!}
-                {!! Form::text('titular_first_name', $titularFirstName) !!}
-            </div>
-
-            <div class="form-group">
-                {!! Form::label('titular_last_name', 'Apellidos', ['class' => 'control-label']) !!}
-                {!! Form::text('titular_last_name', $titularLastName) !!}
-            </div>
-
-            <div class="form-group">
-                {!! Form::label('activity_id', 'Actividad', ['class' => 'control-label']) !!}
-                {!! Form::hidden('activity_id', null, ['class' => 'form-control', 'ng-value' => 'activity_id']) !!}
-                {!! Form::text('activity_name', null, ['class' => 'form-control', 'ng-change' => 'activitySearch()', 'ng-model' => 'activity_name', 'ng-init' => 'activity_name="' . $activityName . '"']) !!}
-                <div class="list-group" ng-show="activities.length">
-                    <button type="button" class="list-group-item" ng-click="activitySelect()" ng-repeat="activity in activities">
-                        @{{ activity.name }}
-                    </button>
-                </div>
-                {{--!! Form::label('activityId', 'Actividad', ['class' => 'control-label']) !!--}}
-                {{--!! Form::select('activityId', $activities, $activityId, ['class' => 'form-control', 'placeholder' => 'Selecciona una actividad...']) !!--}}
-            </div>
-
-            <div class="form-group">
-                {!! Form::label('street_id', 'Vía', ['class' => 'control-label']) !!}
-                {!! Form::hidden('street_id', null, ['class' => 'form-control', 'ng-value' => 'street_id']) !!}
-                {!! Form::text('street_name', null, ['class' => 'form-control', 'ng-change' => 'streetSearch()', 'ng-model' => 'street_name', 'ng-init' => 'street_name="' . $streetName . '"']) !!}
-                <div class="list-group" ng-show="streets.length">
-                    <button type="button" class="list-group-item" ng-click="streetSelect()" ng-repeat="street in streets">
-                        @{{ street.name }}
-                    </button>
-                </div>
-                {{--!! Form::label('street', 'Calle', ['class' => 'control-label']) !!--}}
-                {{--!! Form::text('street', $street) !!--}}
-            </div>
-
-            <div class="form-group">
-                {!! Form::label('street_number', 'Número', ['class' => 'control-label']) !!}
-                {!! Form::text('street_number', $streetNumber) !!}
-            </div>
-
-            <div class="form-group">
-                {!! Form::checkbox('filter_by_register_date', 'filter_by_register_date', $filterByRegisterDate) !!} Filtrar por fecha de registro
-            </div>
-            <div class="form-group">
-                {!! Form::label('register_initial_date', 'Fecha Inicial Registro', ['class' => 'control-label']) !!}
-                {!! Form::date('register_initial_date', $registerInitialDate) !!}
-            </div>
-            <div class="form-group">
-                {!! Form::label('register_final_date', 'Fecha Final Registro', ['class' => 'control-label']) !!}
-                {!! Form::date('register_final_date', $registerFinalDate) !!}
-            </div>
-
-            <div class="form-group">
-                {!! Form::button('Filtrar', ['class'=> 'btn btn-warning', 'type' => 'submit']) !!}
-            </div>
-        </div>
-        {!! Form::close() !!}
-
-@endsection
-
 @section('content')
     <div class="row">
-        <div class="col-md-1">
-        </div>
-        <div class="col-md-4 home-notification bg-success">
-            <ul class="bxslider">
-                <li>
-                    <h3><a href="?license_type_id=1">Comunicados de actividad</a></h3>
-                    <h4><a href="?license_type_id=1">{{ $activityCommunicationAmount }}</a></h4>
-                </li>
-                <li>
-                    <h3><a href="?license_type_id=3">Licencias con calificación</a></h3>
-                    <h4><a href="?license_type_id=3">{{ $withQualificationAmount }}</a></h4>
-                </li>
-                <li>
-                    <h3><a href="?license_type_id=2">Licencias sin calificación</a></h3>
-                    <h4><a href="?license_type_id=2">{{ $withoutQualificationAmount }}</a></h4>
-                </li>
-                <li>
-                    <h3>Cambios de titularidad</h3>
-                    <h4>{{ $titularityChangesAmount }}</h4>
-                </li>
-            </ul>
-        </div>
-        <div class="col-md-2">
-        </div>
-        <div class="col-md-4 home-notification bg-danger">
-            <div class="row">
-                <div class="col-md-4">
-                        <span class="glyphicon glyphicon-bell" aria-hidden="true" style="font-size:6em;top:20px;"></span>
+        <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
+            <div class="js-slider" data-slider-dots="true" data-slider-arrows="true" data-slider-autoplay="true">
+                <div>
+                    <div class="block text-center remove-margin-b">
+                        <div class="block-content block-content-full">
+                            <i class="si si-book-open fa-2x"></i>
+                            <div class="h1 font-w700">{{ $activityCommunicationAmount }}</div>
+                            <div class="h5 text-muted text-uppercase push-5-t">Comunicados de actividad</div>
+                        </div>
+                        <div class="block-content block-content-full block-content-mini bg-danger text-white">
+                        </div>
+                    </div>
                 </div>
-                <div class="col-md-8 text-left">
-                    <h3>Alertas</h3>
-                    <h4>ALERTAS</h4>
+                <div>
+                    <div class="block text-center remove-margin-b">
+                        <div class="block-content block-content-full">
+                            <i class="si si-book-open fa-2x"></i>
+                            <div class="h1 font-w700">{{ $withQualificationAmount }}</div>
+                            <div class="h5 text-muted text-uppercase push-5-t">Licencias con calificación</div>
+                        </div>
+                        <div class="block-content block-content-full block-content-mini bg-warning text-white">
+                        </div>
+                    </div>
                 </div>
+                <div>
+                    <div class="block text-center remove-margin-b">
+                        <div class="block-content block-content-full">
+                            <i class="si si-book-open fa-2x"></i>
+                            <div class="h1 font-w700">{{ $withoutQualificationAmount }}</div>
+                            <div class="h5 text-muted text-uppercase push-5-t">Licencias sin calificación</div>
+                        </div>
+                    </div>
+                    <div class="block-content block-content-full block-content-mini bg-primary text-white">
+                    </div>
+                </div>
+            </div>
         </div>
-        <div class="col-md-1">
+        <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
+            <div class="js-slider" data-slider-dots="true" data-slider-arrows="true" data-slider-autoplay="true">
+                <div>
+                    <div class="block text-center remove-margin-b">
+                        <div class="block-content block-content-full">
+                            <i class="si si-bell fa-2x"></i>
+                            <div class="h1 font-w700">Titulo Alerta</div>
+                            <div class="h5 text-muted text-uppercase push-5-t">Descripci&oacute;n</div>
+                        </div>
+                    </div>
+                    <div class="block-content block-content-full block-content-mini bg-danger text-white">
+                    </div>
+                </div>
+                <div>
+                    <div class="block text-center remove-margin-b">
+                        <div class="block-content block-content-full">
+                            <i class="si si-bell fa-2x"></i>
+                            <div class="h1 font-w700">Titulo Alerta</div>
+                            <div class="h5 text-muted text-uppercase push-5-t">Descripci&oacute;n</div>
+                        </div>
+                    </div>
+                    <div class="block-content block-content-full block-content-mini bg-danger text-white">
+                    </div>
+                </div>
+                <div>
+                    <div class="block text-center remove-margin-b">
+                        <div class="block-content block-content-full">
+                            <i class="si si-bell fa-2x"></i>
+                            <div class="h1 font-w700">Titulo Alerta</div>
+                            <div class="h5 text-muted text-uppercase push-5-t">Descripci&oacute;n</div>
+                        </div>
+                    </div>
+                    <div class="block-content block-content-full block-content-mini bg-danger text-white">
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
     <div class="row">
-        <div class="col-md-12 yellow">
-            <div class="row">
-                <div class="col-md-12">
-                    <h2>Expedientes abiertos</h2>
-                    <h3>Licencias</h3>
-
-                    <table class="table">
+        <div class="block">
+            <div class="block-header">
+                <h3 class="page-heading">Licencias - Expedientes abiertos</h3>
+            </div>
+            <div class="block-content">
+                <table class="table table-striped table-hover table-header-bg">
+                    <thead>
                         <tr>
-                            <th></th>
-                            <!--
-                            <th>ID</th>
-                            <th>Número de registro</th>
-                            -->
                             <th>Nº expediente</th>
                             <th>Actividad</th>
                             <th>Dirección</th>
                             <th>Titular</th>
                             <th>Último cambio</th>
                             <th>Fecha Último cambio</th>
+                            <th>Acciones</th>
                         </tr>
+                    </thead>
+                    <tbody>
                         @foreach($licenses as $license)
                             <tr>
-                                <td>
-                                    <a class="btn btn-warning"
-                                       href="{{ route('license.show', ['id' => $license->id]) }}" role="button">Ver</a>
-                                </td>
-                                <!--
-                                <td>#{{ $license->id }}</td>
-                                <td>{{ $license->register_number }}</td>
-                                -->
                                 <td>{{ $license->expedient_number }}</td>
                                 <td>{{ $license->activity->name }}</td>
                                 <td>{{ $license->street->name }}, {{ $license->street_number}} </td>
@@ -186,9 +112,15 @@
                                         {{ $license->license_data_current_stage->updated_at }}
                                     @endif
                                 </td>
+                                <td>
+                                    <a class="btn btn-warning"
+                                       href="{{ route('license.show', ['id' => $license->id]) }}" role="button">Ver</a>
+                                </td>
                             </tr>
                         @endforeach
-                    </table>
+                    </tbody>
+                </table>
+                <div class="text-center">
                     {!! $licenses->appends([
                         'expedient_number' => $expedientNumber,
                         'register_number' => $registerNumber,
@@ -209,77 +141,70 @@
                     ])->render() !!}
                 </div>
             </div>
-            <div class="row">
-                <div class="col-md-12">
-                    <h2>Cambios de titularidad</h2>
-                    <table class="table">
-                        <tr>
-                            <th></th>
-                            <th>Licencia</th>
-                            <th>Titular</th>
-                            <th>Número de Expediente</th>
-                            <th>Número de registro</th>
-                            <th>Fecha de registro</th>
-                            <th>Fecha de finalización</th>
-                            <th>Estado</th>
-                        </tr>
-                        @foreach($titularityChanges as $titularityChange)
+        </div>
+        <div class="row">
+            <div class="block">
+                <div class="block-header">
+                    <h3 class="page-heading">Cambios de titularidad</h3>
+                </div>
+                <div class="block-content">
+                    <table class="table table-striped table-hover table-header-bg">
+                        <thead>
                             <tr>
-                                <td>
-                                    <a class="btn btn-warning"
-                                       href="{{ route('titularitychange.show', ['id' => $titularityChange->id]) }}"
-                                       role="button">Ver</a>
-                                </td>
-                                <td>{{ $titularityChange->license->number }}
-                                    /{{ $titularityChange->license->year }} {{ $titularityChange->license->licenseType->name }}</td>
-                                <td>{{ $titularityChange->titular->first_name }} {{ $titularityChange->titular->last_name }}</td>
-                                <td>{{ $titularityChange->expedient_number }}</td>
-                                <td>{{ $titularityChange->register_number }}</td>
-                                <td>{{ $titularityChange->register_date_output }}</td>
-
-                                @if (isset($titularityChange->finished_date_output))
-                                    <td>{{ $titularityChange->finished_date_output }}</td>
-                                @else
-                                    <td></td>
-                                @endif
-
-                                @if (isset($titularityChange->status))
-                                    <td>{{ $titularityChange->status }}</td>
-                                @else
-                                    <td></td>
-                                @endif
+                                <th>Licencia</th>
+                                <th>Titular</th>
+                                <th>Número de Expediente</th>
+                                <th>Número de registro</th>
+                                <th>Fecha de registro</th>
+                                <th>Fecha de finalización</th>
+                                <th>Estado</th>
+                                <th>Acciones</th>
                             </tr>
-                        @endforeach
-                    </table>
+                        </thead>
+                        <tbody>
+                            @foreach($titularityChanges as $titularityChange)
+                                <tr>
+                                    <td>{{ $titularityChange->license->number }}
+                                        /{{ $titularityChange->license->year }} {{ $titularityChange->license->licenseType->name }}</td>
+                                    <td>{{ $titularityChange->titular->first_name }} {{ $titularityChange->titular->last_name }}</td>
+                                    <td>{{ $titularityChange->expedient_number }}</td>
+                                    <td>{{ $titularityChange->register_number }}</td>
+                                    <td>{{ $titularityChange->register_date_output }}</td>
 
-                    {!! $titularityChanges->render() !!}
+                                    @if (isset($titularityChange->finished_date_output))
+                                        <td>{{ $titularityChange->finished_date_output }}</td>
+                                    @else
+                                        <td></td>
+                                    @endif
+
+                                    @if (isset($titularityChange->status))
+                                        <td>{{ $titularityChange->status }}</td>
+                                    @else
+                                        <td></td>
+                                    @endif
+                                    <td>
+                                        <a class="btn btn-warning"
+                                           href="{{ route('titularitychange.show', ['id' => $titularityChange->id]) }}"
+                                           role="button">Ver</a>
+                                    </td>
+                                </tr>
+                            @endforeach
+                        </tbody>
+                    </table>
+                    <div class="text-center">
+                        {!! $titularityChanges->render() !!}
+                    </div>
                 </div>
             </div>
         </div>
     </div>
+</div>
 @endsection
 
 @section('scripts_at_head')
-    <link href="{{ asset('lib/jquery.bxslider.css') }}" rel="stylesheet" />
 @endsection
 
 @section('scripts_at_body')
-    <script src="{{ asset('js/jquery.min.js') }}"></script>
-    <script src="{{ asset('js/jquery-ui.js') }}"></script>
-    <script src="{{ asset('js/angular.min.js') }}"></script>
-    <script src="{{ asset('js/angular-route.js') }}"></script>
-    <script src="{{ asset('js/ng-file-upload-shim.min.js') }}"></script>
-    <script src="{{ asset('js/ng-file-upload.min.js') }}"></script>
-    <script src="{{ asset('js/sortable.js') }}"></script>
-    <script src="{{ asset('js/bootstrap.min.js') }}"></script>
-    <script src="{{ asset('js/jquery.bxslider.min.js') }}"></script>
-    <script>
-        $(document).ready(function(){
-            $('.bxslider').bxSlider({
-                controls: false
-            });
-        });
-    </script>
     <script>
         var licenseApp = angular.module('licenseApp', ['ngFileUpload']);
 

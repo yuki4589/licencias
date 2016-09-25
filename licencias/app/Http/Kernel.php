@@ -29,5 +29,7 @@ class Kernel extends HttpKernel
         'auth' => \CityBoard\Http\Middleware\Authenticate::class,
         'auth.basic' => \Illuminate\Auth\Middleware\AuthenticateWithBasicAuth::class,
         'guest' => \CityBoard\Http\Middleware\RedirectIfAuthenticated::class,
+        'admin' => \CityBoard\Http\Middleware\IsAdmin::class,
+        'user' => \CityBoard\Http\Middleware\IsUser::class,
     ];
 }

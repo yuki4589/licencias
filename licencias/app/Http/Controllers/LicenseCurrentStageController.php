@@ -367,7 +367,6 @@ class LicenseCurrentStageController extends Controller
         $requiredStages = $this->licenseCurrentStageRepository->obtainRequiredStages($license_id);
 
         $people = $this->personRepository->all();
-        
         $response = [
           'license' => $license,
           'stageData' => $current_stage_data,

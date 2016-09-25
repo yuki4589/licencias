@@ -74,13 +74,6 @@
 @endsection
 
 @section('scripts_at_body')
-    <script src="{{ asset('js/jquery.min.js') }}"></script>
-    <script src="{{ asset('js/jquery-ui.js') }}"></script>
-    <script src="{{ asset('js/angular.min.js') }}"></script>
-    <script src="{{ asset('js/angular-route.js') }}"></script>
-    <script src="{{ asset('js/ng-file-upload-shim.min.js') }}"></script>
-    <script src="{{ asset('js/ng-file-upload.min.js') }}"></script>
-    <script src="{{ asset('js/sortable.js') }}"></script>
     <script>
         var myapp = angular.module('sortableApp', ['ui.sortable']);
 
@@ -157,7 +150,7 @@
 @endsection
 
 @section('content')
-    <div ng-app="sortableApp" ng-controller="sortableController" class="container">
+    <div ng-app="sortableApp" ng-controller="sortableController" class="container" ng-cloak>
 
         <h2>Creación de rutas</h2>
 

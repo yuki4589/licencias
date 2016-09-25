@@ -36,4 +36,8 @@ class User extends Model implements AuthenticatableContract,
      * @var array
      */
     protected $hidden = ['password', 'remember_token'];
+
+    public function is($user_type_id){
+        return $this->user_type_id == $user_type_id or $this->user_type_id == 1;
+    }
 }
