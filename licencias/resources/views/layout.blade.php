@@ -19,6 +19,7 @@
     <link rel="stylesheet" id="css-main" href="{{ asset('assets/css/oneui.css') }}">
     <link rel="stylesheet" id="css-theme" href="{{ asset('assets/css/themes/flat.min.css') }}">
 
+    <link href="{{ asset('bower_components/angular-advanced-searchbox/dist/angular-advanced-searchbox.min.css') }}" rel="stylesheet">
     <style>
         [ng-cloak]
         {
@@ -99,6 +100,8 @@
     <script src="{{ asset('js/ng-file-upload-shim.min.js') }}"></script>
     <script src="{{ asset('js/ng-file-upload.min.js') }}"></script>
     <script src="{{ asset('js/sortable.js') }}"></script>
+
+    <script src="{{ asset('bower_components/angular-advanced-searchbox/dist/angular-advanced-searchbox-tpls.min.js') }}"></script>
 
     @yield('scripts_at_body')
 </body>
