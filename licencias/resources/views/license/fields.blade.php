@@ -77,11 +77,11 @@
             </div>
             <div class="col-md-6">
                 <div class="form-group">
-                    {!! Form::label('trade_name', 'Nombre del comercio', ['class' => 'control-label']) !!}
+                    {!! Form::label('commerce_name', 'Nombre del comercio', ['class' => 'control-label']) !!}
                     @if(isset($license))
-                        {!! Form::text('trade_name', null, ['class' => 'form-control', 'id' => 'trade_name_input', 'placeholder' => 'Nombre del comercio', 'ng-model' => 'trade_name', 'ng-init' => 'trade_name="' . $license->trade_name . '"']) !!}
+                        {!! Form::text('commerce_name', null, ['class' => 'form-control', 'id' => 'commerce_name_input', 'placeholder' => 'Nombre del comercio', 'ng-model' => 'commerce_name', 'ng-init' => 'commerce_name="' . $license->commerce_name . '"']) !!}
                     @else
-                        {!! Form::text('trade_name', null, ['class' => 'form-control', 'id' => 'trade_name_input', 'placeholder' => 'Nombre del comercio', 'ng-model' => 'trade_name']) !!}
+                        {!! Form::text('commerce_name', null, ['class' => 'form-control', 'id' => 'commerce_name_input', 'placeholder' => 'Nombre del comercio', 'ng-model' => 'commerce_name']) !!}
                     @endif
                 </div>
             </div>
