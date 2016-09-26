@@ -34,6 +34,11 @@
                     </li>
                     <li>
                         <a class="nav-submenu" data-toggle="nav-submenu" href="#"><i class="si si-bell"></i><span class="sidebar-mini-hide">Alertas</span></a>
+                        <ul>
+                            <li>
+                                <a href="{{ route('alert.index') }}"><i class="si si-list"></i>Listado de alertas</a>
+                            </li>
+                        </ul>
                     </li>
                     <li>
                         <a class="nav-submenu" data-toggle="nav-submenu" href="#"><i class="si si-bar-chart"></i><span class="sidebar-mini-hide">Estad&iacute;sticas</span></a>
