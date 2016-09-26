@@ -69,7 +69,6 @@ class LicenseController extends Controller
         $titularFirstName = null;
         $titularLastName = null;
         $streets = $this->streetRepository->selectControl();
-        dd($this->streetRepository->selectControl());
         $streetId = null;
         $streetName = null;
         $street = null;
