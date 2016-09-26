@@ -21,6 +21,8 @@
 
     <link rel="stylesheet" href="{{ asset('plugin/bootstrap-year-calendar-master/css/bootstrap-year-calendar.min.css') }}">
 
+    <link href="{{ asset('bower_components/angular-advanced-searchbox/dist/angular-advanced-searchbox.min.css') }}" rel="stylesheet">
+
     <style>
         [ng-cloak]
         {
@@ -103,6 +105,8 @@
     <script src="{{ asset('js/ng-file-upload-shim.min.js') }}"></script>
     <script src="{{ asset('js/ng-file-upload.min.js') }}"></script>
     <script src="{{ asset('js/sortable.js') }}"></script>
+
+    <script src="{{ asset('bower_components/angular-advanced-searchbox/dist/angular-advanced-searchbox-tpls.min.js') }}"></script>
 
     @yield('scripts_at_body')
 </body>

@@ -43,6 +43,71 @@
                     <li>
                         <a class="nav-submenu" data-toggle="nav-submenu" href="#"><i class="si si-bar-chart"></i><span class="sidebar-mini-hide">Estad&iacute;sticas</span></a>
                     </li>
+
+                @if(Auth::user()->is(1))
+                    <li>
+                        <a  href="{{ route('titular.index') }}"><i class="fa fa-users"></i><span class="sidebar-mini-hide">Titulares</span></a>
+                    </li>
+                    <li>
+                        <a href="{{ route('person.index') }}"><i class="fa fa-user-md"></i><span class="sidebar-mini-hide">Personas de visita</span></a>
+                    </li>
+                    <li>
+                        <a href="{{ route('loan.index') }}"><i class="fa fa-exchange"></i><span class="sidebar-mini-hide">Prestamos</span></a>
+                    </li>
+                    <li>
+                        <a class="nav-submenu" data-toggle="nav-submenu" ><i class="glyphicon glyphicon-screenshot"></i><span class="sidebar-mini-hide">Reparos</span></a>
+                        <ul>
+                            <li>
+                                <a href="{{ route('license.index') }}"><i class="glyphicon glyphicon-screenshot"></i>Reparos</a>
+                            </li>
+                            <li>
+                                <a href="{{ route('titularitychange.index') }}"><i class="glyphicon glyphicon-alert"></i>Notificaciones de reparos</a>
+                            </li>
+                        </ul>
+                    </li>
+                    <li>
+                        <a href="{{ route('denunciation.index') }}"><i class="fa fa-balance-scale"></i><span class="sidebar-mini-hide">Denuncias</span></a>
+                    </li>
+                    <li>
+                        <a class="nav-submenu" data-toggle="nav-submenu" ><i class="si si-settings"></i><span class="sidebar-mini-hide">Configuracion</span></a>
+                        <ul>
+                            <li>
+                                <a href="{{ route('licensetype.index') }}">Tipos de licencias</a>
+                            </li>
+                            <li>
+                                <a href="{{ route('licensestage.index') }}">Pasos de Licencia</a>
+                            </li>
+                            <li>
+                                <a href="{{ route('licensecurrentstage.index') }}">Etapas de licencias</a>
+                            </li>
+                            <li>
+                                <a href="{{ route('licensetypestage.index') }}">Asignacion de pasos</a>
+                            </li>
+                            <li>
+                                <a href="{{ route('licensestatus.index') }}">Estados de licencias</a>
+                            </li>
+                            <li>
+                                <a href="{{ route('street.index') }}">Direcciones</a>
+                            </li>
+                            <li>
+                                <a href="{{ route('activity.index') }}">Actividades</a>
+                            </li>
+                            <li>
+                                <a href="{{ route('archive.index') }}">Archivadores</a>
+                            </li>
+                            <li>
+                                <a href="{{ route('personposition.index') }}">Posiciones</a>
+                            </li>
+                            <li>
+                                <a href="{{ route('file.index') }}">Documentos</a>
+                            </li>
+                            <li>
+                                <a href="{{ route('timelimit.index') }}">Tiempos de limites de entrega</a>
+                            </li>
+                        </ul>
+                    </li>
+
+                @endif
                 </ul>
             </div>
             <!-- END Side Content -->
