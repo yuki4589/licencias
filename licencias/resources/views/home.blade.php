@@ -1,6 +1,7 @@
 @extends('layout')
 
 @section('content')
+<div ng-app="licenseApp" ng-controller="licenseController" ng-cloak>
     <div class="row">
         <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
             <div class="js-slider" data-slider-dots="true" data-slider-arrows="true" data-slider-autoplay="true">
@@ -199,6 +200,7 @@
         </div>
     </div>
 </div>
+</div>
 @endsection
 
 @section('scripts_at_head')
@@ -209,6 +211,8 @@
         var licenseApp = angular.module('licenseApp', ['ngFileUpload']);
 
         licenseApp.controller('licenseController', ['$scope', '$http', function ($scope, $http) {
+
+            $scope.licenses = $http.get('api/v1/licenses');
 
             $scope.activitySearch = function () {
                 $scope.activity_id = null;

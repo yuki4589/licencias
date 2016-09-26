@@ -69,6 +69,7 @@ class LicenseController extends Controller
         $titularFirstName = null;
         $titularLastName = null;
         $streets = $this->streetRepository->selectControl();
+        dd($this->streetRepository->selectControl());
         $streetId = null;
         $streetName = null;
         $street = null;
@@ -460,5 +461,13 @@ class LicenseController extends Controller
       ];
 
       return response()->json($response, 200);
+    }
+
+    public function getAllLicense(){
+        $licenses = License::all();
+        $response = [
+            'data' => $licenses,
+        ];
+        return response()->json($response, 200);
     }
 }
