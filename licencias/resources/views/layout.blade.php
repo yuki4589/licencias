@@ -19,6 +19,8 @@
     <link rel="stylesheet" id="css-main" href="{{ asset('assets/css/oneui.css') }}">
     <link rel="stylesheet" id="css-theme" href="{{ asset('assets/css/themes/flat.min.css') }}">
 
+    <link rel="stylesheet" href="{{ asset('plugin/bootstrap-year-calendar-master/css/bootstrap-year-calendar.min.css') }}">
+
     <style>
         [ng-cloak]
         {
@@ -85,6 +87,8 @@
     <script src="{{ asset('assets/js/plugins/datatables/jquery.dataTables.min.js') }}"></script>
 
     <script src="{{ asset('assets/js/pages/base_tables_datatables.js') }}"></script>
+
+    <script src="{{ asset('plugin/bootstrap-year-calendar-master/js/bootstrap-year-calendar.min.js') }}"></script>
 
     <!-- Page JS Code -->
     <script>

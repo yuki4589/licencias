@@ -23,6 +23,7 @@ class CreateAlertsTable extends Migration
                 ->default(null);
             $table->foreign('license_id')->references('id')->on('licenses');
             $table->timestamps();
+            $table->softDeletes();
         });
     }
 

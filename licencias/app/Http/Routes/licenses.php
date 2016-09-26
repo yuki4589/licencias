@@ -95,6 +95,14 @@ Route::group(['middleware' => 'auth'], function () {
     // Descarga de archivos
     Route::get('file/download/{file}',
         ['as' => 'file.download', 'uses' => 'FileController@download']);
+
+    // Guarda las alertas en el modal
+    Route::post('alertmodal', 'AlertController@createModal');
+    Route::get('getalertlicense/{id}', 'AlertController@getAlertLicenses');
+    Route::delete('delete/alert/{id}', 'AlertController@destroy');
+    Route::get('calendario', [
+        'as' => 'calendario', 
+        function () { return view('alert.calendario'); }]);
 });
 
 
@@ -140,6 +148,8 @@ Route::group(['middleware' => ['auth','admin']], function () {
     Route::resource('licensetypestage', 'LicenseTypeStageController');
     // Gestion de cambios de titularidad
     Route::resource('titularitychange', 'TitularityChangeController');
+
+    Route::resource('alert', 'AlertController');
 
 });
 

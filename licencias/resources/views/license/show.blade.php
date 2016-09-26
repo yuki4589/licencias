@@ -159,6 +159,7 @@
                 <li role="presentation"><a href="#license-details" aria-controls="license-details" role="tab" data-toggle="tab">Detalles</a></li>
                 <li role="presentation"><a href="#license-titulars" aria-controls="license-titulars" role="tab" data-toggle="tab">Cambios de titularidad</a></li>
                 <li role="presentation"><a href="#license-denunciations" aria-controls="license-denunciations" role="tab" data-toggle="tab">Denuncias</a></li>
+                <li role="presentation"><a href="#license-avisos" aria-controls="license-avisos" role="tab" data-toggle="tab">Avisos/Alertas</a></li>
             </ul>
             <div class="tab-content">
                 <div role="tabpanel" class="tab-pane active panel panel-body" id="license-data">
@@ -403,6 +404,31 @@
                             @endforeach
                         </div>
                     @endif
+                </div>
+                <div role="tabpanel" class="tab-pane panel panel-body" id="license-avisos">
+                    <!-- Avisos/Alertas-->
+                    <div class="col-md-12 text-right">
+                        <button class="btn btn-success" data-toggle="modal" data-target="#modal-alert" type="button">
+                            <i class="fa fa-plus" aria-hidden="true"></i> Agregar alerta
+                        </button>
+                    </div>
+                    <table class="table table-condensed">
+                        <thead>
+                            <tr>
+                                <th>Titulo</th>
+                                <th>Fecha</th>
+                                <th>Descripción</th>
+                            </tr>
+                        </thead>
+                        <tbody ng-repeat="alert in alertTable">
+                            <tr>
+                                <td>@{{alert.title}}</td>
+                                <td>@{{alert.date}}</td>
+                                <td>@{{alert.description}}</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    @include('license.exposed.modal')
                 </div>
             </div>
         </div>

@@ -339,4 +339,14 @@ class License extends Model
     {
         return $this->loans->where('giving_back_date', null)->first();
     }
+
+    /**
+     * A License has Many TitularityChange.
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
+    public function alert()
+    {
+        return $this->hasMany('CityBoard\Entities\Alert');
+    }
 }
