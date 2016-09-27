@@ -22,6 +22,11 @@ class CreateAlertsTable extends Migration
                 ->nullable()
                 ->default(null);
             $table->foreign('license_id')->references('id')->on('licenses');
+            $table->integer('type_alert_id')
+                ->unsigned()
+                ->nullable()
+                ->default(null);
+            $table->foreign('type_alert_id')->references('id')->on('type_alerts');
             $table->timestamps();
             $table->softDeletes();
         });

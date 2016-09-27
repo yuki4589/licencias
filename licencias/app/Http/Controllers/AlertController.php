@@ -8,6 +8,7 @@ use CityBoard\Http\Requests;
 use CityBoard\Http\Controllers\Controller;
 use CityBoard\Entities\License;
 use CityBoard\Entities\Alert;
+use CityBoard\Entities\TypeAlert;
 use CityBoard\Repositories\LicenseRepository;
 
 class AlertController extends Controller
@@ -36,6 +37,11 @@ class AlertController extends Controller
                 # code...
                 $value->expedient_number = $lis->expedient_number;
             }
+            $typeA = TypeAlert::all()->where('id', $value->type_alert_id);
+            foreach ($typeA as $key => $typAl) {
+                # code...
+                $value->type = $typAl->type;
+            }
         }
         //dd($alerts);
         return view('alert.index', compact('alerts'));
@@ -50,8 +56,9 @@ class AlertController extends Controller
     {
         //
         $licence = $this->licenseRepository->selectControl();
+        $typeAlert = TypeAlert::OrderBy('id','ASC')->lists('type','id');
 
-        return view('alert.create', compact('licence'));
+        return view('alert.create', compact('licence', 'typeAlert'));
     }
 
     /**
@@ -89,13 +96,14 @@ class AlertController extends Controller
         //
         $licence = $this->licenseRepository->selectControl();
         $alert = Alert::all()->where('id', $id);
+        $typeAlert = TypeAlert::OrderBy('id','ASC')->lists('type','id');
         $objetoAlerta;
         foreach ($alert as $key => $value) {
             # code...
             $objetoAlerta = $value;
         }
         //dd($objetoAlerta);
-        return view('alert.edit', compact('objetoAlerta','licence'));
+        return view('alert.edit', compact('objetoAlerta','licence', 'typeAlert'));
 
     }
 
@@ -154,6 +162,17 @@ class AlertController extends Controller
     *
     */
     public function getAlertLicenses($id) {
-        return Alert::all()->where('license_id', $id);
+        $alerts = Alert::all()->where('license_id', $id);
+        foreach ($alerts as $key => $value) {
+            $typeA = TypeAlert::all()->where('id', $value->type_alert_id);
+            foreach ($typeA as $key => $lis) {
+                $value->type = $lis->type;
+            }
+        }
+        return $alerts;
+    }
+
+    public function getTypeAlert(){
+        return TypeAlert::all();
     }
 }

@@ -23,13 +23,23 @@
             </div>
         </div>
         <div class="row">
-            <div class="col-md-12">
+            <div class="col-md-6">
                 <div class="form-group @if($errors->first('license_id')) has-error @endif">
                     {!! Form::label('licence_id', 'Licencias', ['class' => 'control-label']) !!}
                     @if(isset($objetoAlerta))
                         {!! Form::select('license_id',  $licence, $objetoAlerta->license_id, ['class' => 'form-control', 'placeholder' => 'Selecciona una licencia...']) !!}
                     @else
                         {!! Form::select('license_id',  $licence, null, ['class' => 'form-control', 'placeholder' => 'Selecciona una licencia...']) !!}
+                    @endif
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="form-group @if($errors->first('type_alert_id')) has-error @endif">
+                    {!! Form::label('type_alert_id', 'Tipo de alerta', ['class' => 'control-label']) !!}
+                    @if(isset($objetoAlerta))
+                        {!! Form::select('type_alert_id',  $typeAlert, $objetoAlerta->type_alert_id, ['class' => 'form-control', 'placeholder' => 'Selecciona un tipo de alerta.']) !!}
+                    @else
+                        {!! Form::select('type_alert_id',  $typeAlert, null, ['class' => 'form-control', 'placeholder' => 'Selecciona un tipo de alerta']) !!}
                     @endif
                 </div>
             </div>
