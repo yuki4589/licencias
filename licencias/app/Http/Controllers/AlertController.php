@@ -176,20 +176,6 @@ class AlertController extends Controller
         return TypeAlert::all();
     }
 
-    public function getAlertCarrusel() {
-        $now = date('Y-m-d');
-        $alerts = Alert::all()->where('date', $now);
-        $type = TypeAlert::all();
-        $position = array();
-        foreach ($type as $key => $value) {
-            $typeAlert = $alerts->where('type_alert_id', $value->id);
-            $position[] = array(
-                'cantidad' => $typeAlert->count(),
-                'tipo' => $value->type
-            );
-        }
-        return json_encode($position);
-    }
 
     public function getAlertCalendar() {
         $alert = Alert::all();
@@ -213,7 +199,7 @@ class AlertController extends Controller
                     'url' => "",
                     'class' => "event-warning",
                     'start' => strtotime($date) . '000',
-                    'end' => strtotime($date) . '000',
+                    'end' => strtotime($date) . '999',
                     'description' => $value->description,
                     'license' => $value->expedient_number,
                     'type_alert' => $value->type
@@ -225,7 +211,7 @@ class AlertController extends Controller
                     'url' => "",
                     'class' => "event-success",
                     'start' => strtotime($date) . '000',
-                    'end' => strtotime($date) . '000',
+                    'end' => strtotime($date) . '999',
                     'description' => $value->description,
                     'license' => $value->expedient_number,
                     'type_alert' => $value->type
