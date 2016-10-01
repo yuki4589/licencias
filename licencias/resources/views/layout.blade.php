@@ -19,9 +19,11 @@
     <link rel="stylesheet" id="css-main" href="{{ asset('assets/css/oneui.css') }}">
     <link rel="stylesheet" id="css-theme" href="{{ asset('assets/css/themes/flat.min.css') }}">
 
-    <link rel="stylesheet" href="{{ asset('plugin/bootstrap-year-calendar-master/css/bootstrap-year-calendar.min.css') }}">
+    <link rel="stylesheet" href="{{ asset('plugin/bootstrap-calendar-master/css/calendar.css') }}">
 
     <link href="{{ asset('bower_components/angular-advanced-searchbox/dist/angular-advanced-searchbox.min.css') }}" rel="stylesheet">
+
+    <link rel="stylesheet" type="text/css" href="{{ asset('assets/js/plugins/bootstrap-datetimepicker/bootstrap-datetimepicker.min.css') }}">
 
     <style>
         [ng-cloak]
@@ -90,7 +92,12 @@
 
     <script src="{{ asset('assets/js/pages/base_tables_datatables.js') }}"></script>
 
-    <script src="{{ asset('plugin/bootstrap-year-calendar-master/js/bootstrap-year-calendar.min.js') }}"></script>
+    <script src="{{ asset('plugin/bootstrap-calendar-master/components/underscore/underscore-min.js') }}"></script>
+    <script src="{{ asset('plugin/bootstrap-calendar-master/js/calendar.js') }}"></script>
+    <script src="{{ asset('plugin/bootstrap-calendar-master/js/language/es-ES.js') }}"></script>
+    <script src="{{ asset('assets/js/plugins/bootstrap-datetimepicker/moment.min.js') }}"></script>
+    <script src="{{ asset('assets/js/plugins/bootstrap-datetimepicker/locale/es.js') }}"></script>
+    <script src="{{ asset('assets/js/plugins/bootstrap-datetimepicker/bootstrap-datetimepicker.min.js') }}"></script>
 
     <!-- Page JS Code -->
     <script>

@@ -3,6 +3,10 @@ $('#license-tabs a').click(function (e) {
     $(this).tab('show');
 });
 
+$(function () {
+    
+});
+
 var stageApp = angular.module('currentStageApp', ['ngFileUpload']);
 
 stageApp.directive('convertToNumber', function() {
@@ -33,12 +37,16 @@ stageApp.controller('currentStageController', ['$scope', '$http', 'Upload', '$ti
             .success(function (response){
                 $scope.typeAlert = response;  
             });
-        
+        $('.date').datetimepicker({
+            locale: 'es',
+            format: 'YYYY-MM-DD HH:mm:ss'
+        });
     });
 
     // guardar las alertas por modal
     $scope.guardarAlerta = function () {
         $scope.alert.license_id = $scope.license.id;
+        $scope.alert.date = $('#datetimepicker2').val();
         var accion = confirm("Desea guardar la alerta?");
         if(accion){
             $http.post('../alertmodal', $scope.alert)

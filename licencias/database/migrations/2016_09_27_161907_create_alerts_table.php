@@ -15,7 +15,7 @@ class CreateAlertsTable extends Migration
         Schema::create('alerts', function (Blueprint $table) {
             $table->increments('id');
             $table->string('title');
-            $table->date('date');
+            $table->dateTime('date');
             $table->string('description');
             $table->integer('license_id')
                 ->unsigned()

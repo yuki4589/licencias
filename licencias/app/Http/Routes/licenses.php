@@ -104,6 +104,8 @@ Route::group(['middleware' => 'auth'], function () {
         'as' => 'calendario', 
         function () { return view('alert.calendario'); }]);
     Route::get('gettypealert', 'AlertController@getTypeAlert');
+    Route::get('getalertcalendar', 'AlertController@getAlertCalendar');
+    Route::post('getalertexist', 'AlertController@getAlertCarrusel');
     Route::resource('alert', 'AlertController');
 });
 

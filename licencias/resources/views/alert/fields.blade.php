@@ -14,11 +14,19 @@
             <div class="col-md-6">
                 <div class="form-group @if($errors->first('date')) has-error @endif">
                     {!! Form::label('date', 'Fecha de publicación', ['class' => 'control-label']) !!}
-                    @if(isset($objetoAlerta))
-                        {!! Form::date('date', $objetoAlerta->date, ['class' => 'form-control']) !!}
-                    @else
-                        {!! Form::date('date', \Carbon\Carbon::now(), ['class' => 'form-control']) !!}
-                    @endif
+                    <div class='input-group date' >
+                        @if(isset($objetoAlerta))
+                            {!! Form::text('date', $objetoAlerta->date, ['class' => 'form-control', 'id' => 'datetimepicker2']) !!}
+                            <span class="input-group-addon">
+                                <span class="glyphicon glyphicon-calendar"></span>
+                            </span>
+                        @else
+                            {!! Form::text('date', null, ['class' => 'form-control', 'id' => 'datetimepicker2']) !!}
+                            <span class="input-group-addon">
+                                            <span class="glyphicon glyphicon-calendar"></span>
+                                        </span>
+                        @endif
+                    </div>
                 </div>
             </div>
         </div>

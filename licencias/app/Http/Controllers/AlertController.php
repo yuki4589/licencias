@@ -175,4 +175,76 @@ class AlertController extends Controller
     public function getTypeAlert(){
         return TypeAlert::all();
     }
+
+    public function getAlertCarrusel() {
+        $now = date('Y-m-d');
+        $alerts = Alert::all()->where('date', $now);
+        $type = TypeAlert::all();
+        $position = array();
+        foreach ($type as $key => $value) {
+            $typeAlert = $alerts->where('type_alert_id', $value->id);
+            $position[] = array(
+                'cantidad' => $typeAlert->count(),
+                'tipo' => $value->type
+            );
+        }
+        return json_encode($position);
+    }
+
+    public function getAlertCalendar() {
+        $alert = Alert::all();
+        $result = array();
+        foreach ($alert as $key => $value) {
+            # Se setea los valores de las alertas 
+            # para enviarlos al calendario.
+            $value->license = License::all()->where('id', $value->license_id);
+            foreach ($value->license as $key => $lis) {
+                $value->expedient_number = $lis->expedient_number;
+            }
+            $typeA = TypeAlert::all()->where('id', $value->type_alert_id);
+            foreach ($typeA as $key => $typAl) {
+                $value->type = $typAl->type;
+            }
+            $date = $value->date;
+            if($value->type_alert_id == 1){
+                $result[] = array(
+                    'id' => $value->id,
+                    'title' => $value->title,
+                    'url' => "",
+                    'class' => "event-warning",
+                    'start' => strtotime($date) . '000',
+                    'end' => strtotime($date) . '000',
+                    'description' => $value->description,
+                    'license' => $value->expedient_number,
+                    'type_alert' => $value->type
+                );
+            } elseif ($value->type_alert_id == 2) {
+                $result[] = array(
+                    'id' => $value->id,
+                    'title' => $value->title,
+                    'url' => "",
+                    'class' => "event-success",
+                    'start' => strtotime($date) . '000',
+                    'end' => strtotime($date) . '000',
+                    'description' => $value->description,
+                    'license' => $value->expedient_number,
+                    'type_alert' => $value->type
+                );
+            } else{
+                $result[] = array(
+                    'id' => $value->id,
+                    'title' => $value->title,
+                    'url' => "",
+                    'class' => "event-info",
+                    'start' => strtotime($date) . '000',
+                    'end' => strtotime($date) . '000',
+                    'description' => $value->description,
+                    'license' => $value->expedient_number,
+                    'type_alert' => $value->type
+                );
+            }
+        }
+
+        return json_encode($result);
+    }
 }

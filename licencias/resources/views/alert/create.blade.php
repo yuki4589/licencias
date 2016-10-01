@@ -30,9 +30,12 @@
         var licenseApp = angular.module('licenseApp', ['ngFileUpload']);
 
         licenseApp.controller('alertController', ['$scope', '$http', function ($scope, $http) {
-            $scope.commerce_name = ""; //se agrega al scope el campo de "nombre del comercio"
-            
-            
+            angular.element(document).ready(function () {
+                $('.date').datetimepicker({
+                    locale: 'es',
+                    format: 'YYYY-MM-DD HH:mm:ss'
+                });
+            });
         }]);
     </script>
 @endsection

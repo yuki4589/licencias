@@ -3,7 +3,7 @@
 @section('content')
     <div class="row">
         <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
-            <div class="js-slider" data-slider-dots="true" data-slider-arrows="true" data-slider-autoplay="true">
+            <div class="js-slider" data-slider-dots="true" data-slider-arrows="true" data-slider-autoplay="false">
                 <div>
                     <div class="block text-center remove-margin-b">
                         <div class="block-content block-content-full">
@@ -39,41 +39,23 @@
                 </div>
             </div>
         </div>
-        <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
+        <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12" ng-app="licenseApp" ng-controller="licenseController" ng-cloak>
+
             <div class="js-slider" data-slider-dots="true" data-slider-arrows="true" data-slider-autoplay="true">
                 <div>
-                    <div class="block text-center remove-margin-b">
-                        <div class="block-content block-content-full">
-                            <i class="si si-bell fa-2x"></i>
-                            <div class="h1 font-w700">Titulo Alerta</div>
-                            <div class="h5 text-muted text-uppercase push-5-t">Descripci&oacute;n</div>
+                    <div ng-repeat="alert in objectAlert">
+                        <div class="block text-center remove-margin-b">
+                            <div class="block-content block-content-full">
+                                <i class="si si-bell fa-2x"></i>
+                                <div class="h1 font-w700">@{{alert.cantidad}}</div>
+                                <div class="h5 text-muted text-uppercase push-5-t">@{{alert.tipo}}</div>
+                            </div>
+                        </div>
+                        <div class="block-content block-content-full block-content-mini bg-danger text-white">
                         </div>
                     </div>
-                    <div class="block-content block-content-full block-content-mini bg-danger text-white">
-                    </div>
                 </div>
-                <div>
-                    <div class="block text-center remove-margin-b">
-                        <div class="block-content block-content-full">
-                            <i class="si si-bell fa-2x"></i>
-                            <div class="h1 font-w700">Titulo Alerta</div>
-                            <div class="h5 text-muted text-uppercase push-5-t">Descripci&oacute;n</div>
-                        </div>
-                    </div>
-                    <div class="block-content block-content-full block-content-mini bg-danger text-white">
-                    </div>
-                </div>
-                <div>
-                    <div class="block text-center remove-margin-b">
-                        <div class="block-content block-content-full">
-                            <i class="si si-bell fa-2x"></i>
-                            <div class="h1 font-w700">Titulo Alerta</div>
-                            <div class="h5 text-muted text-uppercase push-5-t">Descripci&oacute;n</div>
-                        </div>
-                    </div>
-                    <div class="block-content block-content-full block-content-mini bg-danger text-white">
-                    </div>
-                </div>
+                
             </div>
         </div>
     </div>
@@ -209,6 +191,20 @@
         var licenseApp = angular.module('licenseApp', ['ngFileUpload']);
 
         licenseApp.controller('licenseController', ['$scope', '$http', function ($scope, $http) {
+
+            $scope.objectAlert= {};
+            angular.element(document).ready(function () {
+                //traeAlertas();
+                $http.post('../getalertexist')
+                .success(function (response){
+                    $scope.objectAlert = response;  
+                    console.log($scope.objectAlert);
+                });
+            });
+            function traeAlertas () {
+                
+                //setTimeout(traeAlertas(), 120000);
+            }
 
             $scope.activitySearch = function () {
                 $scope.activity_id = null;
