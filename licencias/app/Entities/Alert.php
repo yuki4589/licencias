@@ -24,6 +24,7 @@ class Alert extends Model
     	'date',
     	'description',
     	'license_id',
+        'type_alert_id',
     ];
 
     public function __construct(array $attributes = [])
@@ -39,5 +40,15 @@ class Alert extends Model
     public function license()
     {
         return $this->belongsTo('CityBoard\Entities\License');
+    }
+
+    /**
+     * A LicenseStatusChange belongs to TypeAlert.
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     */
+    public function type_alert()
+    {
+        return $this->belongsTo('CityBoard\Entities\Alert');
     }
 }

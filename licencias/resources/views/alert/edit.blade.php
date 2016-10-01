@@ -33,6 +33,12 @@
 
         licenseApp.controller('alertController', ['$scope', '$http', function ($scope, $http) {
             $scope.alert = {};
+            angular.element(document).ready(function () {
+                $('.date').datetimepicker({
+                    locale: 'es',
+                    format: 'YYYY-MM-DD HH:mm:ss'
+                });
+            });
         }]);
     </script>
 @endsection

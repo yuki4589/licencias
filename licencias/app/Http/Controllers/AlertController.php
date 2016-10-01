@@ -8,6 +8,7 @@ use CityBoard\Http\Requests;
 use CityBoard\Http\Controllers\Controller;
 use CityBoard\Entities\License;
 use CityBoard\Entities\Alert;
+use CityBoard\Entities\TypeAlert;
 use CityBoard\Repositories\LicenseRepository;
 
 class AlertController extends Controller
@@ -36,6 +37,11 @@ class AlertController extends Controller
                 # code...
                 $value->expedient_number = $lis->expedient_number;
             }
+            $typeA = TypeAlert::all()->where('id', $value->type_alert_id);
+            foreach ($typeA as $key => $typAl) {
+                # code...
+                $value->type = $typAl->type;
+            }
         }
         //dd($alerts);
         return view('alert.index', compact('alerts'));
@@ -50,8 +56,9 @@ class AlertController extends Controller
     {
         //
         $licence = $this->licenseRepository->selectControl();
+        $typeAlert = TypeAlert::OrderBy('id','ASC')->lists('type','id');
 
-        return view('alert.create', compact('licence'));
+        return view('alert.create', compact('licence', 'typeAlert'));
     }
 
     /**
@@ -89,13 +96,14 @@ class AlertController extends Controller
         //
         $licence = $this->licenseRepository->selectControl();
         $alert = Alert::all()->where('id', $id);
+        $typeAlert = TypeAlert::OrderBy('id','ASC')->lists('type','id');
         $objetoAlerta;
         foreach ($alert as $key => $value) {
             # code...
             $objetoAlerta = $value;
         }
         //dd($objetoAlerta);
-        return view('alert.edit', compact('objetoAlerta','licence'));
+        return view('alert.edit', compact('objetoAlerta','licence', 'typeAlert'));
 
     }
 
@@ -154,6 +162,75 @@ class AlertController extends Controller
     *
     */
     public function getAlertLicenses($id) {
-        return Alert::all()->where('license_id', $id);
+        $alerts = Alert::all()->where('license_id', $id);
+        foreach ($alerts as $key => $value) {
+            $typeA = TypeAlert::all()->where('id', $value->type_alert_id);
+            foreach ($typeA as $key => $lis) {
+                $value->type = $lis->type;
+            }
+        }
+        return $alerts;
+    }
+
+    public function getTypeAlert(){
+        return TypeAlert::all();
+    }
+
+
+    public function getAlertCalendar() {
+        $alert = Alert::all();
+        $result = array();
+        foreach ($alert as $key => $value) {
+            # Se setea los valores de las alertas 
+            # para enviarlos al calendario.
+            $value->license = License::all()->where('id', $value->license_id);
+            foreach ($value->license as $key => $lis) {
+                $value->expedient_number = $lis->expedient_number;
+            }
+            $typeA = TypeAlert::all()->where('id', $value->type_alert_id);
+            foreach ($typeA as $key => $typAl) {
+                $value->type = $typAl->type;
+            }
+            $date = $value->date;
+            if($value->type_alert_id == 1){
+                $result[] = array(
+                    'id' => $value->id,
+                    'title' => $value->title,
+                    'url' => "",
+                    'class' => "event-warning",
+                    'start' => strtotime($date) . '000',
+                    'end' => strtotime($date) . '999',
+                    'description' => $value->description,
+                    'license' => $value->expedient_number,
+                    'type_alert' => $value->type
+                );
+            } elseif ($value->type_alert_id == 2) {
+                $result[] = array(
+                    'id' => $value->id,
+                    'title' => $value->title,
+                    'url' => "",
+                    'class' => "event-success",
+                    'start' => strtotime($date) . '000',
+                    'end' => strtotime($date) . '999',
+                    'description' => $value->description,
+                    'license' => $value->expedient_number,
+                    'type_alert' => $value->type
+                );
+            } else{
+                $result[] = array(
+                    'id' => $value->id,
+                    'title' => $value->title,
+                    'url' => "",
+                    'class' => "event-info",
+                    'start' => strtotime($date) . '000',
+                    'end' => strtotime($date) . '000',
+                    'description' => $value->description,
+                    'license' => $value->expedient_number,
+                    'type_alert' => $value->type
+                );
+            }
+        }
+
+        return json_encode($result);
     }
 }

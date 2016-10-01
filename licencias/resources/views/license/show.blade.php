@@ -418,6 +418,7 @@
                                 <th>Titulo</th>
                                 <th>Fecha</th>
                                 <th>Descripción</th>
+                                <th>Tipo de alerta</th>
                             </tr>
                         </thead>
                         <tbody ng-repeat="alert in alertTable">
@@ -425,6 +426,7 @@
                                 <td>@{{alert.title}}</td>
                                 <td>@{{alert.date}}</td>
                                 <td>@{{alert.description}}</td>
+                                <td>@{{alert.type}}</td>
                             </tr>
                         </tbody>
                     </table>

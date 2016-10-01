@@ -22,11 +22,22 @@
                                 </div>
                             </div>
                             <div class="form-group">
-                                <div class="col-sm-9">
+                                <div class="col-sm-6">
                                     <div class="form-material">
-                                        <input class="js-datepicker form-control" type="date" id="date" name="date" ng-model="alert.date" data-date-format="dd-mm-yyyy">
                                         <label for="date">Fecha de publicación</label>
                                     </div>
+                                    <div class='input-group date' >
+                                        <input type='text' class="form-control" id='datetimepicker2' name="date" ng-model="alert.date"/>
+                                        <span class="input-group-addon">
+                                            <span class="glyphicon glyphicon-calendar"></span>
+                                        </span>
+                                    </div>
+                                </div>
+                                <div class="col-sm-6">
+                                    <label for="type_alert_id">Tipo de alerta</label><br>
+                                    <select id="type_alert_id" ng-model="alert.type_alert_id">
+                                        <option ng-repeat="type in typeAlert" value="@{{type.id}}">@{{type.type}}</option>
+                                    </select>
                                 </div>
                             </div>
                         
