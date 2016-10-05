@@ -46,6 +46,7 @@ stageApp.controller('currentStageController', ['$scope', '$http', 'Upload', '$ti
     // guardar las alertas por modal
     $scope.guardarAlerta = function () {
         $scope.alert.license_id = $scope.license.id;
+        $scope.alert.type_alert_id = 4;
         $scope.alert.date = $('#datetimepicker2').val();
         var accion = confirm("Desea guardar la alerta?");
         if(accion){

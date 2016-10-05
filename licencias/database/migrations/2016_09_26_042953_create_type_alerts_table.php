@@ -26,11 +26,11 @@ class CreateTypeAlertsTable extends Migration
             'created_at' => $now
         ]);
 
-        //Creación manual
+        //información pública
         $now = date('Y-m-d H:i:s');
         \DB::table('type_alerts')->insert([
             'id' => 2,
-            'type' => 'Creación manual',
+            'type' => 'Información pública',
             'created_at' => $now
         ]);
 
@@ -39,6 +39,14 @@ class CreateTypeAlertsTable extends Migration
         \DB::table('type_alerts')->insert([
             'id' => 3,
             'type' => 'Plazo de espera',
+            'created_at' => $now
+        ]);
+        
+        //Creación manual
+        $now = date('Y-m-d H:i:s');
+        \DB::table('type_alerts')->insert([
+            'id' => 4,
+            'type' => 'Creación manual',
             'created_at' => $now
         ]);
     }
