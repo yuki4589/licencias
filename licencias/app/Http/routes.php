@@ -13,3 +13,7 @@
 
 require __DIR__ . '/Routes/auth.php';
 require __DIR__ . '/Routes/licenses.php';
+
+// Rutas de consumo Angular
+require __DIR__ . '/Routes/api.php';
+

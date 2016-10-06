@@ -21,6 +21,13 @@ class ActivityController extends Controller
         $this->activityRepository = new ActivityRepository();
     }
 
+    public function getAllActivities(){
+        $activities = Activity::all();
+        $response = [
+            'data' => $activities,
+        ];
+        return response()->json($response, 200);
+    }
     /**
      * Display a listing of the resource.
      *
@@ -33,6 +40,7 @@ class ActivityController extends Controller
 
         return view('activity.index', compact('activities', 'amount'));
     }
+
 
     /**
      * Show the form for creating a new resource.

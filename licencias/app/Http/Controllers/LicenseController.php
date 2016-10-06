@@ -461,4 +461,13 @@ class LicenseController extends Controller
 
       return response()->json($response, 200);
     }
+
+    public function getAllLicense(){
+        $licenses = License::with('activity')->with('street')
+            ->with('titular')->with('licenseStatus')->with('licenseCurrentStages')->get();
+        $response = [
+            'data' => $licenses,
+        ];
+        return response()->json($response, 200);
+    }
 }

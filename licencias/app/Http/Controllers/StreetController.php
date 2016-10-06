@@ -21,6 +21,14 @@ class StreetController extends Controller
         $this->streetRepository = new StreetRepository();
     }
 
+    public function getAllStreets(){
+        $streets = Street::all();
+        $response = [
+            'data' => $streets,
+        ];
+        return response()->json($response, 200);
+    }
+
     /**
      * Display a listing of the resource.
      *
