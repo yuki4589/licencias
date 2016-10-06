@@ -4,6 +4,7 @@
             <div class="col-md-6">
                 <div class="form-group @if($errors->first('title')) has-error @endif">
                 {!! Form::label('title', 'Titulo', ['class' => 'control-label']) !!}
+                {!! Form::hidden('type_alert_id', 4, ['class' => 'form-control', 'id' => 'type_alert_id_input']) !!}
                 @if(isset($objetoAlerta))
                     {!! Form::text('title', $objetoAlerta->title, ['class' => 'form-control', 'id' => 'title_input', 'placeholder' => 'Titulo']) !!}
                 @else
@@ -23,8 +24,8 @@
                         @else
                             {!! Form::text('date', null, ['class' => 'form-control', 'id' => 'datetimepicker2']) !!}
                             <span class="input-group-addon">
-                                            <span class="glyphicon glyphicon-calendar"></span>
-                                        </span>
+                                <span class="glyphicon glyphicon-calendar"></span>
+                            </span>
                         @endif
                     </div>
                 </div>
@@ -38,16 +39,6 @@
                         {!! Form::select('license_id',  $licence, $objetoAlerta->license_id, ['class' => 'form-control', 'placeholder' => 'Selecciona una licencia...']) !!}
                     @else
                         {!! Form::select('license_id',  $licence, null, ['class' => 'form-control', 'placeholder' => 'Selecciona una licencia...']) !!}
-                    @endif
-                </div>
-            </div>
-            <div class="col-md-6">
-                <div class="form-group @if($errors->first('type_alert_id')) has-error @endif">
-                    {!! Form::label('type_alert_id', 'Tipo de alerta', ['class' => 'control-label']) !!}
-                    @if(isset($objetoAlerta))
-                        {!! Form::select('type_alert_id',  $typeAlert, $objetoAlerta->type_alert_id, ['class' => 'form-control', 'placeholder' => 'Selecciona un tipo de alerta.']) !!}
-                    @else
-                        {!! Form::select('type_alert_id',  $typeAlert, null, ['class' => 'form-control', 'placeholder' => 'Selecciona un tipo de alerta']) !!}
                     @endif
                 </div>
             </div>
