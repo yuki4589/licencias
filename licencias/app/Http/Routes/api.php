@@ -13,6 +13,17 @@ Route::group(['middleware' => 'auth', 'prefix' => 'api/v1'], function () {
     //Obtener licencias
     Route::get('getlicenses', 'LicenseController@getAllLicense');
 
-    //Obtener tipos de licencias
-    Route::get('getLicensesType', 'LicenseController@getAllLicense');
+    //Obtener tipos de Actividades
+    Route::get('getAllActivities', 'ActivityController@getAllActivities');
+
+    //Obtener todas las calles
+    Route::get('getAllStreets', 'StreetController@getAllStreets');
+
+
+    //Obtener status
+    Route::get('getAllLicenseStatus', 'LicenseStatusController@getAllLicenseStatus');
+
+    //Obetner types
+    Route::get('getAllLicenseType', 'LicenseTypeStageController@getAllLicenseType');
+
 });

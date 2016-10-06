@@ -463,7 +463,8 @@ class LicenseController extends Controller
     }
 
     public function getAllLicense(){
-        $licenses = License::all();
+        $licenses = License::with('activity')->with('street')
+            ->with('titular')->with('licenseStatus')->with('licenseCurrentStages')->get();
         $response = [
             'data' => $licenses,
         ];

@@ -21,7 +21,9 @@
 
     <link rel="stylesheet" href="{{ asset('plugin/bootstrap-year-calendar-master/css/bootstrap-year-calendar.min.css') }}">
 
-    <link href="{{ asset('bower_components/angular-advanced-searchbox/dist/angular-advanced-searchbox.min.css') }}" rel="stylesheet">
+
+    <!-- angular advanced searchbox includes -->
+    <link rel="stylesheet" href="{{ asset('bower_components/angular-advanced-searchbox/dist/angular-advanced-searchbox.min.css') }}">
 
     <style>
         [ng-cloak]
@@ -74,8 +76,14 @@
     </div>
 
     <!-- OneUI Core JS: jQuery, Bootstrap, slimScroll, scrollLock, Appear, CountTo, Placeholder, Cookie and App.js -->
-    <script src="{{ asset('assets/js/core/jquery.min.js') }}"></script>
+    <script src="{{ asset('js/jquery.min.js') }}"></script>
     <script src="{{ asset('assets/js/core/bootstrap.min.js') }}"></script>
+    <script src="{{ asset('js/angular.min.js') }}"></script>
+    <script src="{{ asset('js/lib/angular-animate.min.js') }}"></script>
+    <script src="{{ asset('bower_components/angular-bootstrap/ui-bootstrap-tpls.js') }}"></script>
+    <script src="{{ asset('bower_components/angular-advanced-searchbox/dist/angular-advanced-searchbox-tpls.js') }}"></script>
+    <script src="{{ asset('bower_components/angularUtils-pagination/dirPagination.js') }}"></script>
+
     <script src="{{ asset('assets/js/core/jquery.slimscroll.min.js') }}"></script>
     <script src="{{ asset('assets/js/core/jquery.scrollLock.min.js') }}"></script>
     <script src="{{ asset('assets/js/core/jquery.appear.min.js') }}"></script>
@@ -84,6 +92,7 @@
     <script src="{{ asset('assets/js/core/js.cookie.min.js') }}"></script>
     <script src="{{ asset('assets/js/app.js') }}"></script>
     <!-- Page Plugins -->
+
     <script src="{{ asset('assets/js/plugins/slick/slick.min.js') }}"></script>
 
     <script src="{{ asset('assets/js/plugins/datatables/jquery.dataTables.min.js') }}"></script>
@@ -100,13 +109,11 @@
         });
     </script>
 
-    <script src="{{ asset('js/angular.min.js') }}"></script>
+
     <script src="{{ asset('js/angular-route.js') }}"></script>
     <script src="{{ asset('js/ng-file-upload-shim.min.js') }}"></script>
     <script src="{{ asset('js/ng-file-upload.min.js') }}"></script>
     <script src="{{ asset('js/sortable.js') }}"></script>
-
-    <script src="{{ asset('bower_components/angular-advanced-searchbox/dist/angular-advanced-searchbox-tpls.min.js') }}"></script>
 
     @yield('scripts_at_body')
 </body>

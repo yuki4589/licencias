@@ -2,6 +2,7 @@
 
 namespace CityBoard\Http\Controllers;
 
+use CityBoard\Entities\LicenseStatus;
 use CityBoard\Http\Controllers\Controller;
 
 use CityBoard\Repositories\LicenseStatusRepository;
@@ -105,5 +106,13 @@ class LicenseStatusController extends Controller
     public function destroy($id)
     {
         //
+    }
+
+    public function getAllLicenseStatus(){
+        $statuses = LicenseStatus::all();
+        $response = [
+            'data' => $statuses,
+        ];
+        return response()->json($response, 200);
     }
 }
