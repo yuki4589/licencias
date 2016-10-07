@@ -165,8 +165,8 @@ class HomeController extends Controller
         
         
         $typeAlert = Alert::where('type_alert_id', 1)->count();
-        $typeAlert2 = Alert::where('type_alert_id', 2)->count();
-        $typeAlert3 = Alert::where('type_alert_id', 3)->count();
+        $typeAlert2 = Alert::where('type_alert_id', 3)->count();
+        $typeAlert3 = Alert::where('type_alert_id', 4)->count();
 
         
 

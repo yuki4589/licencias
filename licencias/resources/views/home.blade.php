@@ -58,7 +58,7 @@
                     <div class="block text-center remove-margin-b">
                         <div class="block-content block-content-full">
                             <i class="si si-bell fa-2x"></i>
-                            <div class="h1 font-w700">{{$typeAlert2}}</div>
+                            <div class="h1 font-w700">{{$typeAlert3}}</div>
                             <div class="h5 text-muted text-uppercase push-5-t">Creacion manual</div>
                         </div>
                     </div>
@@ -69,7 +69,7 @@
                     <div class="block text-center remove-margin-b">
                         <div class="block-content block-content-full">
                             <i class="si si-bell fa-2x"></i>
-                            <div class="h1 font-w700">{{$typeAlert3}}</div>
+                            <div class="h1 font-w700">{{$typeAlert2}}</div>
                             <div class="h5 text-muted text-uppercase push-5-t">Plazo de espera</div>
                         </div>
                     </div>
