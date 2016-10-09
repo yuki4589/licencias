@@ -25,18 +25,8 @@ Files with the ```min``` suffix are minified versions to be used in production. 
 Load the javascript and css and declare your Angular dependency
 
 ```html
-<!-- dependency includes -->
-<script src="bower_components/jquery/dist/jquery.min.js"></script>
-<script src="bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
-<script src="bower_components/angular/angular.min.js"></script>
-<script src="bower_components/angular-animate/angular-animate.min.js"></script>
-<link rel="stylesheet" href="bower_components/bootstrap/dist/css/bootstrap.min.css">
-
-<!-- optional for auto complete / suggested value feature -->
-<script src="bower_components/angular-bootstrap/ui-bootstrap-tpls.min.js"></script>
-
-<!-- angular advanced searchbox includes -->
 <link rel="stylesheet" href="bower_components/angular-advanced-searchbox/dist/angular-advanced-searchbox.min.css">
+<link rel="stylesheet" href="bower_components/bootstrap/dist/css/bootstrap.min.css">
 <script src="bower_components/angular-advanced-searchbox/dist/angular-advanced-searchbox-tpls.min.js"></script>
 ```
 
@@ -51,7 +41,7 @@ $scope.availableSearchParams = [
           { key: "name", name: "Name", placeholder: "Name..." },
           { key: "city", name: "City", placeholder: "City..." },
           { key: "country", name: "Country", placeholder: "Country..." },
-          { key: "emailAddress", name: "E-Mail", placeholder: "E-Mail...", allowMultiple: true },
+          { key: "emailAddress", name: "E-Mail", placeholder: "E-Mail..." },
           { key: "job", name: "Job", placeholder: "Job..." }
         ];
 ```
@@ -119,22 +109,11 @@ param can be a scope variable as well as a hard-coded string.
 
 ### Events
 
-The directive emits events as search parameters added (`advanced-searchbox:addedSearchParam`), removed (`advanced-searchbox:removedSearchParam` and `advanced-searchbox:removedAllSearchParam`), enters the edit mode (`advanced-searchbox:enteredEditMode`), leaves the edit mode (`advanced-searchbox:leavedEditMode`) or the search model was updated (`advanced-searchbox:modelUpdated`).
+The directive emits events as search parameters enters the edit mode (`advanced-searchbox:enteredEditMode`)
+or leaves the edit mode (`advanced-searchbox:leavedEditMode`) or the search model was updated (`advanced-searchbox:modelUpdated`).
 To catch these events do the following:
 
 ```js
-$scope.$on('advanced-searchbox:addedSearchParam', function (event, searchParameter) {
-  ///
-});
-
-$scope.$on('advanced-searchbox:removedSearchParam', function (event, searchParameter) {
-  ///
-});
-
-$scope.$on('advanced-searchbox:removedAllSearchParam', function (event) {
-  ///
-});
-
 $scope.$on('advanced-searchbox:enteredEditMode', function (event, searchParameter) {
   ///
 });
@@ -155,39 +134,28 @@ $scope.$on('advanced-searchbox:modelUpdated', function (event, model) {
     <tr>
       <th>Name</th>
       <th>Description</th>
-      <th>Type</th>
     </tr>
   </thead>
   <tbody>
     <tr>
       <td>key</td>
       <td>Unique key of the search parameter that is used for the ng-model value.</td>
-      <td>string</td>
     </tr>
     <tr>
       <td>name</td>
       <td>User friendly display name of the search parameter.</td>
-      <td>string</td>
     </tr>
     <tr>
       <td>placeholder</td>
       <td>Specifies a short hint in the parameter search box</td>
-      <td>string</td>
-    </tr>
-    <tr>
-      <td>allowMultiple</td>
-      <td>Should multiple search parameters of the same key allowed? Output type changes to array of values. Default is false.</td>
-      <td>boolean</td>
     </tr>
     <tr>
       <td>suggestedValues</td>
       <td>An array of suggested search values, e.g. ['Berlin', 'London', 'Paris']</td>
-      <td>string[]</td>
     </tr>
     <tr>
       <td>restrictToSuggestedValues</td>
-      <td>Should it restrict possible search values to the ones from the suggestedValues array? Default is false.</td>
-      <td>boolean</td>
+      <td>Should it restrict possible search values to the ones from the suggestedValues array?</td>
     </tr>
   </tbody>
 </table>
@@ -198,6 +166,5 @@ Full example:
 $scope.availableSearchParams = [
           { key: "name", name: "Name", placeholder: "Name..." },
           { key: "city", name: "City", placeholder: "City...", restrictToSuggestedValues: true, suggestedValues: ['Berlin', 'London', 'Paris'] }
-          { key: "email", name: "E-Mail", placeholder: "E-Mail...", allowMultiple: true },
         ];
 ```
