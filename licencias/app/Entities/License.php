@@ -340,7 +340,7 @@ class License extends Model
     }
 
     /**
-     * A License has Many TitularityChange.
+     * A License has Many Alert.
      *
      * @return \Illuminate\Database\Eloquent\Relations\HasMany
      */

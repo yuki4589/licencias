@@ -8,6 +8,7 @@ use CityBoard\Entities\LicenseCurrentStage;
 use CityBoard\Entities\LicenseType;
 use CityBoard\Entities\Titular;
 use CityBoard\Entities\TitularityChange;
+use CityBoard\Entities\Alert;
 use CityBoard\Repositories\ActivityRepository;
 use CityBoard\Repositories\LicenseRepository;
 use CityBoard\Repositories\LicenseStatusRepository;
@@ -161,6 +162,14 @@ class HomeController extends Controller
         $activities = $this->activityRepository->selectControl();
         $licenseTypes = $this->licenseTypeRepository->selectControl();
 
+        
+        
+        $typeAlert = Alert::where('type_alert_id', 1)->count();
+        $typeAlert2 = Alert::where('type_alert_id', 3)->count();
+        $typeAlert3 = Alert::where('type_alert_id', 4)->count();
+
+        
+
         $variables = compact(
           'licenses',
           'licenseTypes',
@@ -188,7 +197,10 @@ class HomeController extends Controller
           'registerInitialDate',
           'registerFinalDate',
           'titularityChanges',
-          'titularityChangesAmount'
+          'titularityChangesAmount',
+          'typeAlert',
+          'typeAlert2',
+          'typeAlert3'
         );
 
         return view('home', $variables);

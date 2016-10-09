@@ -3,6 +3,10 @@ $('#license-tabs a').click(function (e) {
     $(this).tab('show');
 });
 
+$(function () {
+    
+});
+
 var stageApp = angular.module('currentStageApp', ['ngFileUpload']);
 
 stageApp.directive('convertToNumber', function() {
@@ -22,19 +26,28 @@ stageApp.directive('convertToNumber', function() {
 stageApp.controller('currentStageController', ['$scope', '$http', 'Upload', '$timeout', '$location', '$anchorScroll', function ($scope, $http, Upload, $timeout, $location, $anchorScroll) {
 
     $scope.alert = {};
+    $scope.typeAlert = {};
     $scope.alertTable = {};
 
     angular.element(document).ready(function () {
         $http.get('../currentstage/' + $scope.license.id).then(currentStage);
         $http.get('../getlicense/' + $scope.license.id).then(readObjectLicense);
         $http.get('../getalertlicense/' + $scope.license.id).then(readAlertLicense);
-        
+        $http.get('../gettypealert')
+            .success(function (response){
+                $scope.typeAlert = response;  
+            });
+        $('.date').datetimepicker({
+            locale: 'es',
+            format: 'YYYY-MM-DD HH:mm:ss'
+        });
     });
 
     // guardar las alertas por modal
     $scope.guardarAlerta = function () {
         $scope.alert.license_id = $scope.license.id;
-        console.log($scope.alert);
+        $scope.alert.type_alert_id = 4;
+        $scope.alert.date = $('#datetimepicker2').val();
         var accion = confirm("Desea guardar la alerta?");
         if(accion){
             $http.post('../alertmodal', $scope.alert)
@@ -303,7 +316,6 @@ stageApp.controller('currentStageController', ['$scope', '$http', 'Upload', '$ti
     }
 
     function readObjectLicense(response){
-        console.log(response);
         $scope.licenseObject = response.data.object.license_current_stages;
     }
 

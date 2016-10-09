@@ -106,6 +106,9 @@ Route::group(['middleware' => 'auth'], function () {
     Route::get('calendario', [
         'as' => 'calendario', 
         function () { return view('alert.calendario'); }]);
+    Route::get('gettypealert', 'AlertController@getTypeAlert');
+    Route::get('getalertcalendar', 'AlertController@getAlertCalendar');
+    Route::resource('alert', 'AlertController');
 });
 
 
@@ -150,8 +153,6 @@ Route::group(['middleware' => ['auth','admin']], function () {
     // Asignacion de pasos en licencias
     Route::resource('licensetypestage', 'LicenseTypeStageController');
 
-
-    Route::resource('alert', 'AlertController');
 
 });
 

@@ -41,13 +41,15 @@
             </div>
         </div>
         <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
+
             <div class="js-slider" data-slider-dots="true" data-slider-arrows="true" data-slider-autoplay="true">
+                
                 <div>
                     <div class="block text-center remove-margin-b">
                         <div class="block-content block-content-full">
                             <i class="si si-bell fa-2x"></i>
-                            <div class="h1 font-w700">Titulo Alerta</div>
-                            <div class="h5 text-muted text-uppercase push-5-t">Descripci&oacute;n</div>
+                            <div class="h1 font-w700">{{$typeAlert}}</div>
+                            <div class="h5 text-muted text-uppercase push-5-t">Reparos</div>
                         </div>
                     </div>
                     <div class="block-content block-content-full block-content-mini bg-danger text-white">
@@ -57,24 +59,26 @@
                     <div class="block text-center remove-margin-b">
                         <div class="block-content block-content-full">
                             <i class="si si-bell fa-2x"></i>
-                            <div class="h1 font-w700">Titulo Alerta</div>
-                            <div class="h5 text-muted text-uppercase push-5-t">Descripci&oacute;n</div>
+                            <div class="h1 font-w700">{{$typeAlert3}}</div>
+                            <div class="h5 text-muted text-uppercase push-5-t">Creacion manual</div>
                         </div>
                     </div>
-                    <div class="block-content block-content-full block-content-mini bg-danger text-white">
+                    <div class="block-content block-content-full block-content-mini bg-warning text-white">
                     </div>
                 </div>
                 <div>
                     <div class="block text-center remove-margin-b">
                         <div class="block-content block-content-full">
                             <i class="si si-bell fa-2x"></i>
-                            <div class="h1 font-w700">Titulo Alerta</div>
-                            <div class="h5 text-muted text-uppercase push-5-t">Descripci&oacute;n</div>
+                            <div class="h1 font-w700">{{$typeAlert2}}</div>
+                            <div class="h5 text-muted text-uppercase push-5-t">Plazo de espera</div>
                         </div>
                     </div>
-                    <div class="block-content block-content-full block-content-mini bg-danger text-white">
+                    <div class="block-content block-content-full block-content-mini bg-primary text-white">
                     </div>
                 </div>
+                
+                
             </div>
         </div>
     </div>

@@ -27,6 +27,7 @@
                             <th>Titulo</th>
                             <th>Descripción</th>
                             <th>Fecha de publicación</th>
+                            <th>Tipo de alerta</th>
                             <th>No. de expediente de licencia</th>
                             <th></th>
                             <th></th>
@@ -39,6 +40,7 @@
                                 <td>{{ $alert->title }}</td>
                                 <td>{{ $alert->description }}</td>
                                 <td>{{ $alert->date }}</td>
+                                <td>{{ $alert->type }}</td>
                                 <td>{{ $alert->expedient_number}}</td>
                                 <td><a class="btn btn-warning" href="{{ route('alert.edit', ['id' => $alert->id]) }}" role="button">Editar</a></td>
                                 <td><a class="btn btn-danger" href="#" role="button" ng-click="deleteAlert({{$alert->id}})">Eliminar</a></td>

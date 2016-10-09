@@ -414,24 +414,25 @@
                                 <i class="fa fa-plus" aria-hidden="true"></i> Agregar alerta
                             </button>
                         </div>
-                        <table class="table table-condensed">
-                            <thead>
-                                <tr>
-                                    <th>Titulo</th>
-                                    <th>Fecha</th>
-                                    <th>Descripción</th>
-                                </tr>
-                            </thead>
-                            <tbody ng-repeat="alert in alertTable">
-                                <tr>
-                                    <td>@{{alert.title}}</td>
-                                    <td>@{{alert.date}}</td>
-                                    <td>@{{alert.description}}</td>
-                                </tr>
-                            </tbody>
-                        </table>
-                        @include('license.exposed.modal')
-                    </div>
+                    <table class="table table-condensed">
+                        <thead>
+                            <tr>
+                                <th>Titulo</th>
+                                <th>Fecha</th>
+                                <th>Descripción</th>
+                                <th>Tipo de alerta</th>
+                            </tr>
+                        </thead>
+                        <tbody ng-repeat="alert in alertTable">
+                            <tr>
+                                <td>@{{alert.title}}</td>
+                                <td>@{{alert.date}}</td>
+                                <td>@{{alert.description}}</td>
+                                <td>@{{alert.type}}</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    @include('license.exposed.modal')
                 </div>
             </div>
         </div>
