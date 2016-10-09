@@ -89,9 +89,9 @@
             </div>
             <div class="block-content">
                 <nit-advanced-searchbox
-                        ng-model="searchInput"
-                        parameters="availableSearchParams"
-                        placeholder="Buscar...">
+                    ng-model="searchParams"
+                    parameters="availableSearchParams"
+                    placeholder="Buscar...">
                 </nit-advanced-searchbox>
                 <table class="table table-striped table-hover table-header-bg">
                     <thead>
@@ -106,27 +106,27 @@
                         </tr>
                     </thead>
                     <tbody>
-                            <tr data-dir-paginate="license in licenses | orderBy:sortKey:reverse | filter:searchInput |itemsPerPage:15">
-                                <td>@{{ license.expedient_number }}</td>
-                                <td>@{{ license.activity.name }}</td>
-                                <td>@{{ license.street.name }}, @{{ license.street_number}} </td>
-                                <td>@{{ license.titular.first_name }} @{{ license.titular.last_name }}</td>
-                                <td>
-                                    @{{ license.type }}
-                                </td>
-                                <td>
-                                    @{{ license.updated_at }}
-                                </td>
-                               {{-- <td>
-                                     @if (isset($license->license_data_current_stage))
-                                         @{{ $license->license_data_current_stage->updated_at }}
-                                     @endif
-                                 </td>--}}
-                                 <td>
-                                     <a class="btn btn-warning"
-                                        href="license/@{{ license.id }}" role="button">Ver</a>
-                                 </td>
-                            </tr>
+                        <tr data-dir-paginate="license in licenses | orderBy:sortKey:reverse | filter:searchParams |itemsPerPage:15">
+                            <td>@{{ license.expedient_number }}</td>
+                            <td>@{{ license.activity_name }}</td>
+                            <td>@{{ license.street.name }}, @{{ license.street_number}} </td>
+                            <td>@{{ license.titular.first_name }} @{{ license.titular.last_name }}</td>
+                            <td>
+                                @{{ license.type }}
+                            </td>
+                            <td>
+                                @{{ license.updated_at }}
+                            </td>
+                           {{-- <td>
+                                 @if (isset($license->license_data_current_stage))
+                                     @{{ $license->license_data_current_stage->updated_at }}
+                                 @endif
+                             </td>--}}
+                             <td>
+                                 <a class="btn btn-warning"
+                                    href="license/@{{ license.id }}" role="button">Ver</a>
+                             </td>
+                        </tr>
                     </tbody>
                 </table>
                 <div class="text-center">
@@ -261,21 +261,24 @@
                         }
                     });
                 });
+                $scope.searchParams.status = 'Solicitada';
             });
 
             // Fileds for search in user model
             $scope.availableSearchParams = [
-                { key: "status", name: "Estado", placeholder: "Estado..."  , allowMultiple: true, restrictToSuggestedValues: true, suggestedValues: $scope.status},
-                { key: "type", name: "Tipos de licencias", placeholder: "Tipos de licencaias..."  , allowMultiple: true, restrictToSuggestedValues: true, suggestedValues: $scope.types},
+                { key: "status", name: "Estado", placeholder: "Estado..."  ,  restrictToSuggestedValues: true, suggestedValues: $scope.status},
+                { key: "type", name: "Tipos de licencias", placeholder: "Tipos de licencaias..."  ,  restrictToSuggestedValues: true, suggestedValues: $scope.types},
 
-                { key: "expedient_number", name: "No expediente", placeholder: "Nº expediente..." ,allowMultiple: true },
-                { key: "register_number", name: "No de registro", placeholder: "No de registro..." ,allowMultiple: true},
-                { key: "identifier", name: "No de licencia", placeholder: "No de licencia..." ,allowMultiple: true},
-                { key: "nif", name: "NIF", placeholder: "NIF...", restrictToSuggestedValues: true, suggestedValues: $scope.nifs ,allowMultiple: true},
-                { key: "activity_name", name: "Actividad", placeholder: "Actividad...", allowMultiple: true, restrictToSuggestedValues: true, suggestedValues: $scope.getAllActivities },
-                { key: "street_name", name: "Dirección", placeholder: "Dirección..." ,allowMultiple: true , restrictToSuggestedValues: true, suggestedValues: $scope.getAllStreets  },
-                { key: "commerce_name", name: "Nombre Comercial" , placeholder: "Nombre Comercial...", allowMultiple: true },
+                { key: "expedient_number", name: "No expediente", placeholder: "Nº expediente..." },
+                { key: "register_number", name: "No de registro", placeholder: "No de registro..." },
+                { key: "identifier", name: "No de licencia", placeholder: "No de licencia..."},
+                { key: "nif", name: "NIF", placeholder: "NIF...", restrictToSuggestedValues: true, suggestedValues: $scope.nifs },
+                { key: "activity_name", name: "Actividad", placeholder: "Actividad...", restrictToSuggestedValues: true, suggestedValues: $scope.getAllActivities },
+                { key: "street_name", name: "Dirección", placeholder: "Dirección..." , restrictToSuggestedValues: true, suggestedValues: $scope.getAllStreets  },
+                { key: "commerce_name", name: "Nombre Comercial" , placeholder: "Nombre Comercial..." },
             ];
+
+
 
 
             $scope.activitySearch = function () {

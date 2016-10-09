@@ -78,11 +78,11 @@
     </div>
 
     <!-- OneUI Core JS: jQuery, Bootstrap, slimScroll, scrollLock, Appear, CountTo, Placeholder, Cookie and App.js -->
-    <script src="{{ asset('js/jquery.min.js') }}"></script>
+    <script src="//code.jquery.com/jquery-2.2.3.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.5/angular.min.js"></script>
     <script src="{{ asset('assets/js/core/bootstrap.min.js') }}"></script>
-    <script src="{{ asset('js/angular.min.js') }}"></script>
-    <script src="{{ asset('js/lib/angular-animate.min.js') }}"></script>
-    <script src="{{ asset('bower_components/angular-bootstrap/ui-bootstrap-tpls.js') }}"></script>
+    <script src="{{ asset('bower_components/angular-animate/angular-animate.min.js') }}"></script>
+    <script src="https://rawgit.com/angular-ui/bootstrap/gh-pages/ui-bootstrap-tpls-1.3.2.min.js"></script>
     <script src="{{ asset('bower_components/angular-advanced-searchbox/dist/angular-advanced-searchbox-tpls.js') }}"></script>
     <script src="{{ asset('bower_components/angularUtils-pagination/dirPagination.js') }}"></script>
 

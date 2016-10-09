@@ -1,17 +1,3 @@
-### 3.0.1-dev - unreleased
-* remove all search params when triggered from the outside, fixed by #50 (Thanks to Ken Petti)
-* allow multiple search parameters of the same key; output array of values, fixed #6
-* fixed extra backspaces cause the browser to navigate back to previous page, fixed #52
-
-### 3.0.0 - 03 May 2016
-* update to angular-ui-bootstrap 1.x, fixed #26, #36
-* show auto complete dropdown from the beginning on suggested value parameters, fixed #33
-* add data attribute (data-key) for better testability, fixed #35
-
-### 2.2.0 - 30 March 2016
-* add support for events on adding and removing search params, fixed #32
-* search parameter input does not close anymore when you click on it, fixed #38
-
 ### 2.1.0 - 04 February 2016
 * add support for suggested values for a search parameter with typeahead support, fixed #11
 * fix optional parameters on AngularJS 1.4.9, fixed #31 and #34

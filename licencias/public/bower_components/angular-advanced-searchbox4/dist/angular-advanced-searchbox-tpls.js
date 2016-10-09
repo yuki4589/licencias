@@ -1,14 +1,14 @@
 /*!
  * angular-advanced-searchbox
  * https://github.com/dnauck/angular-advanced-searchbox
- * Copyright (c) 2016 Nauck IT KG http://www.nauck-it.de/
+ * Copyright (c) 2015 Nauck IT KG http://www.nauck-it.de/
  * Author: Daniel Nauck <d.nauck(at)nauck-it.de>
  * License: MIT
  */
 
 (function() {
 
-    'use strict';
+'use strict';
 
     angular.module('angular-advanced-searchbox', [])
         .directive('nitAdvancedSearchbox', function() {
@@ -30,9 +30,9 @@
                     '$scope', '$attrs', '$element', '$timeout', '$filter', 'setFocusFor',
                     function ($scope, $attrs, $element, $timeout, $filter, setFocusFor) {
 
-                        $scope.parametersLabel = $scope.parametersLabel || 'Filtar por: ';
-                        $scope.parametersDisplayLimit = $scope.parametersDisplayLimit || 20;
-                        $scope.placeholder = $scope.placeholder || 'Buscar ...';
+                        $scope.parametersLabel = $scope.parametersLabel || 'Parameter Suggestions';
+                        $scope.parametersDisplayLimit = $scope.parametersDisplayLimit || 8;
+                        $scope.placeholder = $scope.placeholder || 'Search ...';
                         $scope.searchThrottleTime = $scope.searchThrottleTime || 1000;
                         $scope.searchParams = [];
                         $scope.searchQuery = '';
@@ -40,10 +40,10 @@
                         var searchThrottleTimer;
                         var changeBuffer = [];
 
-                        $scope.$watch('model', function (newValue, oldValue) {
+                    $scope.$watch('model', function (newValue, oldValue) {
 
-                            if(angular.equals(newValue, oldValue))
-                                return;
+                        if(angular.equals(newValue, oldValue))
+                            return;
 
                             angular.forEach($scope.model, function (value, key) {
                                 if (key === 'query' && $scope.searchQuery !== value) {
@@ -118,22 +118,22 @@
                             searchParam.editMode = true;
                             setFocusFor('searchParam:' + searchParam.key);
 
-                            $scope.$emit('advanced-searchbox:enteredEditMode', searchParam);
-                        };
+                        $scope.$emit('advanced-searchbox:enteredEditMode', searchParam);
+                    };
 
-                        $scope.leaveEditMode = function(e, index) {
-                            if (index === undefined)
-                                return;
+                    $scope.leaveEditMode = function(e, index) {
+                        if (index === undefined)
+                            return;
 
-                            var searchParam = $scope.searchParams[index];
-                            searchParam.editMode = false;
+                        var searchParam = $scope.searchParams[index];
+                        searchParam.editMode = false;
 
-                            $scope.$emit('advanced-searchbox:leavedEditMode', searchParam);
+                        $scope.$emit('advanced-searchbox:leavedEditMode', searchParam);
 
-                            // remove empty search params
-                            if (!searchParam.value)
-                                $scope.removeSearchParam(index);
-                        };
+                        // remove empty search params
+                        if (!searchParam.value)
+                            $scope.removeSearchParam(index);
+                    };
 
                         $scope.searchQueryTypeaheadOnSelect = function (item, model, label) {
                             $scope.addSearchParam(item);
@@ -141,21 +141,21 @@
                             updateModel('delete', 'query', 0);
                         };
 
-                        $scope.searchParamTypeaheadOnSelect = function (suggestedValue, searchParam) {
-                            searchParam.value = suggestedValue;
-                            $scope.searchParamValueChanged(searchParam);
-                        };
+                    $scope.searchParamTypeaheadOnSelect = function (suggestedValue, searchParam) {
+                        searchParam.value = suggestedValue;
+                        $scope.searchParamValueChanged(searchParam);
+                    };
 
                         $scope.isUnsedParameter = function (value, index) {
                             return $filter('filter')($scope.searchParams, function (param) { return param.key === value.key && !param.allowMultiple; }).length === 0;
                         };
 
-                        $scope.addSearchParam = function (searchParam, value, enterEditModel) {
-                            if (enterEditModel === undefined)
-                                enterEditModel = true;
+                    $scope.addSearchParam = function (searchParam, value, enterEditModel) {
+                        if (enterEditModel === undefined)
+                            enterEditModel = true;
 
-                            if (!$scope.isUnsedParameter(searchParam))
-                                return;
+                        if (!$scope.isUnsedParameter(searchParam))
+                            return;
 
                             var internalIndex = 0;
                             if(searchParam.allowMultiple)
@@ -184,12 +184,12 @@
                             $scope.$emit('advanced-searchbox:addedSearchParam', searchParam);
                         };
 
-                        $scope.removeSearchParam = function (index) {
-                            if (index === undefined)
-                                return;
+                    $scope.removeSearchParam = function (index) {
+                        if (index === undefined)
+                            return;
 
-                            var searchParam = $scope.searchParams[index];
-                            $scope.searchParams.splice(index, 1);
+                        var searchParam = $scope.searchParams[index];
+                        $scope.searchParams.splice(index, 1);
 
                             // reassign internal index
                             if(searchParam.allowMultiple){
@@ -205,18 +205,18 @@
                             $scope.$emit('advanced-searchbox:removedSearchParam', searchParam);
                         };
 
-                        $scope.removeAll = function() {
-                            $scope.searchParams.length = 0;
-                            $scope.searchQuery = '';
+                    $scope.removeAll = function() {
+                        $scope.searchParams.length = 0;
+                        $scope.searchQuery = '';
 
                             $scope.model = {};
 
                             $scope.$emit('advanced-searchbox:removedAllSearchParam');
                         };
 
-                        $scope.editPrevious = function(currentIndex) {
-                            if (currentIndex !== undefined)
-                                $scope.leaveEditMode(undefined, currentIndex);
+                    $scope.editPrevious = function(currentIndex) {
+                        if (currentIndex !== undefined)
+                            $scope.leaveEditMode(undefined, currentIndex);
 
                             if (currentIndex > 0) {
                                 $scope.enterEditMode(undefined, currentIndex - 1);
@@ -228,11 +228,11 @@
                             }
                         };
 
-                        $scope.editNext = function(currentIndex) {
-                            if (currentIndex === undefined)
-                                return;
+                    $scope.editNext = function(currentIndex) {
+                        if (currentIndex === undefined)
+                            return;
 
-                            $scope.leaveEditMode(undefined, currentIndex);
+                        $scope.leaveEditMode(undefined, currentIndex);
 
                             //TODO: check if index == array length - 1 -> what then?
                             if (currentIndex < $scope.searchParams.length - 1) {
@@ -242,58 +242,58 @@
                             }
                         };
 
-                        $scope.keydown = function(e, searchParamIndex) {
-                            var handledKeys = [8, 9, 13, 37, 39];
-                            if (handledKeys.indexOf(e.which) === -1)
-                                return;
+                    $scope.keydown = function(e, searchParamIndex) {
+                        var handledKeys = [8, 9, 13, 37, 39];
+                        if (handledKeys.indexOf(e.which) === -1)
+                            return;
 
-                            var cursorPosition = getCurrentCaretPosition(e.target);
+                        var cursorPosition = getCurrentCaretPosition(e.target);
 
-                            if (e.which == 8) { // backspace
-                                if (cursorPosition === 0) {
-                                    e.preventDefault();
-                                    $scope.editPrevious(searchParamIndex);
-                                }
-
-                            } else if (e.which == 9) { // tab
-                                if (e.shiftKey) {
-                                    e.preventDefault();
-                                    $scope.editPrevious(searchParamIndex);
-                                } else {
-                                    e.preventDefault();
-                                    $scope.editNext(searchParamIndex);
-                                }
-
-                            } else if (e.which == 13) { // enter
-                                $scope.editNext(searchParamIndex);
-
-                            } else if (e.which == 37) { // left
-                                if (cursorPosition === 0)
-                                    $scope.editPrevious(searchParamIndex);
-
-                            } else if (e.which == 39) { // right
-                                if (cursorPosition === e.target.value.length)
-                                    $scope.editNext(searchParamIndex);
+                        if (e.which == 8) { // backspace
+                            if (cursorPosition === 0) {
+                                e.preventDefault();
+                                $scope.editPrevious(searchParamIndex);
                             }
-                        };
 
-                        function restoreModel() {
-                            angular.forEach($scope.model, function (value, key) {
-                                if (key === 'query') {
-                                    $scope.searchQuery = value;
-                                } else {
-                                    var searchParam = $filter('filter')($scope.parameters, function (param) { return param.key === key; })[0];
-                                    if (searchParam !== undefined)
-                                        $scope.addSearchParam(searchParam, value, false);
-                                }
-                            });
-                        }
+                        } else if (e.which == 9) { // tab
+                            if (e.shiftKey) {
+                                e.preventDefault();
+                                $scope.editPrevious(searchParamIndex);
+                            } else {
+                                e.preventDefault();
+                                $scope.editNext(searchParamIndex);
+                            }
 
-                        if ($scope.model === undefined) {
-                            $scope.model = {};
-                        } else {
-                            restoreModel();
+                        } else if (e.which == 13) { // enter
+                            $scope.editNext(searchParamIndex);
+
+                        } else if (e.which == 37) { // left
+                            if (cursorPosition === 0)
+                                $scope.editPrevious(searchParamIndex);
+
+                        } else if (e.which == 39) { // right
+                            if (cursorPosition === e.target.value.length)
+                                $scope.editNext(searchParamIndex);
                         }
+                    };
+
+                    function restoreModel() {
+                        angular.forEach($scope.model, function (value, key) {
+                            if (key === 'query') {
+                                $scope.searchQuery = value;
+                            } else {
+                                var searchParam = $filter('filter')($scope.parameters, function (param) { return param.key === key; })[0];
+                                if (searchParam !== undefined)
+                                    $scope.addSearchParam(searchParam, value, false);
+                            }
+                        });
+                    }
+
+                    if ($scope.model === undefined) {
+                        $scope.model = {};
+                    } else {
+                        restoreModel();
+                    }
 
                         function updateModel(command, key, index, value) {
                             if (searchThrottleTimer)
@@ -331,16 +331,16 @@
                                     }
                                 });
 
-                                changeBuffer.length = 0;
+                            changeBuffer.length = 0;
 
-                                $scope.$emit('advanced-searchbox:modelUpdated', $scope.model);
+                            $scope.$emit('advanced-searchbox:modelUpdated', $scope.model);
 
-                            }, $scope.searchThrottleTime);
-                        }
+                        }, $scope.searchThrottleTime);
+                    }
 
-                        function getCurrentCaretPosition(input) {
-                            if (!input)
-                                return 0;
+                    function getCurrentCaretPosition(input) {
+                        if (!input)
+                            return 0;
 
                             try {
                                 // Firefox & co
@@ -403,19 +403,19 @@
                         var container = angular.element('<div style="position: fixed; top: -9999px; left: 0px;"></div>');
                         var shadow = angular.element('<span style="white-space:pre;"></span>');
 
-                        var maxWidth = $element.css('maxWidth') === 'none' ? $element.parent().innerWidth() : $element.css('maxWidth');
-                        $element.css('maxWidth', maxWidth);
+                    var maxWidth = $element.css('maxWidth') === 'none' ? $element.parent().innerWidth() : $element.css('maxWidth');
+                    $element.css('maxWidth', maxWidth);
 
-                        angular.forEach([
-                            'fontSize', 'fontFamily', 'fontWeight', 'fontStyle',
-                            'letterSpacing', 'textTransform', 'wordSpacing', 'textIndent',
-                            'boxSizing', 'borderLeftWidth', 'borderRightWidth', 'borderLeftStyle', 'borderRightStyle',
-                            'paddingLeft', 'paddingRight', 'marginLeft', 'marginRight'
-                        ], function(css) {
-                            shadow.css(css, $element.css(css));
-                        });
+                    angular.forEach([
+                        'fontSize', 'fontFamily', 'fontWeight', 'fontStyle',
+                        'letterSpacing', 'textTransform', 'wordSpacing', 'textIndent',
+                        'boxSizing', 'borderLeftWidth', 'borderRightWidth', 'borderLeftStyle', 'borderRightStyle',
+                        'paddingLeft', 'paddingRight', 'marginLeft', 'marginRight'
+                    ], function(css) {
+                        shadow.css(css, $element.css(css));
+                    });
 
-                        angular.element('body').append(container.append(shadow));
+                    angular.element('body').append(container.append(shadow));
 
                         function resize() {
                             $timeout(function() {
@@ -427,21 +427,21 @@
                             });
                         }
 
-                        resize();
+                    resize();
 
-                        if ($scope.model) {
-                            $scope.$watch('model', function() { resize(); });
-                        } else {
-                            $element.on('keypress keyup keydown focus input propertychange change', function() { resize(); });
-                        }
+                    if ($scope.model) {
+                        $scope.$watch('model', function() { resize(); });
+                    } else {
+                        $element.on('keypress keyup keydown focus input propertychange change', function() { resize(); });
                     }
-                };
-            }
-        ]);
+                }
+            };
+        }
+    ]);
 })();
 
 angular.module('angular-advanced-searchbox').run(['$templateCache', function($templateCache) {
-    'use strict';
+  'use strict';
 
     $templateCache.put('angular-advanced-searchbox.html',
         "<div class=advancedSearchBox ng-class={active:focus} ng-init=\"focus = false\" ng-click=\"!focus ? setFocusFor('searchbox') : null\"><span ng-show=\"searchParams.length < 1 && searchQuery.length === 0\" class=\"search-icon glyphicon glyphicon-search\"></span> <a ng-href=\"\" ng-show=\"searchParams.length > 0 || searchQuery.length > 0\" ng-click=removeAll() role=button><span class=\"remove-all-icon glyphicon glyphicon-trash\"></span></a><div><div class=search-parameter ng-repeat=\"searchParam in searchParams\"><a ng-href=\"\" ng-click=removeSearchParam($index) role=button><span class=\"remove glyphicon glyphicon-trash\"></span></a><div class=key data-key={{searchParam.key}} ng-click=\"enterEditMode($event, $index)\">{{searchParam.name}}:</div><div class=value><span ng-show=!searchParam.editMode ng-click=\"enterEditMode($event, $index)\">{{searchParam.value}}</span> <input name=value type={{searchParam.type}} nit-auto-size-input set-focus-on=\"{{'searchParam:' + searchParam.key}}\" ng-keydown=\"keydown($event, $index)\" ng-blur=\"leaveEditMode($event, $index)\" ng-show=searchParam.editMode ng-change=\"searchParam.restrictToSuggestedValues !== true ? searchParamValueChanged(searchParam) : null\" ng-model=searchParam.value uib-typeahead=\"suggestedValue for suggestedValue in searchParam.suggestedValues | filter:$viewValue\" typeahead-min-length=0 typeahead-on-select=\"searchParamTypeaheadOnSelect($item, searchParam)\" typeahead-editable=\"searchParam.restrictToSuggestedValues !== true\" typeahead-select-on-exact=true typeahead-select-on-blur=\"searchParam.restrictToSuggestedValues !== true ? false : true\" placeholder=\"{{searchParam.placeholder}}\"></div></div><input name=searchbox class=search-parameter-input nit-auto-size-input set-focus-on=searchbox ng-keydown=keydown($event) placeholder={{placeholder}} ng-focus=\"focus = true\" ng-blur=\"focus = false\" uib-typeahead=\"parameter as parameter.name for parameter in parameters | filter:isUnsedParameter | filter:{name:$viewValue} | limitTo:parametersDisplayLimit\" typeahead-on-select=\"searchQueryTypeaheadOnSelect($item, $model, $label)\" ng-change=searchQueryChanged(searchQuery) ng-model=\"searchQuery\"></div><div class=search-parameter-suggestions ng-show=\"parameters && focus\"><span class=title>{{parametersLabel}}:</span> <span class=search-parameter ng-repeat=\"param in parameters | filter:isUnsedParameter | limitTo:parametersDisplayLimit\" data-key={{param.key}} ng-mousedown=addSearchParam(param)>{{param.name}} <i ng-class=\"{'glyphicon glyphicon-plus': param.allowMultiple}\"></i></span></div></div>"
