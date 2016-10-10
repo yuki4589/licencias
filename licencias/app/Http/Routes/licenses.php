@@ -109,6 +109,7 @@ Route::group(['middleware' => 'auth'], function () {
     Route::get('gettypealert', 'AlertController@getTypeAlert');
     Route::get('getalertcalendar', 'AlertController@getAlertCalendar');
     Route::resource('alert', 'AlertController');
+    Route::get('mapa',['as' => 'mapa', 'uses' => 'LicenseController@getMapa']);
 });
 
 
