@@ -106,14 +106,6 @@
                                 @{{ per.first_name }} @{{ per.last_name }}</option>
                         </select>
                     </div>
-
-                    {{--<div ng-show="stageData.person_id">
-                        {!! Form::select('person_id', $people, null, ['class' => 'form-control', 'placeholder' => 'Selecciona una persona...', 'ng-model' => 'stageData.person_id', 'ng-change' => 'stageSave = true', 'convert-to-number' => '']) !!}
-                    </div>
-                    <div ng-hide="stageData.person_id">
-                        {!! Form::select('person_id', $people, null, ['class' => 'form-control', 'placeholder' => 'Selecciona una persona...', 'ng-model' => 'stageData.person_id', 'ng-change' => 'stageSave = true']) !!}
-                    </div>--}}
-
                 </div>
 
                 <div class="form-group" ng-class="stageError.number ? 'has-error' : ''" ng-show="stageFields.number">
