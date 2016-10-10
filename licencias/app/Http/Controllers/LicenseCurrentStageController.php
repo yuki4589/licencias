@@ -5,6 +5,10 @@ namespace CityBoard\Http\Controllers;
 use CityBoard\Entities\LicenseCurrentStage;
 use CityBoard\Entities\LicenseStage;
 use CityBoard\Entities\LicenseTypeStage;
+use CityBoard\Entities\Alert;
+use CityBoard\Entities\License;
+use CityBoard\Entities\Street;
+use CityBoard\Entities\Activity;
 use CityBoard\Http\Controllers\Controller;
 
 use CityBoard\Repositories\LicenseCurrentStageRepository;
@@ -219,6 +223,14 @@ class LicenseCurrentStageController extends Controller
           'stageObjectionNotificationNext' => $stageObjectionNotificationNext,
         ];
 
+        if ($request->input('license_stage_id') == 5) {
+            $alertNotPrue = Alert::where('license_id', $license_id)
+                ->where('type_alert_id', 2)->get();
+            foreach ($alertNotPrue as $key => $value) {
+                Alert::destroy($value->id);
+            }
+        }
+
         return response()->json($response, 200);
     }
 
@@ -386,5 +398,46 @@ class LicenseCurrentStageController extends Controller
           'closets' => $this->licenseRepository->closets(),
         ];
         return $response;
+    }
+
+    public function saveCurrentStageAlert(StoreLicenseCurrentStageRequest $request,
+      $license_id)
+    {
+        try{
+            $licenseAlert = License::find($license_id);
+
+            $descripcion = '';
+
+            #$people = Person::find($request->input('first_person_position_id'));
+
+            $alertPrue = new Alert();
+
+            $alertPrue->license_id = $license_id;
+                
+            $alertPrue->type_alert_id = 2;
+                
+            $streets = Street::find($licenseAlert->street_id);
+            $activties = Activity::find($licenseAlert->activity_id);
+                
+            $alertPrue->title = $licenseAlert->expedient_number . ' - Información pública';
+                
+            $descripcion .= 'Nombre del negocio: ' . $licenseAlert->commerce_name; 
+            $descripcion .= "Dirección:  * Calle ". $streets->name . ' número: ' . $licenseAlert->street_number; 
+            $descripcion .= "Ciudad: ". $licenseAlert->city; 
+            $descripcion .= "Actividad: ". $activties->name; 
+            #$descripcion .= "Persona: ". $people->first_name . ' ' . $people->last_name; 
+                
+            $alertPrue->description = $descripcion;
+                
+            $alertPrue->date = $request->input('date');
+                
+            Alert::create(json_decode($alertPrue, true));
+            
+            return ['created' => true];
+        
+        } catch (Exception $e){
+            \Log::info('Error creating user: '.$e);
+            return \Response::json(['created' => false], 500);
+        }
     }
 }

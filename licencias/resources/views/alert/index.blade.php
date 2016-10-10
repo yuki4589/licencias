@@ -36,14 +36,14 @@
                     <tbody>
                        @foreach($alerts as $alert)
                             <tr>
-                            	<input type="hidden" ng-model="idAlert" value="{{$alert->id}}">
-                                <td>{{ $alert->title }}</td>
-                                <td>{{ $alert->description }}</td>
-                                <td>{{ $alert->date }}</td>
-                                <td>{{ $alert->type }}</td>
-                                <td>{{ $alert->expedient_number}}</td>
-                                <td><a class="btn btn-warning" href="{{ route('alert.edit', ['id' => $alert->id]) }}" role="button">Editar</a></td>
-                                <td><a class="btn btn-danger" href="#" role="button" ng-click="deleteAlert({{$alert->id}})">Eliminar</a></td>
+                            	<input type="hidden" ng-model="idAlert" value="{{$alert['id']}}">
+                                <td>{{ $alert['title'] }}</td>
+                                <td>{{ $alert['description'] }}</td>
+                                <td>{{ $alert['date'] }}</td>
+                                <td>{{ $alert['type'] }}</td>
+                                <td>{{ $alert['expedient_number']}}</td>
+                                <td><a class="btn btn-warning" href="{{ route('alert.edit', ['id' => $alert['id']]) }}" role="button">Editar</a></td>
+                                <td><a class="btn btn-danger" href="#" role="button" ng-click="deleteAlert({{$alert['id']}})">Eliminar</a></td>
                             </tr>
                         @endforeach
                     </tbody>

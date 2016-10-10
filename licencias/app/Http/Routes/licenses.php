@@ -46,6 +46,10 @@ Route::group(['middleware' => 'auth'], function () {
         'LicenseCurrentStageController@currentStage');
     Route::post('currentstage/{license_id}/stage/{stage_id}',
         'LicenseCurrentStageController@saveCurrentStage');
+
+    Route::post('currentstage/{license_id}/alert',
+        'LicenseCurrentStageController@saveCurrentStageAlert');
+    
     Route::post('finishstage/{license_id}',
         'LicenseCurrentStageController@finishStage');
     Route::post('changestatuslicense/{license_id}',
@@ -63,6 +67,8 @@ Route::group(['middleware' => 'auth'], function () {
         'ObjectionController@nextObjectionNotification');
     Route::post('closeobjection/{objection_id}',
         'ObjectionController@closeObjection');
+    Route::post('notificationalert',
+        'ObjectionController@createAlert');
     Route::post('openobjection/{objection_id}',
         'ObjectionController@openObjection');
     Route::post('openobjection/{objection_id}',

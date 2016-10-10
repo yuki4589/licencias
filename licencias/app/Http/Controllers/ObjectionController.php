@@ -4,6 +4,11 @@ namespace CityBoard\Http\Controllers;
 
 use Carbon\Carbon;
 use CityBoard\Entities\Objection;
+use CityBoard\Entities\Alert;
+use CityBoard\Entities\License;
+use CityBoard\Entities\Street;
+use CityBoard\Entities\Activity;
+use CityBoard\Entities\Person;
 use CityBoard\Entities\ObjectionNotification;
 use CityBoard\Http\Controllers\Controller;
 
@@ -151,7 +156,7 @@ class ObjectionController extends Controller
             'stageObjectionNotifications' => $objection->objectionNotifications()->get(),
             'stageObjectionNotificationNext' => $this->objectionRepository->nextTimeLimit($objection),
         ];
-
+        
         return response()->json($response, 200);
     }
 
@@ -168,6 +173,12 @@ class ObjectionController extends Controller
             'stageObjections' => $current_stage_data->objections->load('firstPersonPosition')->load('secondPersonPosition')
         ];
 
+        $alertNotPrue = Alert::where('license_id', $request->input('license_id'))
+            ->where('type_alert_id', 1)->get();
+        foreach ($alertNotPrue as $key => $value) {
+            Alert::destroy($value->id);
+        }
+
         return response()->json($response);
     }
 
@@ -179,5 +190,59 @@ class ObjectionController extends Controller
         ];
 
         return response()->json($response);
+    }
+
+    public function createAlert(UpdateObjectionRequest $request) {
+        
+        ////////////////////////////////////////////////////////////////////////////////////////////////////
+        try{
+            $licenseAlert = License::find($request->input('license_id'));
+
+            $alertNotPrue = Alert::where('license_id', $request->input('license_id'))
+                ->where('type_alert_id', 1)->get();
+            
+            $descripcion = '';
+
+            $people = Person::find($request->input('first_person_position_id'));
+
+            $alertPrue = new Alert();
+
+            if (!empty(json_decode($alertNotPrue))){
+                foreach ($alertNotPrue as $key => $value) {
+                    Alert::destroy($value->id);
+                }
+                $alertPrue->title = $licenseAlert->expedient_number . ' - Reparo - N2';
+            } else {
+                $alertPrue->title = $licenseAlert->expedient_number . ' - Reparo - N1';
+            }
+
+            $alertPrue->license_id = $request->input('license_id');
+            
+            $alertPrue->type_alert_id = 1;
+                
+            $streets = Street::find($licenseAlert->street_id);
+                
+            $activties = Activity::find($licenseAlert->activity_id);
+                
+            $descripcion .= '* Nombre del negocio: ' . $licenseAlert->commerce_name; 
+            $descripcion .= " * Dirección:  ". $streets->name . ' número: ' . $licenseAlert->street_number; 
+            $descripcion .= " * Ciudad: ". $licenseAlert->city; 
+            $descripcion .= " * Actividad: ". $activties->name; 
+            $descripcion .= " * Persona: ". $people->first_name . ' ' . $people->last_name; 
+                
+            $alertPrue->description = $descripcion;
+                
+            $alertPrue->date = $request->input('notification_date');
+                
+            Alert::create(json_decode($alertPrue, true));
+             
+            return ['created' => true];
+        
+        }catch (Exception $e){
+                \Log::info('Error creating user: '.$e);
+                return \Response::json(['created' => false], 500);
+            }
+        ////////////////////////////////////////////////////////////////////////////////////////////
+        
     }
 }
