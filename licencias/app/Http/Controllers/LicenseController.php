@@ -470,4 +470,8 @@ class LicenseController extends Controller
         ];
         return response()->json($response, 200);
     }
+
+    public function getMapa(){
+        return view('license.mapa');
+    }
 }
