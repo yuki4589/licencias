@@ -31,6 +31,12 @@
     </label>
 </div>
 
+<div class="form-group">
+    {!! Form::label('person_position_id', 'Selecciona tipo de persona', ['class' => 'control-label']) !!}
+    {!! Form::select('person_position_id', $person_position_id, null,
+        ['class' => 'form-control', 'placeholder' => 'Selecciona tipo de persona...']) !!}
+</div>
+
 <div class="checkbox @if($errors->first('number')) has-error @endif">
     <label>
         {!! Form::checkbox('number', 'Campo Número') !!} Campo Número
@@ -66,3 +72,6 @@
         {!! Form::checkbox('objection_required', 'Campo Reparo Requerido') !!} Campo Reparo Requerido
     </label>
 </div>
+
+
+@include('licenseStage.exposed.angular')

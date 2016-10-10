@@ -256,7 +256,7 @@
                     value.street_name = value.street.name;
                     value.status = value.license_status.name;
                     angular.forEach($scope.allTypes, function(value2, key2) {
-                        if(value2.id =+ value.license_type_id){
+                        if(value2.id == value.license_type_id){
                             value.type = value2.name;
                         }
                     });
