@@ -162,6 +162,10 @@ stageApp.controller('currentStageController', ['$scope', '$http', 'Upload', '$ti
             $scope.stageData.stageObjection = $scope.stageObjection;
         }
         $http.post('../nextobjectionnotification/' + $scope.stageData.objection_id, $scope.stageObjection).then(retrieveObjectionNotifications, ObjectionNotificationError);
+        $http.post('../notificationalert', $scope.stageObjection)
+        .success(function (data){
+            
+        });
     };
 
     function retrieveObjectionNotifications(response) {
@@ -234,6 +238,10 @@ stageApp.controller('currentStageController', ['$scope', '$http', 'Upload', '$ti
             $scope.stageData.stageObjection = $scope.stageObjection;
         }
         $http.post('../currentstage/' + $scope.license.id + '/stage/' + $scope.stageFields.id, $scope.stageData).then(retrieveRequiredStages, stageChangeError);
+        if ($scope.stageData.license_stage_id == 4) {
+            $http.post('../currentstage/' + $scope.license.id + '/alert', $scope.stageData)
+            .success(function (data){});
+        };
     };
 
     function retrieveRequiredStages(response) {
