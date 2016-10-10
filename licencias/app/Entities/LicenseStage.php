@@ -31,6 +31,7 @@ class LicenseStage extends Model
       'objection' => 'boolean',
       'objection_required' => 'boolean',
       'optional' => 'boolean',
+      'person_position_id' => 'integer',
     ];
 
     /**
@@ -52,5 +53,6 @@ class LicenseStage extends Model
       'objection',
       'objection_required',
       'optional',
+      'person_position_id'
     ];
 }

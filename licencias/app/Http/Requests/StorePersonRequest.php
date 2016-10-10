@@ -26,7 +26,7 @@ class StorePersonRequest extends Request
         return [
             'first_name' => 'required',
             'last_name' => 'required',
-            'position' => 'required',
+            'person_position_id' => 'required',
             'email' => 'required',
         ];
     }

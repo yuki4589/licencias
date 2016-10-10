@@ -34,9 +34,9 @@ stageApp.controller('currentStageController', ['$scope', '$http', 'Upload', '$ti
         $http.get('../getlicense/' + $scope.license.id).then(readObjectLicense);
         $http.get('../getalertlicense/' + $scope.license.id).then(readAlertLicense);
         $http.get('../gettypealert')
-            .success(function (response){
-                $scope.typeAlert = response;  
-            });
+        .success(function (response){
+            $scope.typeAlert = response;
+        });
         $('.date').datetimepicker({
             locale: 'es',
             format: 'YYYY-MM-DD HH:mm:ss'
@@ -396,7 +396,15 @@ stageApp.controller('currentStageController', ['$scope', '$http', 'Upload', '$ti
         $scope.stageNext = response.data.stageNext;
         $scope.requiredStages = response.data.requiredStages;
         $scope.closets = response.data.closets;
-        $scope.people = response.data.people;
+        $scope.people = [];
+
+        if(response.data.stageFields.person){
+            angular.forEach(response.data.people, function(value, key) {
+                if(value.person_position_id == response.data.stageFields.person_position_id){
+                    $scope.people.push(value);
+                }
+            });
+        }
     }
 
     function initializeStageFields(response) {
