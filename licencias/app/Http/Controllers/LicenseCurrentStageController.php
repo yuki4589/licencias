@@ -9,7 +9,9 @@ use CityBoard\Entities\Alert;
 use CityBoard\Entities\License;
 use CityBoard\Entities\Street;
 use CityBoard\Entities\Activity;
+use CityBoard\Entities\TimeLimit;
 use CityBoard\Http\Controllers\Controller;
+use Carbon\Carbon;
 
 use CityBoard\Repositories\LicenseCurrentStageRepository;
 use CityBoard\Repositories\LicenseRepository;
@@ -408,7 +410,7 @@ class LicenseCurrentStageController extends Controller
 
             $descripcion = '';
 
-            #$people = Person::find($request->input('first_person_position_id'));
+            $dt = Carbon::parse($request->input('date'));
 
             $alertPrue = new Alert();
 
@@ -425,11 +427,10 @@ class LicenseCurrentStageController extends Controller
             $descripcion .= "Dirección:  * Calle ". $streets->name . ' número: ' . $licenseAlert->street_number; 
             $descripcion .= "Ciudad: ". $licenseAlert->city; 
             $descripcion .= "Actividad: ". $activties->name; 
-            #$descripcion .= "Persona: ". $people->first_name . ' ' . $people->last_name; 
                 
             $alertPrue->description = $descripcion;
-                
-            $alertPrue->date = $request->input('date');
+            $dt->addDays((20 + 1));
+            $alertPrue->date =  $dt->toDateTimeString();
                 
             Alert::create(json_decode($alertPrue, true));
             

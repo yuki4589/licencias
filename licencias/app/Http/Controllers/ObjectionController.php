@@ -9,6 +9,7 @@ use CityBoard\Entities\License;
 use CityBoard\Entities\Street;
 use CityBoard\Entities\Activity;
 use CityBoard\Entities\Person;
+use CityBoard\Entities\TimeLimit;
 use CityBoard\Entities\ObjectionNotification;
 use CityBoard\Http\Controllers\Controller;
 
@@ -197,7 +198,8 @@ class ObjectionController extends Controller
         ////////////////////////////////////////////////////////////////////////////////////////////////////
         try{
             $licenseAlert = License::find($request->input('license_id'));
-
+            $dt = Carbon::parse($request->input('notification_date'));
+            
             $alertNotPrue = Alert::where('license_id', $request->input('license_id'))
                 ->where('type_alert_id', 1)->get();
             
@@ -211,9 +213,16 @@ class ObjectionController extends Controller
                 foreach ($alertNotPrue as $key => $value) {
                     Alert::destroy($value->id);
                 }
-                $alertPrue->title = $licenseAlert->expedient_number . ' - Reparo - N2';
+              $timeLimit = TimeLimit::find(2);
+              $dt->addDays(($timeLimit->days + 1));
+              $alertPrue->date = $dt->toDateTimeString();
+              
+              $alertPrue->title = $licenseAlert->expedient_number . ' - Reparo - N2';
             } else {
-                $alertPrue->title = $licenseAlert->expedient_number . ' - Reparo - N1';
+              $timeLimit = TimeLimit::find(1);
+              $dt->addDays(($timeLimit->days + 1));
+              $alertPrue->date = $dt->toDateTimeString();
+              $alertPrue->title = $licenseAlert->expedient_number . ' - Reparo - N1';
             }
 
             $alertPrue->license_id = $request->input('license_id');
@@ -232,7 +241,7 @@ class ObjectionController extends Controller
                 
             $alertPrue->description = $descripcion;
                 
-            $alertPrue->date = $request->input('notification_date');
+            
                 
             Alert::create(json_decode($alertPrue, true));
              
