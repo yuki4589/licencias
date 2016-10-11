@@ -29,20 +29,13 @@ class AlertController extends Controller
     public function index()
     {
         //
-        $alerts2 = Alert::all();
-       
+        $alerts2 = Alert::whereDate('date', '=', date('Y-m-d'))->get();
+        
         $alerts = array();
-        $fecha = date('Y-m-d');
-        $d = substr($fecha, 8, 2);
-        $m = substr($fecha, 5, 2);
-        $timeLimit = TimeLimit::find(1);
         //$alerts->license();
         $expedient_number;
         $type;
         foreach ($alerts2 as $key => $value) {
-            $arrayfech = explode(" ", $value->date);
-            $dbase = substr($arrayfech[0], 8, 2);
-            $mbase = substr($arrayfech[0], 5, 2);
             
             $value->license = License::all()->where('id', $value->license_id);
             foreach ($value->license as $key => $lis) {
@@ -53,20 +46,14 @@ class AlertController extends Controller
                 $type = $typAl->type;
             }
             if ($value->type_alert_id == 1) {
-                if ($mbase < $m || $mbase == $m) {
-                    $day = $d - $dbase;
-                    $time = $timeLimit->days + 1;
-                    if ($day > $time|| $day == $time) {
-                        $alerts[] = array(
-                            'id' => $value->id,
-                            'title' => $value->title,
-                            'description' => $value->description,
-                            'type' => $type,
-                            'expedient_number' => $expedient_number,
-                            'date' => $value->date
-                        );
-                    }
-                }
+                $alerts[] = array(
+                    'id' => $value->id,
+                    'title' => $value->title,
+                    'description' => $value->description,
+                    'type' => $type,
+                    'expedient_number' => $expedient_number,
+                    'date' => $value->date
+                );
             } elseif($value->type_alert_id == 4) {
                 $alerts[] = array(
                     'id' => $value->id,
@@ -77,23 +64,15 @@ class AlertController extends Controller
                     'date' => $value->date
                 );
             }elseif ($value->type_alert_id == 2) {
-                # code...
-                if ($mbase < $m || $mbase == $m) {
-                    $day = $d - $dbase;
-                    $time;
-                    $time = 20 + 1;
-                    
-                    if ($day > $time|| $day == $time) {
-                        $alerts[] = array(
-                            'id' => $value->id,
-                            'title' => $value->title,
-                            'description' => $value->description,
-                            'type' => $type,
-                            'expedient_number' => $expedient_number,
-                            'date' => $value->date
-                        );
-                    }
-                }
+                
+                $alerts[] = array(
+                    'id' => $value->id,
+                    'title' => $value->title,
+                    'description' => $value->description,
+                    'type' => $type,
+                    'expedient_number' => $expedient_number,
+                    'date' => $value->date
+                );
             }
         }
         //dd($alerts);
@@ -235,11 +214,6 @@ class AlertController extends Controller
         $alert = Alert::all();
         $result = array();
 
-        $fecha = date('Y-m-d');
-        $d = substr($fecha, 8, 2);
-        $m = substr($fecha, 5, 2);
-        $timeLimit = TimeLimit::find(1);
-
         foreach ($alert as $key => $value) {
             
             # Se setea los valores de las alertas 
@@ -255,31 +229,18 @@ class AlertController extends Controller
             $date = $value->date;
 
             if ($value->type_alert_id == 2) {
-                $arrayfech = explode(" ", $value->date);
-                $dbase = substr($arrayfech[0], 8, 2);
-                $mbase = substr($arrayfech[0], 5, 2);
                 
-                if ($mbase < $m || $mbase == $m) {
-                    $day = $d - $dbase;
-                    $time = 20 + 1;
-                    #foreach ($timeLimit as $key => $value2) {
-                        #$time = $value2->days + 1;
-                    //}
-                    
-                    if ($day < $time) {
-                        $result[] = array(
-                            'id' => $value->id,
-                            'title' => $value->title,
-                            'url' => "",
-                            'class' => "event-warning",
-                            'start' => strtotime($date) . '000',
-                            'end' => strtotime($date) . '999',
-                            'description' => $value->description,
-                            'license' => $value->expedient_number,
-                            'type_alert' => $value->type
-                        );
-                    }
-                }
+                $result[] = array(
+                    'id' => $value->id,
+                    'title' => $value->title,
+                    'url' => "",
+                    'class' => "event-warning",
+                    'start' => strtotime($date) . '000',
+                    'end' => strtotime($date) . '999',
+                    'description' => $value->description,
+                    'license' => $value->expedient_number,
+                    'type_alert' => $value->type
+                );
             }
             if ($value->type_alert_id == 3) {
                 $result[] = array(
