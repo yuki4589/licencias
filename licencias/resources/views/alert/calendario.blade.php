@@ -72,6 +72,9 @@
                             <p id="modalConten" class="text-justify"></p>
                         </div>
                     </div>
+                    <div class="row">
+                        <a id="url" class="btn btn-info"> Ver licencia</a>
+                    </div>
                     
                 </div>
                 <div class="modal-footer">
@@ -122,6 +125,7 @@
                     $('#modalConten').text(e.description);
                     $('#modalExpedient').text(e.license);
                     $('#modalAlertType').text(e.type_alert);
+                    $('#url').attr('href', e.urlLicencia);
                     return e.title },
                 onAfterEventsLoad: function(events) {
                     if(!events) {

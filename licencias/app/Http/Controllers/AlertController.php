@@ -10,6 +10,7 @@ use CityBoard\Entities\License;
 use CityBoard\Entities\Alert;
 use CityBoard\Entities\TypeAlert;
 use CityBoard\Entities\TimeLimit;
+use Carbon\Carbon;
 use CityBoard\Repositories\LicenseRepository;
 
 class AlertController extends Controller
@@ -28,13 +29,14 @@ class AlertController extends Controller
      */
     public function index()
     {
-        //
+    
         $alerts2 = Alert::whereDate('date', '=', date('Y-m-d'))->get();
         
         $alerts = array();
-        //$alerts->license();
+
         $expedient_number;
         $type;
+
         foreach ($alerts2 as $key => $value) {
             
             $value->license = License::all()->where('id', $value->license_id);
@@ -75,7 +77,6 @@ class AlertController extends Controller
                 );
             }
         }
-        //dd($alerts);
         return view('alert.index', compact('alerts'));
     }
 
@@ -239,7 +240,8 @@ class AlertController extends Controller
                     'end' => strtotime($date) . '999',
                     'description' => $value->description,
                     'license' => $value->expedient_number,
-                    'type_alert' => $value->type
+                    'type_alert' => $value->type,
+                    'urlLicencia' => "../license/".$value->license_id
                 );
             }
             if ($value->type_alert_id == 3) {
@@ -252,23 +254,11 @@ class AlertController extends Controller
                     'end' => strtotime($date) . '999',
                     'description' => $value->description,
                     'license' => $value->expedient_number,
-                    'type_alert' => $value->type
+                    'type_alert' => $value->type,
+                    'urlLicencia' => "../license/".$value->license_id
                 );
-            } /*else{
-                $result[] = array(
-                    'id' => $value->id,
-                    'title' => $value->title,
-                    'url' => "",
-                    'class' => "event-info",
-                    'start' => strtotime($date) . '000',
-                    'end' => strtotime($date) . '000',
-                    'description' => $value->description,
-                    'license' => $value->expedient_number,
-                    'type_alert' => $value->type
-                );
-            }*/
+            }
         }
-        //dd($result);
         return json_encode($result);
     }
 }
