@@ -33,12 +33,11 @@ class AlertController extends Controller
         $alerts2 = Alert::whereDate('date', '=', date('Y-m-d'))->get();
         
         $alerts = array();
-        //$alerts->license();
+
         $expedient_number;
         $type;
+
         foreach ($alerts2 as $key => $value) {
-            ##$ultimaModificacion = Carbon::parse($value->updated_at);
-            ##dd($ultimaModificacion->diffInDays($fechaActual));
             
             $value->license = License::all()->where('id', $value->license_id);
             foreach ($value->license as $key => $lis) {
@@ -78,7 +77,6 @@ class AlertController extends Controller
                 );
             }
         }
-        //dd($alerts);
         return view('alert.index', compact('alerts'));
     }
 
@@ -259,21 +257,8 @@ class AlertController extends Controller
                     'type_alert' => $value->type,
                     'urlLicencia' => "../license/".$value->license_id
                 );
-            } /*else{
-                $result[] = array(
-                    'id' => $value->id,
-                    'title' => $value->title,
-                    'url' => "",
-                    'class' => "event-info",
-                    'start' => strtotime($date) . '000',
-                    'end' => strtotime($date) . '000',
-                    'description' => $value->description,
-                    'license' => $value->expedient_number,
-                    'type_alert' => $value->type
-                );
-            }*/
+            }
         }
-        //dd($result);
         return json_encode($result);
     }
 }
