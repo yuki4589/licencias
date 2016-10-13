@@ -76,6 +76,17 @@
                     <div class="block-content block-content-full block-content-mini bg-primary text-white">
                     </div>
                 </div>
+                <div>
+                    <div class="block text-center remove-margin-b">
+                        <div class="block-content block-content-full">
+                            <i class="si si-bell fa-2x"></i>
+                            <div class="h1 font-w700">{{$typeAlert4}}</div>
+                            <div class="h5 text-muted text-uppercase push-5-t">Información pública</div>
+                        </div>
+                    </div>
+                    <div class="block-content block-content-full block-content-mini bg-primary text-white">
+                    </div>
+                </div>
                 
                 
             </div>

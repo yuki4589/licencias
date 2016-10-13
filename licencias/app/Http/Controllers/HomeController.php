@@ -167,6 +167,7 @@ class HomeController extends Controller
         $typeAlert = Alert::where('type_alert_id', 1)->count();
         $typeAlert2 = Alert::where('type_alert_id', 3)->count();
         $typeAlert3 = Alert::where('type_alert_id', 4)->count();
+        $typeAlert4 = Alert::where('type_alert_id', 2)->count();
 
         
 
@@ -200,7 +201,8 @@ class HomeController extends Controller
           'titularityChangesAmount',
           'typeAlert',
           'typeAlert2',
-          'typeAlert3'
+          'typeAlert3',
+          'typeAlert4'
         );
 
         return view('home', $variables);
