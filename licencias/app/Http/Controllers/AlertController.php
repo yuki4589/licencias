@@ -10,6 +10,7 @@ use CityBoard\Entities\License;
 use CityBoard\Entities\Alert;
 use CityBoard\Entities\TypeAlert;
 use CityBoard\Entities\TimeLimit;
+use Carbon\Carbon;
 use CityBoard\Repositories\LicenseRepository;
 
 class AlertController extends Controller
@@ -28,7 +29,7 @@ class AlertController extends Controller
      */
     public function index()
     {
-        //
+    
         $alerts2 = Alert::whereDate('date', '=', date('Y-m-d'))->get();
         
         $alerts = array();
@@ -36,6 +37,8 @@ class AlertController extends Controller
         $expedient_number;
         $type;
         foreach ($alerts2 as $key => $value) {
+            ##$ultimaModificacion = Carbon::parse($value->updated_at);
+            ##dd($ultimaModificacion->diffInDays($fechaActual));
             
             $value->license = License::all()->where('id', $value->license_id);
             foreach ($value->license as $key => $lis) {
@@ -239,7 +242,8 @@ class AlertController extends Controller
                     'end' => strtotime($date) . '999',
                     'description' => $value->description,
                     'license' => $value->expedient_number,
-                    'type_alert' => $value->type
+                    'type_alert' => $value->type,
+                    'urlLicencia' => "../license/".$value->license_id
                 );
             }
             if ($value->type_alert_id == 3) {
@@ -252,7 +256,8 @@ class AlertController extends Controller
                     'end' => strtotime($date) . '999',
                     'description' => $value->description,
                     'license' => $value->expedient_number,
-                    'type_alert' => $value->type
+                    'type_alert' => $value->type,
+                    'urlLicencia' => "../license/".$value->license_id
                 );
             } /*else{
                 $result[] = array(

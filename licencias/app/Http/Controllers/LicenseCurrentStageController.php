@@ -257,6 +257,18 @@ class LicenseCurrentStageController extends Controller
           'requiredStages' => $requiredStages,
         ];
 
+        $alertaObjeto = Alert::where('license_id', $license_id)
+          ->where('type_alert_id', 1)
+          ->orWhere('type_alert_id', 3)
+          ->get();
+          foreach ($alertaObjeto as $key => $value) {
+            if ($value->type_alert_id == 1){
+              Alert::destroy($value->id);
+            } elseif ($value->type_alert_id == 3) {
+              $value->forceDelete();
+            }
+          }
+
 
         return response()->json($response, 200);
     }

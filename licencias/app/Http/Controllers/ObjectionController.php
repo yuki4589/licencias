@@ -177,7 +177,7 @@ class ObjectionController extends Controller
         $alertNotPrue = Alert::where('license_id', $request->input('license_id'))
             ->where('type_alert_id', 1)->get();
         foreach ($alertNotPrue as $key => $value) {
-            Alert::destroy($value->id);
+          Alert::destroy($value->id);
         }
 
         return response()->json($response);
