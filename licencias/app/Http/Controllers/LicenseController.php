@@ -353,6 +353,7 @@ class LicenseController extends Controller
         $license = $this->licenseRepository->findOrFailById($license_id);
         $requestJson = $request->json()->all();
         $license->visit_status = $requestJson['visitStatus'];
+        $license->visit_date = $requestJson['visitDate'];
         $license->save();
     }
     

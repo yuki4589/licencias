@@ -8,6 +8,7 @@ use CityBoard\Entities\License;
 use CityBoard\Entities\LicenseCurrentStage;
 use CityBoard\Entities\Street;
 use CityBoard\Entities\Activity;
+use CityBoard\Entities\TimeLimit;
 use Carbon\Carbon;
 use Illuminate\Foundation\Console\Kernel as ConsoleKernel;
 
@@ -53,6 +54,8 @@ class Kernel extends ConsoleKernel
                         }
                         $alertaObjeto = new Alert();
                         
+                        $timeLimit = TimeLimit::where('code', 'LTAP')->get()[0];
+                        $fechaActual->addDays(($timeLimit->days + 1));
                         
                         $alertaObjeto->date = $fechaActual->toDateTimeString();
                         $alertaObjeto->title = $value->expedient_number . ' - Plazo';

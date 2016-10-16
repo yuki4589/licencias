@@ -35,19 +35,37 @@
 
 <div class="panel panel-default" ng-show="license.finished" style="background-color:wheat">
     <div class="row" style="margin:10px">
-        <div class="col-md-4 text-left">
+        <div class="col-md-6 text-left">
             <h2 ng-show="license.identifier !== null">Número de licencia: @{{ license.identifier }}</h2>
         </div>
-        <div class="col-md-4 text-center">
+        <div class="col-md-6 text-right">
             <button class="btn btn-warning" type="button" ng-click="openLicense()">Reabrir Licencia</button>
         </div>
-        <div class="col-md-4 text-right">
-            @if($license->licenseType->visit)
+    </div>
+    
+    <div class="row" style="margin:10px">
+        @if($license->licenseType->visit)
+            <div class="col-md-6 ">
+                <div class="form-group">
+                    {!! Form::label('visit_date', 'Fecha de visita', ['class' => 'control-label']) !!}
+                    @if(isset($license->visit_date))
+                        {!! Form::date('visit_date', $license->visit_date, ['class' => 'form-control', 'ng-model' => 'visitDate', 'ng-init' => 'visitDate="' . $license->visit_date . '"']) !!}
+                    @else
+                        {!! Form::date('visit_date', \Carbon\Carbon::now(), ['class' => 'form-control', 'ng-model' => 'visitDate', 'ng-init' => 'visitDate="' . $license->visit_date . '"']) !!}
+                    @endif
+                </div>
+            </div>
+            <div class="col-md-6 ">
                 <div class="form-group">
                     {!! Form::label('visit_status', 'Selecciona una estado de la visita', ['class' => 'control-label']) !!}
                     {!! Form::select('visit_status', $visitStatuses, null, ['class' => 'form-control', 'placeholder' => 'Selecciona un estado de la visita', 'ng-model' => 'visitStatus', 'ng-change' => 'saveVisitStatus()', 'ng-init' => 'visitStatus="' . $license->visit_status . '"']) !!}
+                    
+                </div>
+            <div class="col-md-4 ">
+                <div class="form-group">
                     <button class="btn btn-warning" type="button" ng-show="saveVisitButton">Salvando</button>
                 </div>
+            </div>
             @endif
         </div>
     </div>

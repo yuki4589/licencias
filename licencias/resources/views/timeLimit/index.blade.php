@@ -22,12 +22,16 @@
                     <th></th>
                     <th>Orden de ejecución</th>
                     <th>Días</th>
+                    <th>Nombre</th>
+                    <th>Código</th>
                 </tr>
             @foreach($timeLimits as $timeLimit)
                 <tr>
                     <td><a class="btn btn-warning" href="{{ route('timelimit.show', ['id' => $timeLimit->id]) }}" role="button">Ver</a> <a class="btn btn-warning" href="{{ route('timelimit.edit', ['id' => $timeLimit->id]) }}" role="button">Editar</a></td>
                     <td>{{ $timeLimit->weight }}</td>
                     <td>{{ $timeLimit->days }}</td>
+                    <td>{{ $timeLimit->name }}</td>
+                    <td>{{ $timeLimit->code }}</td>
                 </tr>
                 @endforeach
             </table>

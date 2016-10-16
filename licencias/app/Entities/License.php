@@ -56,6 +56,7 @@ class License extends Model
         'closet',
         'on_query',
         'commerce_name',// Se agrega el campo trade_name
+        'visit_date',
     ];
 
     protected $licenseCurrentStageRepository;

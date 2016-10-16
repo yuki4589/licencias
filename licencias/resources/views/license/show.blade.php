@@ -222,6 +222,17 @@
                             <p><strong>Localización Archivador:</strong> {{ isset($license->archive_location) ? $license->archive_location : '' }}</p>
                         </div>
                     </div>
+                    <div class="row" style="border-top:1px solid lightgrey;padding-top:10px">
+                        <div class="col-md-4">
+                            <p><i class="fa fa-arrows" aria-hidden="true"></i> <strong>Visita de ingeniero:</strong></p>
+                        </div>
+                        <div class="col-md-4">
+                            <p><strong>Estatus:</strong> {{ isset($license->visit_status) ? $license->visit_status : '' }}</p>
+                        </div>
+                        <div class="col-md-4">
+                            <p><strong>Fecha de visita:</strong> {{ isset($license->visit_date) ? $license->visit_date : '' }}</p>
+                        </div>
+                    </div>
                     <!-- <p><strong>Finalizado:</strong> {{ isset($license->finished) ?  $license->finished : '' }}</p>
                     <p><strong>Identificador licencia:</strong> {{ isset($license->identifier) ?  $license->identifier : '' }}</p>-->
                 </div>

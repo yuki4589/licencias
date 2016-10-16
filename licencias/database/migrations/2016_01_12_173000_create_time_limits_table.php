@@ -17,6 +17,9 @@ class CreateTimeLimitsTable extends Migration
 
             $table->integer('weight');
             $table->integer('days');
+            #JGT Se agregan los campos de codigo y nombre
+            $table->string('name');
+            $table->string('code');
 
             $table->timestamps();
         });
