@@ -33,6 +33,7 @@
             display: none !important;
         }
     </style>
+
     @yield('scripts_at_head')
 
 </head>
@@ -121,6 +122,9 @@
     <script src="{{ asset('js/ng-file-upload-shim.min.js') }}"></script>
     <script src="{{ asset('js/ng-file-upload.min.js') }}"></script>
     <script src="{{ asset('js/sortable.js') }}"></script>
+
+    <script type="text/javascript" src="https://maps.google.com/maps/api/js?key=AIzaSyB39CtwtvOwhb2aAuKsTjHDYUimouVFHpc"></script>
+    <script src="assets/js/plugins/gmapsjs/gmaps.min.js"></script>
 
     @yield('scripts_at_body')
 </body>
