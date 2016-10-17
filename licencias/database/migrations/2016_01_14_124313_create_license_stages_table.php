@@ -27,8 +27,8 @@ class CreateLicenseStagesTable extends Migration
             $table->boolean('file_required')->default(false);
             $table->boolean('objection');
             $table->boolean('objection_required')->default(false);
-
             $table->boolean('optional')->default(false);
+            $table->integer('person_position_id')->nullable();
 
             $table->timestamps();
         });

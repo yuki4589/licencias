@@ -8,8 +8,8 @@
                     Editar {{ $license->licenseType->name }} {{ $license->number }}/{{ $license->year }}
                 </div>
                 <div class="col-md-4 text-right">
-                    <a class="btn btn-warning" href="{{ route('license.index') }}" role="button">Volver al listado</a>
-                    <a class="btn btn-warning" href="{{ route('license.show', ['id' => $license->id]) }}" role="button">Volver a licencia</a>
+                    <a class="btn btn-primary" href="{{ route('license.index') }}" role="button">Volver al listado</a>
+                    <a class="btn btn-info" href="{{ route('license.show', ['id' => $license->id]) }}" role="button">Volver a licencia</a>
                 </div>
             </div>
         </div>
@@ -22,7 +22,7 @@
 
                 @include('license.fields')
             
-                {!! Form::button('Guardar', ['class'=> 'btn btn-warning', 'type' => 'submit']) !!}
+                {!! Form::button('Guardar', ['class'=> 'btn btn-success', 'type' => 'submit']) !!}
             {!! Form::close() !!}
         </div>
     </div>

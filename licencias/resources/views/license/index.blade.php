@@ -16,10 +16,16 @@
 @endsection
 
 @section('content')
+<span ng-app="licenseApp" ng-controller="licenseController" ng-cloak>
     <div class="row">
         <div class="block">
             <div class="block-content">
-                <table class="table table-striped table-hover table-header-bg js-dataTable-full">
+                <nit-advanced-searchbox
+                        ng-model="searchParams"
+                        parameters="availableSearchParams"
+                        placeholder="Buscar...">
+                </nit-advanced-searchbox>
+                <table class="table table-striped table-hover table-header-bg">
                     <thead>
                         <tr>
                             <th>Registro interno</th>
@@ -35,37 +41,115 @@
                         </tr>
                     </thead>
                     <tbody>
-                        @foreach($licenses as $license)
-                            <tr>
-                                <td>{{ $license->register_number }}</td>
-                                <td>{{ isset($license->identifier) ?  $license->identifier : '' }}</td>
-                                <td>{{ $license->expedient_number }}</td>
-                                <td>{{ $license->licenseStatus->name }}</td>
-                                <td>{{ $license->titular->first_name }} {{ $license->titular->last_name }}</td>
-                                <td>{{ $license->activity->name }}</td>
-                                <td>{{ $license->street->name }}, {{ $license->street_number}} - {{ $license->city }} ({{ $license->postcode }})</td>
-                                <td>{{ $license->volumeyear }}</td>
-                                <td>{{ $license->closet }}</td>
-                                <td><a class="btn btn-warning" href="{{ route('license.show', ['id' => $license->id]) }}" role="button">Ver</a></td>
-                            </tr>
-                        @endforeach
+                        <tr data-dir-paginate="license in licenses | orderBy:sortKey:reverse | filter:searchParams |itemsPerPage:15">
+                            <td>@{{ license.register_number }}</td>
+                            <td>@{{ license.identifier }}</td>
+                            <td>@{{ license.expedient_number }}</td>
+                            <td>@{{ license.status }}</td>
+                            <td>@{{ license.titular.first_name }} @{{ license.titular.last_name }}</td>
+                            <td>@{{ license.activity_name }}</td>
+                            <td>@{{ license.street.name }}, @{{ license.street_number}} - @{{ license.city}} @{{ license.postcode}} </td>
+                            <td>@{{ license.volumeyear }}</td>
+                            <td>@{{ license.closet }}</td>
+                            <td>
+                                <a class="btn btn-warning"
+                                   href="license/@{{ license.id }}" role="button">Ver</a>
+                            </td>
+                        </tr>
                     </tbody>
                 </table>
                 <div class="text-center">
-
+                    <dir-pagination-controls
+                            max-size="15"
+                            direction-links="true"
+                            boundary-links="true" >
+                    </dir-pagination-controls>
                 </div>
             </div>
         </div>
     </div>
-
+</span>
 @endsection
 
 
 @section('scripts_at_body')
     <script>
-        var licenseApp = angular.module('licenseApp', ['ngFileUpload']);
+        var licenseApp = angular.module('licenseApp', ['ngFileUpload',
+            'ui.bootstrap',
+            'angular-advanced-searchbox',
+            'angularUtils.directives.dirPagination']);
 
         licenseApp.controller('licenseController', ['$scope', '$http', function ($scope, $http) {
+
+            $scope.getAllActivities = [];
+            $scope.getAllStreets = [];
+            $scope.nifs = [];
+            $scope.status = [];
+            $scope.types = [];
+            $scope.allTypes = [];
+
+            $http.get('../api/v1/getAllLicenseType')
+                    .success(function (response){
+                        $scope.allTypes = response.data;
+                        angular.forEach(response.data, function(value, key) {
+                            $scope.types.push(value.name);
+                        });
+                    });
+
+            $http.get('../api/v1/getAllLicenseStatus')
+                    .success(function (response){
+                        angular.forEach(response.data, function(value, key) {
+                            $scope.status.push(value.name);
+                        });
+                    });
+
+            $http.get('../api/v1/getAllStreets')
+                    .success(function (response){
+                        angular.forEach(response.data, function(value, key) {
+                            $scope.getAllStreets.push(value.name);
+                        });
+                    });
+
+            $http.get('../api/v1/getAllActivities')
+                    .success(function (response){
+                        angular.forEach(response.data, function(value, key) {
+                            $scope.getAllActivities.push(value.name);
+                        });
+                    });
+
+            $http.get('../api/v1/getlicenses')
+            .success(function (response){
+                $scope.licenses = response.data;
+                angular.forEach($scope.licenses, function(value, key) {
+                    $scope.nifs.push(value.titular.nif);
+                    value.nif = value.titular.nif;
+                    value.activity_name = value.activity.name;
+                    value.street_name = value.street.name;
+                    value.status = value.license_status.name;
+                    angular.forEach($scope.allTypes, function(value2, key2) {
+                        if(value2.id =+ value.license_type_id){
+                            value.type = value2.name;
+                        }
+                    });
+                });
+            });
+
+            // Fileds for search in user model
+            $scope.availableSearchParams = [
+                { key: "status", name: "Estado", placeholder: "Estado..."  ,  restrictToSuggestedValues: true, suggestedValues: $scope.status},
+                { key: "type", name: "Tipos de licencias", placeholder: "Tipos de licencaias..."  ,  restrictToSuggestedValues: true, suggestedValues: $scope.types},
+
+                { key: "expedient_number", name: "No expediente", placeholder: "Nº expediente..." },
+                { key: "register_number", name: "No de registro", placeholder: "No de registro..." },
+                { key: "identifier", name: "No de licencia", placeholder: "No de licencia..."},
+                { key: "nif", name: "NIF", placeholder: "NIF...", restrictToSuggestedValues: true, suggestedValues: $scope.nifs },
+                { key: "activity_name", name: "Actividad", placeholder: "Actividad...", restrictToSuggestedValues: true, suggestedValues: $scope.getAllActivities },
+                { key: "street_name", name: "Dirección", placeholder: "Dirección..." , restrictToSuggestedValues: true, suggestedValues: $scope.getAllStreets  },
+                { key: "commerce_name", name: "Nombre Comercial" , placeholder: "Nombre Comercial..." },
+                { key: "volumeyear", name: "Archivo" , placeholder: "Archivo..." },
+                { key: "closet", name: "Armario" , placeholder: "Armario..." },
+            ];
+
             $scope.activitySearch = function () {
                 $scope.activity_id = null;
                 $http.get('activity/search/' + $scope.activity_name).then(pushActivities);

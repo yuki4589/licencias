@@ -77,6 +77,9 @@ Route::group(['middleware' => 'auth'], function () {
         'ObjectionNotificationController@destroy');
 
     // Cambios de titularidad
+    // Gestion de cambios de titularidad
+    Route::resource('titularitychange', 'TitularityChangeController');
+
     Route::get('license/titularitychange/{license}', [
         'as' => 'license.titularitychange',
         'uses' => 'TitularityChangeController@createFromLicense'
@@ -112,6 +115,7 @@ Route::group(['middleware' => 'auth'], function () {
     Route::get('gettypealert', 'AlertController@getTypeAlert');
     Route::get('getalertcalendar', 'AlertController@getAlertCalendar');
     Route::resource('alert', 'AlertController');
+    Route::get('mapa',['as' => 'mapa', 'uses' => 'LicenseController@getMapa']);
 });
 
 
@@ -155,8 +159,7 @@ Route::group(['middleware' => ['auth','admin']], function () {
     Route::resource('licensecurrentstage', 'LicenseCurrentStageController');
     // Asignacion de pasos en licencias
     Route::resource('licensetypestage', 'LicenseTypeStageController');
-    // Gestion de cambios de titularidad
-    Route::resource('titularitychange', 'TitularityChangeController');
+
 
 });
 

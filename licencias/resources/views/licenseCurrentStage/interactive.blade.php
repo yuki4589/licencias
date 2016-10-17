@@ -113,13 +113,15 @@
 
                 <div class="form-group" ng-class="stageError.person_id ? 'has-error' : ''" ng-show="stageFields.person">
                     {!! Form::label('person_id', 'Selecciona una persona', ['class' => 'control-label']) !!}
-                    <div ng-show="stageData.person_id">
-                    {!! Form::select('person_id', $people, null, ['class' => 'form-control', 'placeholder' => 'Selecciona una persona...', 'ng-model' => 'stageData.person_id', 'ng-change' => 'stageSave = true', 'convert-to-number' => '']) !!}
-                    </div>
-                    <div ng-hide="stageData.person_id">
-                        {!! Form::select('person_id', $people, null, ['class' => 'form-control', 'placeholder' => 'Selecciona una persona...', 'ng-model' => 'stageData.person_id', 'ng-change' => 'stageSave = true']) !!}
-                    </div>
 
+                        <select class="form-control" id="person_id" name="person_id"
+                                ng-model="stageData.person_id" ng-change="stageSave = true"
+                                convert-to-number>
+                            <option value="">Selecciona una persona...</option>
+                            <option ng-repeat="per in people" value="@{{ per.id }}"
+                                    ng-selected="@{{per.id == stageData.person_id}}">
+                                @{{ per.first_name }} @{{ per.last_name }}</option>
+                        </select>
                 </div>
 
                 <div class="form-group" ng-class="stageError.number ? 'has-error' : ''" ng-show="stageFields.number">
