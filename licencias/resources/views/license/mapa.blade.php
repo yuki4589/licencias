@@ -19,18 +19,15 @@
     <span ng-app="licenseApp" ng-controller="licenseController" ng-cloak>
     <div class="row">
         <div class="block">
-            <div class="block-content">
-                <ng-map center="[40.74, -74.18]"></ng-map>
-            </div>
+            <!-- Markers Map Container -->
+            <div id="js-map-markers" style="height: 600px;"></div>
         </div>
     </div>
 </span>
 @endsection
 
-
 @section('scripts_at_body')
-    <script src="https://maps.google.com/maps/api/js?libraries=placeses,visualization,drawing,geometry,places"></script>
-    <script src="https://rawgit.com/allenhwkim/angularjs-google-maps/master/build/scripts/ng-map.js"></script>
+
     <script>
         var licenseApp = angular.module('licenseApp', ['ngFileUpload',
             'ui.bootstrap',
@@ -45,6 +42,7 @@
             $scope.status = [];
             $scope.types = [];
             $scope.allTypes = [];
+            $scope.markers = [];
 
             $http.get('../api/v1/getAllLicenseType')
                     .success(function (response){
@@ -76,21 +74,45 @@
                     });
 
             $http.get('../api/v1/getlicenses')
-                    .success(function (response){
-                        $scope.licenses = response.data;
-                        angular.forEach($scope.licenses, function(value, key) {
-                            $scope.nifs.push(value.titular.nif);
-                            value.nif = value.titular.nif;
-                            value.activity_name = value.activity.name;
-                            value.street_name = value.street.name;
-                            value.status = value.license_status.name;
-                            angular.forEach($scope.allTypes, function(value2, key2) {
-                                if(value2.id =+ value.license_type_id){
-                                    value.type = value2.name;
-                                }
-                            });
-                        });
+            .success(function (response){
+                $scope.licenses = response.data;
+                angular.forEach($scope.licenses, function(value, key) {
+                    GMaps.geocode({
+                        address: "Mina calderones, leon".trim(),
+                        //address: object.street.name+" "+ object.number+", "+object.city,
+                        callback: function(results, status) {
+                             if (status == 'OK') {
+                                var latlng = results[0].geometry.location;
+                                $scope.markers.push( {lat: latlng.lat(),lng:latlng.lng(), title: value.expedient_number, animation: google.maps.Animation.DROP, infoWindow: {content: '<strong>'+value.expedient_number+'</strong>'}});
+                            } else {
+                                console.log('Address not found!');
+                            }
+                        }
                     });
+
+
+                    $scope.nifs.push(value.titular.nif);
+                    value.nif = value.titular.nif;
+                    value.activity_name = value.activity.name;
+                    value.street_name = value.street.name;
+                    value.status = value.license_status.name;
+                    angular.forEach($scope.allTypes, function(value2, key2) {
+                        if(value2.id =+ value.license_type_id){
+                            value.type = value2.name;
+                        }
+                    });
+                });
+                console.log($scope.markers);
+
+                new GMaps({
+                    div: '#js-map-markers',
+                    lat: 38.2413027,
+                    lng: -1.42233,
+                    zoom: 15,
+                    scrollwheel: false
+                }).addMarkers($scope.markers);
+            });
+
 
             // Fileds for search in user model
             $scope.availableSearchParams = [
@@ -160,6 +182,7 @@
                 $scope.titular_email = this.titular.email;
                 $scope.titulars = {};
             };
+
         }]);
     </script>
 @endsection
