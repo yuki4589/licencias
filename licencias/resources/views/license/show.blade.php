@@ -224,6 +224,17 @@
                                 <p><strong>Localización Archivador:</strong> {{ isset($license->archive_location) ? $license->archive_location : '' }}</p>
                             </div>
                         </div>
+                        <div class="row" style="border-top:1px solid lightgrey;padding-top:10px">
+                            <div class="col-md-4">
+                                <p><i class="fa fa-arrows" aria-hidden="true"></i> <strong>Visita de ingeniero:</strong></p>
+                            </div>
+                            <div class="col-md-4">
+                                <p><strong>Estatus:</strong> {{ isset($license->visit_status) ? $license->visit_status : '' }}</p>
+                            </div>
+                            <div class="col-md-4">
+                                <p><strong>Fecha de visita:</strong> {{ isset($license->visit_date) ? $license->visit_date : '' }}</p>
+                            </div>
+                        </div>
                         <!-- <p><strong>Finalizado:</strong> {{ isset($license->finished) ?  $license->finished : '' }}</p>
                         <p><strong>Identificador licencia:</strong> {{ isset($license->identifier) ?  $license->identifier : '' }}</p>-->
                     </div>
@@ -262,8 +273,23 @@
                                         <div ng-repeat="notification in objection.objection_notifications">
                                             <p>Notificación: @{{ notification.notification_date | date:'dd-MM-yyyy'}} Fecha de Finalización: @{{ notification.finish_date | date:'dd-MM-yyyy'}}</p>
                                         </div>
-                                        <div ng-if="objection.correction_date">
-                                             <p>Fecha de subsanación: @{{ objection.correction_date | date:'dd-MM-yyyy'}}</p>
+                                        <div class="col-md-11">
+                                            <p><strong>Reparo @{{ objection.id }}</strong></p>
+                                            <div ng-if="objection.first_person_position_id">
+                                                <p>Primera Posición de Persona: @{{ objection.first_person_position.name }}</p>
+                                            </div>
+                                            <div ng-if="objection.second_person_position_id">
+                                                <p>Segunda Posición de Persona: @{{ objection.second_person_position.name }}</p>
+                                            </div>
+                                            <div ng-if="objection.report_date">
+                                                <p>Fecha de reporte: @{{ objection.report_date | date:'dd-MM-yyyy' }}</p>
+                                            </div>
+                                            <div ng-repeat="notification in objection.objection_notifications">
+                                                <p>Notificación: @{{ notification.notification_date | date:'dd-MM-yyyy'}} Fecha de Finalización: @{{ notification.finish_date | date:'dd-MM-yyyy'}}</p>
+                                            </div>
+                                            <div ng-if="objection.correction_date">
+                                                 <p>Fecha de subsanación: @{{ objection.correction_date | date:'dd-MM-yyyy'}}</p>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>

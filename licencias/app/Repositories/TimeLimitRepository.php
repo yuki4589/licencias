@@ -101,7 +101,7 @@ class TimeLimitRepository implements RepositoryInterface
         if (is_null($weight)) {
             return TimeLimit::orderBy('weight')->first();
         }
-        return TimeLimit::where('weight', '>', $weight)->orderBy('weight')->first();
+        return TimeLimit::where('weight', '>', $weight)->whereIn('weight', [1,2])->orderBy('weight')->first();
     }
 
     public function totalDays($timeLimitIds)

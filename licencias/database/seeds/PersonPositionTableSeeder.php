@@ -16,7 +16,7 @@ class PersonPositionTableSeeder extends Seeder
         ]);
 
         factory(CityBoard\Entities\PersonPosition::class)->create([
-          'name' => 'Ambientólogo',
+          'name' => 'Técnico ambiental',
         ]);
     }
 }
