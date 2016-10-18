@@ -215,13 +215,13 @@ class ObjectionController extends Controller
                 }
               $timeLimit = TimeLimit::where('code', 'LTARN2')->get()[0];#find(2);
               
-              $dt->addDays(($timeLimit->days + 1));
+              $dt->addWeekdays(($timeLimit->days + 1));
               $alertPrue->date = $dt->toDateTimeString();
               
               $alertPrue->title = $licenseAlert->expedient_number . ' - Reparo - N2';
             } else {
               $timeLimit = TimeLimit::where('code', 'LTAR')->get()[0];#find(1);
-              $dt->addDays(($timeLimit->days + 1));
+              $dt->addWeekdays(($timeLimit->days + 1));
               $alertPrue->date = $dt->toDateTimeString();
               $alertPrue->title = $licenseAlert->expedient_number . ' - Reparo - N1';
             }

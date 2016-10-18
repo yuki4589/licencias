@@ -442,7 +442,8 @@ class LicenseCurrentStageController extends Controller
                 
             $alertPrue->description = $descripcion;
             $timeLimit = TimeLimit::where('code', 'LTAIP')->get()[0];
-            $dt->addDays(($timeLimit->days + 1));
+            
+            $dt->addWeekdays(($timeLimit->days + 1));
             $alertPrue->date =  $dt->toDateTimeString();
                 
             Alert::create(json_decode($alertPrue, true));

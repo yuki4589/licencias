@@ -34,8 +34,8 @@ class Kernel extends ConsoleKernel
         $schedule->command('inspire')
                  ->hourly();
         $schedule->call(function () {
-            $licenseObjeto = License::whereIn('license_status_id', [1,2])->get();
 
+            $licenseObjeto = License::whereIn('license_status_id', [1,2])->get();
             foreach ($licenseObjeto as $key => $value) {
                 try { 
                 
@@ -45,7 +45,9 @@ class Kernel extends ConsoleKernel
                     $fechaActual = Carbon::now();
                     $ultimaModificacion = Carbon::parse($licenciaCurrentStage->updated_at);
                     
-                    if ($fechaActual->diffInDays($ultimaModificacion) > 10) {
+                    $timeLimit = TimeLimit::where('code', 'LTAP')->get()[0];
+                    
+                    if ($fechaActual->diffInDays($ultimaModificacion) > $timeLimit->days) {
                         $descripcion = '';
                         $alertPlaso = Alert::where('license_id', $value->id)
                             ->where('type_alert_id', 3)->get();
@@ -54,10 +56,7 @@ class Kernel extends ConsoleKernel
                         }
                         $alertaObjeto = new Alert();
                         
-                        $timeLimit = TimeLimit::where('code', 'LTAP')->get()[0];
-                        $fechaActual->addDays(($timeLimit->days + 1));
-                        
-                        $alertaObjeto->date = $fechaActual->toDateTimeString();
+                        $alertaObjeto->date = Carbon::now()->toDateTimeString();
                         $alertaObjeto->title = $value->expedient_number . ' - Plazo';
                         $alertaObjeto->license_id = $value->id;
                         $alertaObjeto->type_alert_id = 3;
@@ -79,6 +78,6 @@ class Kernel extends ConsoleKernel
                     get_class($e); 
                 }
             }
-        })->dailyAt('00:05');
+        })->everyMinute();#dailyAt('00:05');
     }
 }
