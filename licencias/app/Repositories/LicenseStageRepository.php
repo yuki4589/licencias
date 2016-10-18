@@ -86,6 +86,7 @@ class LicenseStageRepository implements RepositoryInterface
         $licenseStage->number_required = $this->processingCheckbox($request->input('number_required'));
         $licenseStage->file_required = $this->processingCheckbox($request->input('file_required'));
         $licenseStage->objection_required = $this->processingCheckbox($request->input('objection_required'));
+        $licenseStage->person_position_id = $request->input('person_position_id');
 
         $licenseStage->save();
 
@@ -110,6 +111,8 @@ class LicenseStageRepository implements RepositoryInterface
         $licenseStage->number_required = $this->processingCheckbox($request->input('number_required'));
         $licenseStage->file_required = $this->processingCheckbox($request->input('file_required'));
         $licenseStage->objection_required = $this->processingCheckbox($request->input('objection_required'));
+        $licenseStage->person_position_id = $request->input('person_position_id');
+
 
         $licenseStage->save();
 

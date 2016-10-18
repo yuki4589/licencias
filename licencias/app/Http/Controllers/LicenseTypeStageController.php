@@ -2,6 +2,7 @@
 
 namespace CityBoard\Http\Controllers;
 
+use CityBoard\Entities\LicenseType;
 use CityBoard\Http\Controllers\Controller;
 
 use CityBoard\Repositories\LicenseTypeStageRepository;
@@ -144,6 +145,14 @@ class LicenseTypeStageController extends Controller
 
         $this->licenseTypeStageRepository->saveJson($licenseType, $response);
 
+        return response()->json($response, 200);
+    }
+
+    public function getAllLicenseType(){
+        $types = LicenseType::all();
+        $response = [
+            'data' => $types,
+        ];
         return response()->json($response, 200);
     }
 }

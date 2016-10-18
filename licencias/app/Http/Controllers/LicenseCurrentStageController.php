@@ -103,7 +103,6 @@ class LicenseCurrentStageController extends Controller
     public function show($id)
     {
         $licenseCurrentStage = $this->licenseCurrentStageRepository->findOrFailById($id);
-
         return view('licenseCurrentStage.show', compact('licenseCurrentStage'));
     }
 
@@ -391,6 +390,8 @@ class LicenseCurrentStageController extends Controller
         }
         $requiredFields = $this->licenseCurrentStageRepository->fieldsRequiredAreFill($license_id);
         $requiredStages = $this->licenseCurrentStageRepository->obtainRequiredStages($license_id);
+
+
 
         $people = $this->personRepository->all();
         $response = [

@@ -24,7 +24,7 @@ class License extends Model
      */
     protected $appends = [
       'on_loan',
-      'active_loan',
+      'active_loan'
     ];
 
     /**
@@ -58,6 +58,7 @@ class License extends Model
         'commerce_name',// Se agrega el campo trade_name
         'visit_date',
     ];
+
 
     protected $licenseCurrentStageRepository;
 
@@ -188,7 +189,6 @@ class License extends Model
             $current_stage_data = $this->licenseCurrentStageRepository->findOrFailById($this->last_current_stage_id);
             $stage_id = $current_stage_data->licenseStage->id;
         }
-
         return $this->licenseCurrentStageRepository->stageData($this->id, $stage_id);
     }
 
@@ -206,7 +206,6 @@ class License extends Model
             $current_stage_data = $this->licenseCurrentStageRepository->findOrFailById($this->last_current_stage_id);
             $stage_id = $current_stage_data->licenseStage->id;
         }
-
         return $this->licenseCurrentStageRepository->currentStage($this->id, $stage_id);
     }
 

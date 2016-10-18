@@ -2,6 +2,8 @@
 
 namespace CityBoard\Http\Controllers;
 
+use CityBoard\Entities\LicenseStage;
+use CityBoard\Entities\PersonPosition;
 use CityBoard\Http\Controllers\Controller;
 
 use CityBoard\Repositories\LicenseStageRepository;
@@ -39,7 +41,9 @@ class LicenseStageController extends Controller
      */
     public function create()
     {
-        return view('licenseStage.create');
+        $person_position_id = PersonPosition::all()->lists('name', 'id');
+
+        return view('licenseStage.create', compact('person_position_id'));
     }
 
     /**
@@ -63,6 +67,7 @@ class LicenseStageController extends Controller
      */
     public function show($id)
     {
+
         $licenseStage = $this->licenseStageRepository->findOrFailById($id);
 
         return view('licenseStage.show', compact('licenseStage'));
@@ -76,9 +81,10 @@ class LicenseStageController extends Controller
      */
     public function edit($id)
     {
+        $person_position_id = PersonPosition::all()->lists('name', 'id');
         $licenseStage = $this->licenseStageRepository->findOrFailById($id);
 
-        return view('licenseStage.edit', compact('licenseStage'));
+        return view('licenseStage.edit', compact('licenseStage', 'person_position_id'));
     }
 
     /**

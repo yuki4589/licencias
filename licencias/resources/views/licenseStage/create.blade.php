@@ -1,6 +1,7 @@
 @extends('layout')
 
 @section('content')
+<div ng-app="licenseApp" ng-controller="licenseStageController" ng-cloak>
     <div class="panel panel-default">
         <div class="panel-heading">
             <div class="row">
@@ -25,4 +26,5 @@
             {!! Form::close() !!}
         </div>
     </div>
+</div>
 @endsection
