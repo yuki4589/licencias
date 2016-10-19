@@ -30,6 +30,9 @@
                             <li>
                                 <a href="{{ route('titularitychange.index') }}"><i class="si si-user"></i>Cambios de titularidad</a>
                             </li>
+                            <li>
+                                <a href="{{ route('mapa') }}"><i class="fa fa-map-marker"></i>Mapa</a>
+                            </li>
                         </ul>
                     </li>
                     <li>

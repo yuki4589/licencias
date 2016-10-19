@@ -146,6 +146,9 @@ class LicenseRepository implements RepositoryInterface
             $license->license_status_id = $licenseStatus->id;
         }
 
+        $license->lat = $license->street->name." ". $license->street_number .", ".$license->city;;
+        $license->lng = $license->street->name." ". $license->street_number .", ".$license->city;;
+
         $license->save();
         
         $licenseStatusChange = new LicenseStatusChange();
@@ -247,6 +250,8 @@ class LicenseRepository implements RepositoryInterface
         } else {
             $license->archive_location = null;
         }
+        $license->lat = $license->street->name." ". $license->street_number .", ".$license->city;
+        $license->lng = $license->street->name." ". $license->street_number .", ".$license->city;
 
         $license->save();
 
