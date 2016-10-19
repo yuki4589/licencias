@@ -307,7 +307,8 @@ stageApp.controller('currentStageController', ['$scope', '$http', 'Upload', '$ti
     $scope.saveVisitStatus = function () {
         $scope.saveVisitButton = true;
         data = {
-            visitStatus: $scope.visitStatus
+            visitStatus: $scope.visitStatus,
+            visitDate: $scope.visitDate
         };
         $http.post('../savevisitstatus/' + $scope.license.id, data).then(hideSaveVisitButton, stageChangeError);
     };

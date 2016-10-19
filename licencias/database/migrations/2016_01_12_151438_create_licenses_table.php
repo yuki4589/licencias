@@ -71,6 +71,8 @@ class CreateLicensesTable extends Migration
             $table->string('commerce_name')->default(null);
             $table->string('lat')->default("");
             $table->string('lng')->default("");
+            $table->date('visit_date');
+
 
             $table->timestamps();
         });

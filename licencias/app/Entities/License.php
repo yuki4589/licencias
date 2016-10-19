@@ -57,7 +57,8 @@ class License extends Model
         'on_query',
         'commerce_name',// Se agrega el campo trade_name
         'lat',
-        'lng'
+        'lng',
+        'visit_date',
     ];
 
 

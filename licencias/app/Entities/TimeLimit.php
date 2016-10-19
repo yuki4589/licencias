@@ -11,5 +11,5 @@ class TimeLimit extends Model
      *
      * @var array
      */
-    protected $fillable = ['weight', 'days'];
+    protected $fillable = ['weight', 'days', 'name', 'code'];
 }
