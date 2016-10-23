@@ -108,7 +108,7 @@
             <div class="col-md-4">
                 <div class="form-group @if($errors->first('street_number')) has-error @endif">
                     {!! Form::label('street_number', 'Nº, piso, puerta', ['class' => 'control-label']) !!}
-                    {!! Form::text('street_number', null, ['class' => 'form-control', 'id' => 'street_number_input', 'placeholder' => 'Introduce el número, piso, puerta...']) !!}
+                    {!! Form::text('street_number', null, ['class' => 'form-control', 'id' => 'street_number_input', 'placeholder' => 'Introduce el número, piso, puerta...', 'ng-model' => 'street_number']) !!}
                 </div>
             </div>
         </div>

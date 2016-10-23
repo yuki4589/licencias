@@ -43,7 +43,10 @@
             * la dirección que se esta ingresando 
             */
             $scope.validaLicencia = function(){
-                $http.get('../validalicencia/' + $scope.street_id)
+                $scope.validaStreet = {};
+                $scope.validaStreet.street_id = $scope.street_id;
+                $scope.validaStreet.street_number = $scope.street_number;
+                $http.post('../validalicencia', $scope.validaStreet)
                 .then(function (response) {
                     $scope.variable = response.data;
                     if ($scope.variable.data) {

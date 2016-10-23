@@ -478,12 +478,13 @@ class LicenseController extends Controller
         return view('license.mapa');
     }
 
-    public function validaLicencia ($id) {
-
-      $licenseObjeto = License::where('street_id', $id)
-      ->whereIn('license_status_id', [1, 2])->get();
+    public function validaLicencia (Request $request) {
+      $licenseObjeto = License::where('street_id', $request->input('street_id'))
+      ->where('street_number', $request->input('street_number'))
+      ->whereIn('license_status_id', [1, 2, 3])->get();
+     
       $licenseArry = array();
-      if (!isset($licenseObjeto)) {
+      if (!$licenseObjeto->isEmpty()) {
         $titulars = Titular::find($licenseObjeto[0]->titular_id);
         $licenseArry = array(
           'data' => true,
