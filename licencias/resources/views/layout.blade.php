@@ -124,7 +124,7 @@
     <script src="{{ asset('js/sortable.js') }}"></script>
 
     <script type="text/javascript" src="https://maps.google.com/maps/api/js?key=AIzaSyB39CtwtvOwhb2aAuKsTjHDYUimouVFHpc"></script>
-    <script src="assets/js/plugins/gmapsjs/gmaps.min.js"></script>
+    <script src="{{ asset('assets/js/plugins/gmapsjs/gmaps.min.js') }}"></script>
 
     @yield('scripts_at_body')
 </body>
