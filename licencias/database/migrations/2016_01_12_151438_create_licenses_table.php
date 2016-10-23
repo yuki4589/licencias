@@ -69,8 +69,11 @@ class CreateLicensesTable extends Migration
             $table->string('volume_year')->nullable();
             $table->boolean('on_query')->default(false);
             $table->string('commerce_name')->default(null);
+            $table->string('lat')->default("");
+            $table->string('lng')->default("");
             $table->date('visit_date');
             $table->string('expiration')->default(null);
+
 
             $table->timestamps();
         });

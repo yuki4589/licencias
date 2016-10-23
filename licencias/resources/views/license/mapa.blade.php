@@ -77,19 +77,26 @@
             .success(function (response){
                 $scope.licenses = response.data;
                 angular.forEach($scope.licenses, function(value, key) {
-                    GMaps.geocode({
-                        address: "Mina calderones, leon".trim(),
-                        //address: object.street.name+" "+ object.number+", "+object.city,
-                        callback: function(results, status) {
-                             if (status == 'OK') {
-                                var latlng = results[0].geometry.location;
-                                $scope.markers.push( {lat: latlng.lat(),lng:latlng.lng(), title: value.expedient_number, animation: google.maps.Animation.DROP, infoWindow: {content: '<strong>'+value.expedient_number+'</strong>'}});
-                            } else {
-                                console.log('Address not found!');
-                            }
-                        }
-                    });
 
+                    var icono = '';
+
+                    if(value.license_type_id ==1){
+                        icono = '../img/markers/rojo.svg';
+                    }
+                    if(value.license_type_id ==2){
+                        icono = '../img/markers/azul.svg';
+                    }
+                    if(value.license_type_id ==3){
+                        icono = '../img/markers/verde.svg';
+                    }
+
+                    $scope.markers.push( {
+                        lat: value.lat ,
+                        lng: value.lng,
+                        title: value.expedient_number,
+                        animation: google.maps.Animation.DROP,
+                        icon  : icono,
+                        infoWindow: {content: '<strong>'+value.expedient_number+'</strong>'}});
 
                     $scope.nifs.push(value.titular.nif);
                     value.nif = value.titular.nif;
@@ -102,8 +109,6 @@
                         }
                     });
                 });
-                console.log($scope.markers);
-
                 new GMaps({
                     div: '#js-map-markers',
                     lat: 38.2413027,
