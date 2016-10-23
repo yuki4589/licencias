@@ -1,4 +1,4 @@
-<div ng-app="licenseApp" ng-controller="licenseController" ng-cloak>
+<div >
     <div class="panel panel-body panel-default">
         <div class="row">
             <div class="col-md-6">
@@ -92,10 +92,10 @@
                 <div class="form-group @if($errors->first('street_id')) has-error @endif">
                     {!! Form::label('street_id', 'Vía', ['class' => 'control-label']) !!}
                     @if(isset($license))
-                        {!! Form::hidden('street_id', null, ['class' => 'form-control', 'ng-value' => 'street_id', 'ng-init' => 'street_id="' . $license->street_id . '"']) !!}
+                        {!! Form::hidden('street_id', null, ['class' => 'form-control', 'ng-model' => 'street_id', 'ng-value' => 'street_id', 'ng-init' => 'street_id="' . $license->street_id . '"']) !!}
                         {!! Form::text('street_name', null, ['class' => 'form-control', 'ng-change' => 'streetSearch()', 'ng-model' => 'street_name', 'ng-init' => 'street_name="' . $license->street_name . '"']) !!}
                     @else
-                        {!! Form::hidden('street_id', null, ['class' => 'form-control', 'ng-value' => 'street_id']) !!}
+                        {!! Form::hidden('street_id', null, ['class' => 'form-control', 'ng-value' => 'street_id', 'ng-model' => 'street_id']) !!}
                         {!! Form::text('street_name', null, ['class' => 'form-control', 'ng-change' => 'streetSearch()', 'ng-model' => 'street_name']) !!}
                     @endif
                     <div class="list-group" ng-show="streets.length">

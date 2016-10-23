@@ -258,9 +258,11 @@ class LicenseController extends Controller
      */
     public function store(StoreLicenseRequest $request)
     {
+      
         $license_id = $this->licenseRepository->create($request);
 
         return redirect(route('license.show', ['id' => $license_id]));
+      
     }
 
     /**
@@ -474,5 +476,54 @@ class LicenseController extends Controller
 
     public function getMapa(){
         return view('license.mapa');
+    }
+
+    public function validaLicencia ($id) {
+
+      $licenseObjeto = License::where('street_id', $id)
+      ->whereIn('license_status_id', [1, 2])->get();
+      $licenseArry = array();
+      if (!isset($licenseObjeto)) {
+        $titulars = Titular::find($licenseObjeto[0]->titular_id);
+        $licenseArry = array(
+          'data' => true,
+          'expedient_number' => $licenseObjeto[0]->expedient_number,
+          'register_number' => $licenseObjeto[0]->register_number,
+          'commerce_name' => $licenseObjeto[0]->commerce_name,
+          'license_id' => $licenseObjeto[0]->id,
+          'titular' => $titulars->first_name . ' ' .  $titulars->last_name
+        );
+      } else {
+        $licenseArry = array(
+          'data' => false
+        );
+      }
+      return json_encode($licenseArry);
+    }
+
+    public function caducarLicense ($id) {
+      $licenseObjeto = License::find($id);
+      if (!empty($licenseObjeto->expiration)) {
+        $licenseObjeto->expiration = 'Caducada';
+        $licenseObjeto->license_status_id = 4;
+        $licenseObjeto->save();
+      } else {
+        $licenseObjeto->expiration = 'Pendiente';
+        $licenseObjeto->save();
+      }
+      $licenseArry = array(
+        'data' => true
+      );
+      return json_encode($licenseArry);
+    }
+
+    public function getLicensePendiente() {
+      $licenses = License::where('expiration', 'Pendiente')->whereIn('license_status_id', [1, 2])->with('activity')->with('street')
+        ->with('titular')->with('licenseStatus')->with('licenseCurrentStages')->get();
+      
+      $response = [
+        'data' => $licenses,
+      ];
+      return response()->json($response, 200);
     }
 }

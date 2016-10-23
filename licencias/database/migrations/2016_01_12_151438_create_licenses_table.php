@@ -70,6 +70,7 @@ class CreateLicensesTable extends Migration
             $table->boolean('on_query')->default(false);
             $table->string('commerce_name')->default(null);
             $table->date('visit_date');
+            $table->string('expiration')->default(null);
 
             $table->timestamps();
         });

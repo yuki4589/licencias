@@ -3,10 +3,6 @@ $('#license-tabs a').click(function (e) {
     $(this).tab('show');
 });
 
-$(function () {
-    
-});
-
 var stageApp = angular.module('currentStageApp', ['ngFileUpload']);
 
 stageApp.directive('convertToNumber', function() {

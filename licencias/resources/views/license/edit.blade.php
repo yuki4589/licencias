@@ -15,15 +15,16 @@
         </div>
 
         <div class="panel-body">
+            <div class="panel-body" ng-app="licenseApp" ng-controller="licenseController" ng-cloak>
+                @include('errors.form')
 
-            @include('errors.form')
+                {!! Form::model($license, array('route' => array('license.update', $license->id), 'method' => 'put', 'autocomplete' => 'off')) !!}
 
-            {!! Form::model($license, array('route' => array('license.update', $license->id), 'method' => 'put', 'autocomplete' => 'off')) !!}
-
-                @include('license.fields')
-            
-                {!! Form::button('Guardar', ['class'=> 'btn btn-success', 'type' => 'submit']) !!}
-            {!! Form::close() !!}
+                    @include('license.fields')
+                
+                    {!! Form::button('Guardar', ['class'=> 'btn btn-success', 'type' => 'submit']) !!}
+                {!! Form::close() !!}
+            </div>
         </div>
     </div>
 @endsection
