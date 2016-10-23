@@ -353,25 +353,25 @@ class License extends Model
     }
 
     public function setLatAttribute($value){
-        try {
-            $prepAddr = str_replace(' ','+',$value);
-            $geocode=file_get_contents('http://maps.google.com/maps/api/geocode/json?address='.$prepAddr.'&sensor=false');
-            $output= json_decode($geocode);
-            $this->attributes['lat'] = $output->results[0]->geometry->location->lat;
-        }catch(\Exception $e){
-            $this->attributes['lat'] = "";
-        }
+        $prepAddr = str_replace(' ','+',$value);
+        $geocode=file_get_contents('http://maps.google.com/maps/api/geocode/json?address='.$prepAddr.'&sensor=false');
 
+        $output= json_decode($geocode);
+        if($output->status == "ZERO_RESULTS"){
+            $this->attributes['lat'] = "";
+        }else{
+            $this->attributes['lat'] = $output->results[0]->geometry->location->lat;
+        }
     }
 
     public function setLngAttribute($value){
-        try {
-            $prepAddr = str_replace(' ','+',$value);
-            $geocode=file_get_contents('http://maps.google.com/maps/api/geocode/json?address='.$prepAddr.'&sensor=false');
-            $output= json_decode($geocode);
-            $this->attributes['lng'] =  $output->results[0]->geometry->location->lng;
-        }catch(\Exception $e){
+        $prepAddr = str_replace(' ','+',$value);
+        $geocode=file_get_contents('http://maps.google.com/maps/api/geocode/json?address='.$prepAddr.'&sensor=false');
+        $output= json_decode($geocode);
+        if($output->status == "ZERO_RESULTS"){
             $this->attributes['lng'] = "";
+        }else{
+            $this->attributes['lng'] = $output->results[0]->geometry->location->lng;
         }
     }
 }
