@@ -64,16 +64,30 @@
 
             /**/
             $scope.caducarlicencia = function () {
-                var accion = confirm("Desea iniciar el proceso para caducar la licencia?");
-                if (accion) {
-                    $http.get('../caducarlicense/' + $scope.variable.license_id)
-                    .success(function (data) {
-                        alert("Se ha iniciado el proceso para caducar la licencia");
-                        window.location.href = '../expire';
-                    });
-                } else {
-                    $('#modal-caducidad').modal('hidden');
-                }
+                swal({
+                    title: "Inicio de proceso",
+                    text: "Desea iniciar el proceso para caducar la licencia?",
+                    type: "warning",
+                    showCancelButton: true,
+                    confirmButtonColor: "#DD6B55",
+                    confirmButtonText: "Iniciar proceso",
+                    cancelButtonText: "Cancelar",
+                    closeOnConfirm: false,
+                    closeOnCancel: true
+                },
+                function(isConfirm){
+                    if (isConfirm) {
+                        $http.get('../caducarlicense/' + $scope.variable.license_id)
+                        .success(function (data) {
+                            swal("Se ha iniciado el proceso para caducar la licencia");
+                            window.location.href = '../expire';
+                        });
+                        
+                    } else {
+                        $('#modal-caducidad').modal('hide');
+                    }
+                });
+                
                 //$scope.activity_id = null;
             };
 

@@ -67,16 +67,26 @@
         	$scope.idAlert;
             $scope.deleteAlert = function (id) {
             	console.log(id);
-            	var accion = confirm("Desea eliminar esta alerta?");
-                //$scope.activity_id = null;
-                if(accion){
-                	$http.delete('delete/alert/' + id)
-                	.success(function (data) {
-                		alert("Se eliminó con exito la alerta.");
-                		window.location.reload();
-                	});	
-                }
-                
+                swal({
+                    title: "Eliminación de alertas",
+                    text: "Desea eliminar esta alerta?",
+                    type: "warning",
+                    showCancelButton: true,
+                    confirmButtonColor: "#DD6B55",
+                    confirmButtonText: "Yes, delete it!",
+                    cancelButtonText: "No, cancel plx!",
+                    closeOnConfirm: false,
+                    closeOnCancel: true
+                },
+                function(isConfirm){
+                    if (isConfirm) {
+                        $http.delete('delete/alert/' + id)
+                        .success(function (data) {
+                            swal("Se eliminó con exito la alerta.");
+                            window.location.reload();
+                        }); 
+                    }
+                });
             };
 
             
