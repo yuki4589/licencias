@@ -26,4 +26,7 @@ Route::group(['middleware' => 'auth', 'prefix' => 'api/v1'], function () {
     //Obetner types
     Route::get('getAllLicenseType', 'LicenseTypeStageController@getAllLicenseType');
 
+    //Obtener licencias
+    Route::get('getlicensespendietes', 'LicenseController@getLicensePendiente');
+
 });

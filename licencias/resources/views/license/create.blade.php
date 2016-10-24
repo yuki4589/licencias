@@ -13,14 +13,15 @@
             </div>
         </div>
 
-        <div class="panel-body">
+        <div class="panel-body" ng-app="licenseApp" ng-controller="licenseController" ng-cloak>
 
             @include('errors.form')
 
-            {!! Form::open(array('route' => 'license.store', 'autocomplete' => 'off')) !!}
+            {!! Form::open(array('route' => 'license.store', 'method' => 'post', 'class' => 'prueba', 'autocomplete' => 'off')) !!}
                 @include('license.fields')
-                {!! Form::button('Crear licencia', ['class'=> 'btn btn-warning', 'type' => 'submit', 'ng-model' => 'activityInput']) !!}
+                <a  ng-click="validaLicencia()" class="btn btn-warning">Crear licencia</a>
             {!! Form::close() !!}
+            @include('license.exposed.modalExpire')
         </div>
     </div>
 @endsection
@@ -31,9 +32,49 @@
 
         licenseApp.controller('licenseController', ['$scope', '$http', function ($scope, $http) {
             $scope.commerce_name = ""; //se agrega al scope el campo de "nombre del comercio"
+            $scope.variable;
             $scope.activitySearch = function () {
                 $scope.activity_id = null;
                 $http.get('../activity/search/' + $scope.activity_name).then(pushActivities);
+            };
+
+            /*
+            * Llama al servicio que valida si hay una licencia con
+            * la dirección que se esta ingresando 
+            */
+            $scope.validaLicencia = function(){
+                $scope.validaStreet = {};
+                $scope.validaStreet.street_id = $scope.street_id;
+                $scope.validaStreet.street_number = $scope.street_number;
+                $http.post('../validalicencia', $scope.validaStreet)
+                .then(function (response) {
+                    $scope.variable = response.data;
+                    if ($scope.variable.data) {
+                        $('#expedient_number').text($scope.variable.expedient_number);
+                        $('#register_number').text($scope.variable.register_number);
+                        $('#commerce_name').text($scope.variable.commerce_name);
+                        $('#titular').text($scope.variable.titular);
+                        $('#modal-caducidad').modal('show');
+                    } else {
+                        $('.prueba').submit();
+                    }
+                    
+                });
+            }
+
+            /**/
+            $scope.caducarlicencia = function () {
+                var accion = confirm("Desea iniciar el proceso para caducar la licencia?");
+                if (accion) {
+                    $http.get('../caducarlicense/' + $scope.variable.license_id)
+                    .success(function (data) {
+                        alert("Se ha iniciado el proceso para caducar la licencia");
+                        window.location.href = '../expire';
+                    });
+                } else {
+                    $('#modal-caducidad').modal('hidden');
+                }
+                //$scope.activity_id = null;
             };
 
             function pushActivities(response) {
