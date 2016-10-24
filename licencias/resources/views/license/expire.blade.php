@@ -147,15 +147,28 @@
             ];
 
             $scope.caducarLicense = function (id) {
-            	console.log(id);
-                var accion = confirm("Desea caducar la licencia?");
-                if (accion) {
-                    $http.get('../caducarlicense/' + id)
-                    .success(function (data) {
-                        alert("Se ha completado el proceso para caducar la licencia");
-                        location.reload();
-                    });
-                }
+                swal({
+                    title: "Caducar licencia",
+                    text: "Desea caducar la licencia?",
+                    type: "warning",
+                    showCancelButton: true,
+                    confirmButtonColor: "#DD6B55",
+                    confirmButtonText: "Caducar",
+                    cancelButtonText: "Cancelar",
+                    closeOnConfirm: false,
+                    closeOnCancel: true
+                },
+                function(isConfirm){
+                    if (isConfirm) {
+                        $http.get('../caducarlicense/' + id)
+                        .success(function (data) {
+                            swal("Se ha completado el proceso para caducar la licencia");
+                            location.reload();
+                        });
+                        
+                    } 
+                });
+                
                 //$scope.activity_id = null;
             }
 

@@ -44,23 +44,37 @@ stageApp.controller('currentStageController', ['$scope', '$http', 'Upload', '$ti
         $scope.alert.license_id = $scope.license.id;
         $scope.alert.type_alert_id = 4;
         $scope.alert.date = $('#datetimepicker2').val();
-        var accion = confirm("Desea guardar la alerta?");
-        if(accion){
-            $http.post('../alertmodal', $scope.alert)
-            .success(function (data){
-                $http.get('../getalertlicense/' + $scope.license.id).then(readAlertLicense);
-                $scope.alert = {};
-                jQuery('#modal-alert').modal('hide');    
-            })
-            .error(function (error){
-                alert('Ha ocurrido un error!!!');
+        swal({
+            title: "Creación de alertas",
+            text: "Desea guardar la alerta?",
+            type: "info",
+            showCancelButton: true,
+            confirmButtonColor: "#DD6B55",
+            confirmButtonText: "Si",
+            cancelButtonText: "No",
+            closeOnConfirm: false,
+            closeOnCancel: true
+        },
+        function(isConfirm){
+            if (isConfirm) {
+                $http.post('../alertmodal', $scope.alert)
+                .success(function (data){
+                    $http.get('../getalertlicense/' + $scope.license.id).then(readAlertLicense);
+                    $scope.alert = {};
+                    swal("Exito", "La alerta se ha creado correctamente.", "success");
+                    jQuery('#modal-alert').modal('hide');    
+                })
+                .error(function (error){
+                    swal("Error", "Ha ocurrido un error!!!", "error");
+                    $scope.alert = {};
+                    jQuery('#modal-alert').modal('hide');
+                });
+                
+            } else {
                 $scope.alert = {};
                 jQuery('#modal-alert').modal('hide');
-            });
-        }else{
-            $scope.alert = {};
-            jQuery('#modal-alert').modal('hide');
-        }
+            }
+        });
     }
 
     function readAlertLicense (response) {
