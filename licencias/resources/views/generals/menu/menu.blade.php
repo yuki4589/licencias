@@ -28,6 +28,9 @@
                                 <a href="{{ route('license.index') }}"><i class="si si-book-open"></i>Licencias</a>
                             </li>
                             <li>
+                                <a href="{{ route('expire') }}"><i class="fa fa-book"></i>Licencias pendientes a caducar</a>
+                            </li>
+                            <li>
                                 <a href="{{ route('titularitychange.index') }}"><i class="si si-user"></i>Cambios de titularidad</a>
                             </li>
                             <li>

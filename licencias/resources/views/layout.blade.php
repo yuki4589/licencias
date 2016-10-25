@@ -20,6 +20,7 @@
     <link rel="stylesheet" id="css-theme" href="{{ asset('assets/css/themes/flat.min.css') }}">
 
     <link rel="stylesheet" href="{{ asset('plugin/bootstrap-calendar-master/css/calendar.css') }}">
+    <link rel="stylesheet" type="text/css" href="{{ asset('plugin/sweetalert-master/dist/sweetalert.css') }}">
 
 
     <!-- angular advanced searchbox includes -->
@@ -105,6 +106,7 @@
     <script src="{{ asset('plugin/bootstrap-calendar-master/components/underscore/underscore-min.js') }}"></script>
     <script src="{{ asset('plugin/bootstrap-calendar-master/js/calendar.js') }}"></script>
     <script src="{{ asset('plugin/bootstrap-calendar-master/js/language/es-ES.js') }}"></script>
+    <script src="{{ asset('plugin/sweetalert-master/dist/sweetalert.min.js') }}"></script>
     <script src="{{ asset('assets/js/plugins/bootstrap-datetimepicker/moment.min.js') }}"></script>
     <script src="{{ asset('assets/js/plugins/bootstrap-datetimepicker/locale/es.js') }}"></script>
     <script src="{{ asset('assets/js/plugins/bootstrap-datetimepicker/bootstrap-datetimepicker.min.js') }}"></script>
@@ -124,7 +126,7 @@
     <script src="{{ asset('js/sortable.js') }}"></script>
 
     <script type="text/javascript" src="https://maps.google.com/maps/api/js?key=AIzaSyB39CtwtvOwhb2aAuKsTjHDYUimouVFHpc"></script>
-    <script src="assets/js/plugins/gmapsjs/gmaps.min.js"></script>
+    <script src="{{ asset('assets/js/plugins/gmapsjs/gmaps.min.js') }}"></script>
 
     @yield('scripts_at_body')
 </body>

@@ -59,15 +59,15 @@
                 <div class="form-group">
                     {!! Form::label('visit_status', 'Selecciona una estado de la visita', ['class' => 'control-label']) !!}
                     {!! Form::select('visit_status', $visitStatuses, null, ['class' => 'form-control', 'placeholder' => 'Selecciona un estado de la visita', 'ng-model' => 'visitStatus', 'ng-change' => 'saveVisitStatus()', 'ng-init' => 'visitStatus="' . $license->visit_status . '"']) !!}
-                    
+
                 </div>
+            </div>
             <div class="col-md-4 ">
                 <div class="form-group">
                     <button class="btn btn-warning" type="button" ng-show="saveVisitButton">Salvando</button>
                 </div>
             </div>
-            @endif
-        </div>
+        @endif
     </div>
 </div>
 

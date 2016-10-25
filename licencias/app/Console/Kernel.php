@@ -78,6 +78,6 @@ class Kernel extends ConsoleKernel
                     get_class($e); 
                 }
             }
-        })->everyMinute();#dailyAt('00:05');
+        })->dailyAt('00:05');
     }
 }

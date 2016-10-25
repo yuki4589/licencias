@@ -122,6 +122,10 @@ Route::group(['middleware' => 'auth'], function () {
     Route::post('denunciamodal', 'DenunciationController@createModal');
     Route::get('getdenuncia/{id}', 'DenunciationController@getDenunciaLicenses');
     Route::post('postUpdateDenuncia', 'DenunciationController@updateEstatus');
+
+    Route::get('caducarlicense/{id}', 'LicenseController@caducarLicense');
+    Route::post('validalicencia', 'LicenseController@validaLicencia');
+
 });
 
 
@@ -166,6 +170,9 @@ Route::group(['middleware' => ['auth','admin']], function () {
     // Asignacion de pasos en licencias
     Route::resource('licensetypestage', 'LicenseTypeStageController');
 
+    Route::get('expire', [
+        'as' => 'expire', 
+        function () { return view('license.expire'); }]);
 
 });
 
