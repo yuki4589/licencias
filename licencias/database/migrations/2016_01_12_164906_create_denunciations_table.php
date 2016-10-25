@@ -27,6 +27,7 @@ class CreateDenunciationsTable extends Migration
 
 
             $table->timestamps();
+            $table->string('status');
         });
     }
 

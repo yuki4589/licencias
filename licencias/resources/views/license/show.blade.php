@@ -404,32 +404,42 @@
                                             Denuncias para {{ $license->licenseType->name }} {{ $license->number }}/{{ $license->year }}
                                         </div>
                                         <div class="col-md-4 text-right">
-                                            <a class="btn btn-warning" href="{{ route('license.denunciation', ['id' => $license->id]) }}" role="button">Nueva Denuncia</a>
+                                            <!--<a class="btn btn-warning" href="{{ route('license.denunciation', ['id' => $license->id]) }}" role="button">Nueva Denuncia</a>-->
+                                            <button class="btn btn-success" data-toggle="modal" data-target="#modal-denuncia" type="button">
+                                                <i class="fa fa-plus" aria-hidden="true"></i> Nueva Denuncia
+                                            </button>
                                         </div>
                                     </div>
                                 </div>
-                                @foreach($license->Denunciations as $denunciation)
-                                    <div class="panel-body">
-                                        <div class="row">
-                                            <div class="col-md-1">
-                                                <a class="btn btn-warning" href="{{ route('denunciation.edit', ['id' => $denunciation->id]) }}" role="button">Editar</a>
-                                            </div>
-                                            <div class="col-md-3">
-                                                <strong>Numero de expediente:</strong> {{ $denunciation->expedient_number }}
-                                            </div>
-                                            <div class="col-md-3">
-                                                <strong>Fecha de denuncia:</strong> {{ $denunciation->register_date_output }}
-                                            </div>
-                                            @if($denunciation->reason)
-                                                <div class="col-md-5">
-                                                    <strong>Razón:</strong> {{$denunciation->reason}}
+                                <table class="table table-condensed">
+                                    <thead>
+                                    <tr>
+                                        <th>Número expediente</th>
+                                        <th>Fecha de denuncia</th>
+                                        <th>Razón</th>
+                                        <th>Estatus</th>
+                                    </tr>
+                                    </thead>
+                                    <tbody ng-repeat="d in denuncias">
+                                    <tr>
+                                        <td>@{{d.expedient_number}}</td>
+                                        <td>@{{d.register_date}}</td>
+                                        <td>@{{d.reason}}</td>
+                                        <td>
+                                            <div ng-switch on="d.status">
+                                                <div ng-switch-when="Abierta">
+                                                    <select ng-model="d.status" name="d.id" ng-change="updateStatus(d)">
+                                                        <option data-ng-repeat="record in estatus" value="@{{ record.valor }}"> @{{record.label}}  </option>
+                                                    </select>
                                                 </div>
-                                            @endif
-                                        </div>
-
-                                        <hr>
-                                    </div>
-                                @endforeach
+                                                <div ng-switch-when="Cerrada">  @{{d.status}} </div>
+                                                <div ng-switch-default></div>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                    </tbody>
+                                </table>
+                                @include('license.exposed.modal2')
                             </div>
                         @endif
                     </div>
