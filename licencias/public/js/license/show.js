@@ -24,6 +24,8 @@ stageApp.controller('currentStageController', ['$scope', '$http', 'Upload', '$ti
     $scope.alert = {};
     $scope.typeAlert = {};
     $scope.alertTable = {};
+    $scope.denuncia = {};
+    $scope.denuncias = {};
 
     angular.element(document).ready(function () {
         $http.get('../currentstage/' + $scope.license.id).then(currentStage);
@@ -37,7 +39,16 @@ stageApp.controller('currentStageController', ['$scope', '$http', 'Upload', '$ti
             locale: 'es',
             format: 'YYYY-MM-DD HH:mm:ss'
         });
+
+        $http.get('../getdenuncia/' + $scope.license.id).then(readObjectDenuncia);
+        $scope.estatus = [{valor:'Abierta',label:'Abierta'},{valor:'Cerrada',label:'Cerrada'}];
+
     });
+
+    function readObjectDenuncia (response){
+        $scope.denuncias = response.data;
+
+    }
 
     // guardar las alertas por modal
     $scope.guardarAlerta = function () {
@@ -75,6 +86,40 @@ stageApp.controller('currentStageController', ['$scope', '$http', 'Upload', '$ti
                 jQuery('#modal-alert').modal('hide');
             }
         });
+    }
+
+    $scope.updateStatus = function(Object) {
+        $http.post('../postUpdateDenuncia', Object)
+            .success(function(data){}).error(function(error){});
+    }
+
+    // guardar las denuncias por modal
+    $scope.guardarDenuncia = function () {
+        $scope.denuncia.license_id = $scope.license.id;
+        $scope.denuncia.register_date=$("#datepicker2").val().split(' ')[0];
+        $scope.denuncia.expedient_number = $('#numero').val();
+        $scope.denuncia.reason = $('#razon').val();
+        var accion = confirm("Desea guardar la denuncia?"+$scope.denuncia.reason);
+        if(accion){
+            $http.post('../denunciamodal', $scope.denuncia)
+                .success(function (data){
+                    $http.get('../getdenuncia/' + $scope.license.id).then(readObjectDenuncia);
+                    $scope.denuncia = {};
+                    jQuery('#modal-denuncia').modal('hide');
+                })
+                .error(function (error){
+                    alert('Ha ocurrido un error!!!');
+                    $scope.denuncia = {};
+                    jQuery('#modal-denuncia').modal('hide');
+                });
+        }else{
+            $scope.denuncia = {};
+            jQuery('#modal-denuncia').modal('hide');
+        }
+    }
+
+    function readdenunciaLicense (response) {
+        $scope.denunciaTable = response.data;
     }
 
     function readAlertLicense (response) {

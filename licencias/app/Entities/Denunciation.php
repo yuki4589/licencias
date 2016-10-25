@@ -11,7 +11,7 @@ class Denunciation extends Model
      *
      * @var array
      */
-    protected $fillable = ['license_id', 'register_date', 'expedient_number', 'file_id'];
+    protected $fillable = ['license_id', 'register_date', 'expedient_number', 'file_id', 'reason', 'status'];
 
     /**
      * A Denunciation belongs to License.

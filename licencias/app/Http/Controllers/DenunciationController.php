@@ -10,6 +10,8 @@ use CityBoard\Repositories\LicenseRepository;
 use CityBoard\Http\Requests;
 use CityBoard\Http\Requests\StoreDenunciationRequest;
 use CityBoard\Http\Requests\UpdateDenunciationRequest;
+use CityBoard\Entities\Denunciation;
+use Illuminate\Http\Request;
 
 class DenunciationController extends Controller
 {
@@ -139,5 +141,38 @@ class DenunciationController extends Controller
         $denunciation = $this->denunciationRepository->findOrFailById($denunciation_id);
 
         return view('denunciation.edit', compact('license', 'denunciation'));
+    }
+
+    /**
+     * Store a newly created resource in storage.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @return \Illuminate\Http\Response
+     */
+    public function createModal(Request $request) {
+        try{
+            Denunciation::create($request->all());
+            return ['created' => true];
+        }catch (Exception $e){
+            \Log::info('Error creating user: '.$e);
+            return \Response::json(['created' => false], 500);
+        }
+    }
+
+    public function getDenunciaLicenses($id) {
+        $Denunciation = Denunciation::where('license_id', $id)->get();
+        return $Denunciation;
+    }
+
+    public  function  updateEstatus (Request $request){
+        try{
+            $Denunciation = Denunciation::find($request->input('id'));
+            $Denunciation->status=$request->input('status');
+            $Denunciation->save();
+            return ['update' => true];
+        }catch (Exception $e){
+            \Log::info('Error creating user: '.$e);
+            return \Response::json(['update' => false], 500);
+        }
     }
 }
